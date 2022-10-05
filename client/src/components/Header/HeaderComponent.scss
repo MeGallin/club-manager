@@ -1,0 +1,48 @@
+@import '../../index.scss';
+
+header {
+  border: 1px solid $border-colour;
+  text-transform: uppercase;
+  a {
+    color: $main-font-colour;
+  }
+
+  nav {
+    height: clamp(1rem, $header-height, $header-height);
+    background-color: $main-bg-colour;
+
+    span {
+      border: 1px solid $border-colour;
+      width: 100%;
+      text-align: center;
+    }
+
+    .login-wrapper {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      a.active {
+        color: $main-bg-colour;
+        background-color: $main-font-colour;
+        display: flex;
+        justify-content: center;
+      }
+      &:hover {
+        background: $border-colour-light;
+      }
+    }
+  }
+}
+/* Responsive layout */
+@media (max-width: 812px) {
+  header nav {
+    font-size: 0.9em;
+    padding: 6px 0;
+  }
+}
