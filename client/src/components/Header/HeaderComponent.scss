@@ -26,15 +26,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    a.active {
-      color: $main-bg-colour;
-      background-color: $main-font-colour;
-      display: flex;
-      justify-content: center;
-    }
-    &:hover {
-      background: $border-colour-light;
+    span {
+      a.active {
+        color: $main-bg-colour;
+        background-color: $main-font-colour;
+        display: flex;
+        justify-content: center;
+      }
+      &:hover {
+        background: $border-colour-light;
+      }
     }
   }
 }
