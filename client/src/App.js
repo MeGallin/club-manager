@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.scss';
 
-function App() {
+import HeaderComponent from './components/Header/HeaderComponent';
+import HomeView from './views/HomeView/HomeView';
+import FooterComponent from './components/Footer/FooterComponent';
+import { ErrorView } from './views/ErrorView/ErrorView';
+import ContactView from './views/ContactView/ContactView';
+import AboutView from './views/AboutView/AboutView';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container--fluid">
+        <HeaderComponent />
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="/home" element={<HomeView />} exact />
+            <Route path="/about" element={<AboutView />} exact />
+            <Route path="/contact" element={<ContactView />} exact />
+            <Route path="*" element={<ErrorView />} exact />
+          </Routes>
+        </div>
+        <FooterComponent />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
