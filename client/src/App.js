@@ -15,6 +15,7 @@ const App = () => {
         <HeaderComponent />
         <div className="content-wrapper">
           <Routes>
+            <Route path="/" element={<HomeView />} />
             <Route path="/home" element={<HomeView />} exact />
             <Route path="/about" element={<AboutView />} exact />
             <Route path="/contact" element={<ContactView />} exact />
