@@ -2,7 +2,7 @@
 
 .success-component {
   width: 100%;
-  font-size: 2em;
+  font-size: $notice-message-size;
   background-color: $success;
   color: $main-bg-colour;
   padding: 0.2em;

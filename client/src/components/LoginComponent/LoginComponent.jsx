@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './RegistrationComponent.scss';
-import { userRegistrationAction } from '../../store/actions/userActions';
+import './LoginComponent.scss';
+
+import { userLoginAction } from '../../store/actions/userActions';
 
 import InputComponent from '../../components/Input/InputComponent';
 import ButtonComponent from '../../components/Button/ButtonComponent';
@@ -9,22 +10,19 @@ import SpinnerComponent from '../Spinner/SpinnerComponent';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../Success/SuccessComponent';
 
-const RegistrationComponent = () => {
+const LoginComponent = () => {
   const dispatch = useDispatch();
-
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
-  const { username, email, password } = formData;
-
-  const usernameRegEx = /[a-zA-Z]{4,}/;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
-  const userRegistration = useSelector((state) => state.userRegistration);
-  const { loading, error, success } = userRegistration;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, success } = userLogin;
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = formData;
 
   const handleOnChange = (e) => {
     setFormData((previousState) => ({
@@ -33,13 +31,12 @@ const RegistrationComponent = () => {
     }));
   };
 
-  const handleRegistrationSubmit = (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
     //Dispatch action
-    dispatch(userRegistrationAction(formData));
+    dispatch(userLoginAction(email, password));
 
     setFormData({
-      username: '',
       email: '',
       password: '',
     });
@@ -49,31 +46,15 @@ const RegistrationComponent = () => {
     <>
       {error ? <ErrorComponent error={error} /> : null}
       {success ? (
-        <SuccessComponent message="Registration has been successful" />
+        <SuccessComponent message="You have successfully logged in!" />
       ) : null}
       {loading ? (
         <SpinnerComponent />
       ) : (
         <fieldset className="fieldSet">
-          <legend>Registration Form</legend>
+          <legend>Login Form</legend>
           <div>
-            <form onSubmit={handleRegistrationSubmit}>
-              <InputComponent
-                label="User Name"
-                value={username}
-                type="text"
-                name="username"
-                required
-                className={
-                  !usernameRegEx.test(username) ? 'invalid' : 'entered'
-                }
-                error={
-                  !usernameRegEx.test(username) && username.length !== 0
-                    ? `Username must contain at least 5 characters`
-                    : null
-                }
-                onChange={handleOnChange}
-              />
+            <form onSubmit={handleLoginSubmit}>
               <InputComponent
                 label="EMAIL"
                 value={email}
@@ -107,11 +88,7 @@ const RegistrationComponent = () => {
                 type="submit"
                 text="submit"
                 variant="primary"
-                disabled={
-                  !emailRegEx.test(email) ||
-                  !usernameRegEx.test(username) ||
-                  password.length <= 5
-                }
+                disabled={!emailRegEx.test(email) || password.length <= 5}
               />
             </form>
           </div>
@@ -121,4 +98,4 @@ const RegistrationComponent = () => {
   );
 };
 
-export default RegistrationComponent;
+export default LoginComponent;
