@@ -1,0 +1,67 @@
+/* Button style */
+@import '../../index.scss';
+
+$btn-primary: #3b71ca;
+$btn-secondary: #9fa6b2;
+$btn-success: #14a44d;
+$btn-danger: #dc4c64;
+$btn-warning: #e4a11b;
+$btn-info: #54b4d3;
+$btn-light: #fbfbfb;
+$btn-dark: #332d2d;
+
+button {
+  border: none;
+  border-radius: 2px;
+  padding: 6px 9px;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: white;
+  background-color: white;
+  box-shadow: 0 0 4px #999;
+  outline: none;
+  opacity: 0.8;
+}
+
+button.primary {
+  background-color: $btn-primary;
+}
+button.secondary {
+  background-color: $btn-secondary;
+}
+button.success {
+  background-color: $btn-success;
+}
+button.danger {
+  background-color: $btn-danger;
+}
+button.warning {
+  background-color: $btn-warning;
+}
+button.info {
+  background-color: $btn-info;
+}
+button.light {
+  background-color: $btn-light;
+}
+button.dark {
+  background-color: $btn-dark;
+}
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: rgba(190, 190, 190, 1)
+    radial-gradient(circle, transparent 1%, rgba(190, 190, 190, 1) 1%)
+    center/15000%;
+  opacity: 1;
+}
+.ripple:active {
+  background-color: $btn-danger;
+  background-size: 100%;
+  transition: background 0s;
+}
