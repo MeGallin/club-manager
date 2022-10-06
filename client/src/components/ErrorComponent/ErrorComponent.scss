@@ -1,0 +1,11 @@
+@import '../../index.scss';
+
+.error-component {
+  width: 100%;
+  font-size: 2em;
+  background-color: $danger;
+  color: $main-bg-colour;
+  padding: 0.2em;
+  border: none;
+  border-radius: 2px;
+}

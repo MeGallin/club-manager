@@ -2,7 +2,7 @@ import React from 'react';
 import './ButtonComponent.scss';
 import PropTypes from 'prop-types';
 
-const ButtonComponent = ({ id, type, text, onClick, variant }) => {
+const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
   switch (variant) {
     case 'primary':
       return (
@@ -12,6 +12,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
           type={type}
           text={text}
           onClick={onClick}
+          disabled={disabled}
         >
           {text}
         </button>
@@ -24,6 +25,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
           type={type}
           text={text}
           onClick={onClick}
+          disabled={disabled}
         >
           {text}
         </button>
@@ -36,6 +38,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
           type={type}
           text={text}
           onClick={onClick}
+          disabled={disabled}
         >
           {text}
         </button>
@@ -48,6 +51,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
           type={type}
           text={text}
           onClick={onClick}
+          disabled={disabled}
         >
           {text}
         </button>
@@ -60,6 +64,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
           type={type}
           text={text}
           onClick={onClick}
+          disabled={disabled}
         >
           {text}
         </button>
@@ -72,6 +77,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
           type={type}
           text={text}
           onClick={onClick}
+          disabled={disabled}
         >
           {text}
         </button>
@@ -84,6 +90,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
           type={type}
           text={text}
           onClick={onClick}
+          disabled={disabled}
         >
           {text}
         </button>
@@ -96,6 +103,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
           type={type}
           text={text}
           onClick={onClick}
+          disabled={disabled}
         >
           {text}
         </button>
@@ -104,6 +112,10 @@ const ButtonComponent = ({ id, type, text, onClick, variant }) => {
     default:
       break;
   }
+};
+
+ButtonComponent.defaultProps = {
+  disabled: true,
 };
 
 ButtonComponent.propTypes = {

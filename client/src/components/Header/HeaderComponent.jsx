@@ -30,6 +30,14 @@ const HeaderComponent = () => {
               Contact
             </NavLink>
           </span>
+          <span>
+            <NavLink
+              className={(navData) => (navData.isActive ? 'active' : '')}
+              to="/login"
+            >
+              Login
+            </NavLink>
+          </span>
         </nav>
       </header>
     </>
