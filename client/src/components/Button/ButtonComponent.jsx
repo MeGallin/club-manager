@@ -110,8 +110,9 @@ ButtonComponent.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string,
   text: PropTypes.string,
-  onClick: PropTypes.func,
   className: PropTypes.string,
+  variant: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default ButtonComponent;
