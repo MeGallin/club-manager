@@ -2,7 +2,7 @@
 
 .error-component {
   width: 100%;
-  font-size: 2em;
+  font-size: $notice-message-size;
   background-color: $danger;
   color: $main-bg-colour;
   padding: 0.2em;

@@ -1,1 +1,10 @@
 @import '../../index.scss';
+
+.link-effect {
+  color: #0094de;
+  &:hover {
+    cursor: pointer;
+    color: blue;
+    transition: color 0.8s;
+  }
+}
