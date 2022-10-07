@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  USER_FORGOT_EMAIL_FAILURE,
+  USER_FORGOT_EMAIL_REQUEST,
+  USER_FORGOT_EMAIL_SUCCESS,
   USER_LOGIN_FAILURE,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -54,7 +57,7 @@ export const userLoginAction = (email, password) => async (dispatch) => {
       { email: email, password: password },
       config,
     );
-    console.log(data);
+
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -67,9 +70,40 @@ export const userLoginAction = (email, password) => async (dispatch) => {
     });
   }
 };
+
 // USER USER_LOGOUT
-//User logout
 export const userLogoutAction = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT });
+};
+
+//User FORGOT EMAIL ACTION
+export const userForgotEmailAction = (email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_FORGOT_EMAIL_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.post(
+      'api/auth/forgot-password',
+      { email: email },
+      config,
+    );
+
+    dispatch({ type: USER_FORGOT_EMAIL_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_FORGOT_EMAIL_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };
