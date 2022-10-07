@@ -1,7 +1,10 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import LogoutComponent from '../LogoutComponent/LogoutComponent';
 import './HeaderComponent.scss';
 const HeaderComponent = () => {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { success } = userLogin;
   return (
     <>
       <header>
@@ -30,14 +33,24 @@ const HeaderComponent = () => {
               Contact
             </NavLink>
           </span>
-          <span>
-            <NavLink
-              className={(navData) => (navData.isActive ? 'active' : '')}
-              to="/login"
-            >
-              Login
-            </NavLink>
-          </span>
+          {success ? (
+            <>
+              <span>
+                <LogoutComponent />
+              </span>
+            </>
+          ) : (
+            <>
+              <span>
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              </span>
+            </>
+          )}
         </nav>
       </header>
     </>
