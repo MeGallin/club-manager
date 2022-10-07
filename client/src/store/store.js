@@ -5,12 +5,14 @@ import {
   userRegistrationReducer,
   userLoginReducer,
   userForgotEmailReducer,
+  userResetPasswordReducer,
 } from './reducers/userReducers';
 
 const reducer = combineReducers({
   userRegistration: userRegistrationReducer,
   userLogin: userLoginReducer,
   userForgotEmail: userForgotEmailReducer,
+  userResetPassword: userResetPasswordReducer,
 });
 
 const initialState = {};
