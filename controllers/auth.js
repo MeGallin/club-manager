@@ -28,7 +28,7 @@ exports.login = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ email }).select('+password');
-    console.log('xxx', user);
+
     if (!user) {
       return next(new ErrorResponse('Please provide valid credentials', 401));
     }
@@ -59,7 +59,7 @@ exports.forgotPassword = async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
 
     await user.save();
-    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}/reset-password/${resetToken}`;
+    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}password-reset/${resetToken}`;
 
     const message = `<h1>You have requested a password reset.</h1><p>Please click on the following link to reset your password.</p><p><a href=${resetUrl} id='link'>Click here to verify</a></p>`;
 
@@ -89,7 +89,7 @@ exports.forgotPassword = async (req, res, next) => {
 exports.resetPassword = async (req, res, next) => {
   const resetPasswordToken = crypto
     .createHash('sha256')
-    .update(req.params.resetToken)
+    .update(req.params.token)
     .digest('hex');
 
   try {

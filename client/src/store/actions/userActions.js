@@ -10,6 +10,9 @@ import {
   USER_REGISTER_FAILURE,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_RESET_PASSWORD_FAILURE,
+  USER_RESET_PASSWORD_REQUEST,
+  USER_RESET_PASSWORD_SUCCESS,
 } from '../constants/userConstants';
 
 // USER Registration
@@ -100,6 +103,38 @@ export const userForgotEmailAction = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_FORGOT_EMAIL_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+//User Login
+export const userResetPasswordAction = (updatedInfo) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_RESET_PASSWORD_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    console.log(updatedInfo);
+    const { data } = await axios.put(
+      `http://localhost:5000/api/auth/resetpassword/${updatedInfo.resetPasswordToken}`,
+      updatedInfo,
+      config,
+    );
+    console.log(data);
+    dispatch({ type: USER_RESET_PASSWORD_SUCCESS, payload: data });
+    // localStorage.setItem('userInfo', JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_RESET_PASSWORD_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
