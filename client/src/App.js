@@ -8,6 +8,7 @@ import { ErrorView } from './views/ErrorView/ErrorView';
 import ContactView from './views/ContactView/ContactView';
 import AboutView from './views/AboutView/AboutView';
 import LoginView from './views/LoginView/LoginView';
+import PWResetView from './views/PWRestView/PWResetView';
 
 const App = () => {
   return (
@@ -21,6 +22,11 @@ const App = () => {
             <Route path="/about" element={<AboutView />} exact />
             <Route path="/contact" element={<ContactView />} exact />
             <Route path="/login" element={<LoginView />} exact />
+            <Route
+              path="/password-reset/:token"
+              element={<PWResetView />}
+              exact
+            />
             <Route path="*" element={<ErrorView />} exact />
           </Routes>
         </div>

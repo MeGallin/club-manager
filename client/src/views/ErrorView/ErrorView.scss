@@ -1,4 +1,6 @@
+@import '../../index.scss';
 .error-view {
-  background-color: blue;
+  background-color: $danger;
+  color: $main-bg-colour;
   font: size 3em;
 }
