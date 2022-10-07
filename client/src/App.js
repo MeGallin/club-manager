@@ -7,6 +7,7 @@ import FooterComponent from './components/Footer/FooterComponent';
 import { ErrorView } from './views/ErrorView/ErrorView';
 import ContactView from './views/ContactView/ContactView';
 import AboutView from './views/AboutView/AboutView';
+import LoginView from './views/LoginView/LoginView';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/home" element={<HomeView />} exact />
             <Route path="/about" element={<AboutView />} exact />
             <Route path="/contact" element={<ContactView />} exact />
+            <Route path="/login" element={<LoginView />} exact />
             <Route path="*" element={<ErrorView />} exact />
           </Routes>
         </div>

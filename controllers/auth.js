@@ -28,7 +28,7 @@ exports.login = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ email }).select('+password');
-
+    console.log('xxx', user);
     if (!user) {
       return next(new ErrorResponse('Please provide valid credentials', 401));
     }
@@ -59,7 +59,7 @@ exports.forgotPassword = async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
 
     await user.save();
-    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}/passwordreset/${resetToken}`;
+    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}/reset-password/${resetToken}`;
 
     const message = `<h1>You have requested a password reset.</h1><p>Please click on the following link to reset your password.</p><p><a href=${resetUrl} id='link'>Click here to verify</a></p>`;
 
@@ -98,8 +98,6 @@ exports.resetPassword = async (req, res, next) => {
       resetPasswordExpire: { $gt: Date.now() },
     });
 
-    console.log('ssss', user);
-
     if (!user) {
       return next(new ErrorResponse('Invalid Reset Token', 400));
     }
@@ -118,5 +116,7 @@ exports.resetPassword = async (req, res, next) => {
 
 const sendToken = (user, statusCode, res) => {
   const token = user.getSignedToken();
-  res.status(statusCode).json({ success: true, token });
+  res
+    .status(statusCode)
+    .json({ success: true, token, username: user.username });
 };
