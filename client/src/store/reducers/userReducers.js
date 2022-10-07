@@ -1,4 +1,7 @@
 import {
+  USER_FORGOT_EMAIL_FAILURE,
+  USER_FORGOT_EMAIL_REQUEST,
+  USER_FORGOT_EMAIL_SUCCESS,
   USER_LOGIN_FAILURE,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -37,6 +40,20 @@ export const userLoginReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case USER_LOGOUT:
       return {};
+    default:
+      return { ...state };
+  }
+};
+
+// USER Forgotten EMAIL reducer
+export const userForgotEmailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_FORGOT_EMAIL_REQUEST:
+      return { loading: true };
+    case USER_FORGOT_EMAIL_SUCCESS:
+      return { loading: false, success: true, email: action.payload };
+    case USER_FORGOT_EMAIL_FAILURE:
+      return { loading: false, error: action.payload };
     default:
       return { ...state };
   }
