@@ -22,11 +22,7 @@ const App = () => {
             <Route path="/about" element={<AboutView />} exact />
             <Route path="/contact" element={<ContactView />} exact />
             <Route path="/login" element={<LoginView />} exact />
-            <Route
-              path="/password-reset/:token"
-              element={<PWResetView />}
-              exact
-            />
+            <Route path="/password-reset/:token" element={<PWResetView />} />
             <Route path="*" element={<ErrorView />} exact />
           </Routes>
         </div>
