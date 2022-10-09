@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth/private', require('./routes/auth'));
 app.use('/api/private', require('./routes/private'));
 
 // Error Handlers NB should be last piece of middleware
