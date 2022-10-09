@@ -8,6 +8,11 @@ import {
   userResetPasswordReducer,
 } from './reducers/userReducers';
 
+//Initialise state to hold user info if logged in.
+const userInfoFromStorage = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : null;
+
 const reducer = combineReducers({
   userRegistration: userRegistrationReducer,
   userLogin: userLoginReducer,
@@ -15,7 +20,9 @@ const reducer = combineReducers({
   userResetPassword: userResetPasswordReducer,
 });
 
-const initialState = {};
+const initialState = {
+  userLogin: { userInfo: userInfoFromStorage },
+};
 const middleware = [thunk];
 
 const store = createStore(

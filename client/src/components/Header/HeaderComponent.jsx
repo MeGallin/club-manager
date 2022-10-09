@@ -4,7 +4,8 @@ import LogoutComponent from '../LogoutComponent/LogoutComponent';
 import './HeaderComponent.scss';
 const HeaderComponent = () => {
   const userLogin = useSelector((state) => state.userLogin);
-  const { success } = userLogin;
+  const { userInfo } = userLogin;
+
   return (
     <>
       <header>
@@ -17,30 +18,40 @@ const HeaderComponent = () => {
               Home
             </NavLink>
           </span>
-          <span>
-            <NavLink
-              className={(navData) => (navData.isActive ? 'active' : '')}
-              to="/about"
-            >
-              About
-            </NavLink>
-          </span>
-          <span>
-            <NavLink
-              className={(navData) => (navData.isActive ? 'active' : '')}
-              to="/contact"
-            >
-              Contact
-            </NavLink>
-          </span>
-          {success ? (
+
+          {userInfo ? (
             <>
+              <span>
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/user-admin"
+                >
+                  {userInfo.username} Admin
+                </NavLink>
+              </span>
+
               <span>
                 <LogoutComponent />
               </span>
             </>
           ) : (
             <>
+              <span>
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/about"
+                >
+                  About
+                </NavLink>
+              </span>
+              <span>
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/contact"
+                >
+                  Contact
+                </NavLink>
+              </span>
               <span>
                 <NavLink
                   className={(navData) => (navData.isActive ? 'active' : '')}
