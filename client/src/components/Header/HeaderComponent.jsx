@@ -5,7 +5,7 @@ import './HeaderComponent.scss';
 const HeaderComponent = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  console.log(userInfo);
+
   return (
     <>
       <header>
@@ -21,7 +21,15 @@ const HeaderComponent = () => {
 
           {userInfo ? (
             <>
-              <span>{userInfo.username} Admin</span>
+              <span>
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/user-admin"
+                >
+                  {userInfo.username} Admin
+                </NavLink>
+              </span>
+
               <span>
                 <LogoutComponent />
               </span>
