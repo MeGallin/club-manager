@@ -6,11 +6,15 @@ const {
   login,
   forgotPassword,
   resetPassword,
+  getUserAdminDetails,
 } = require('../controllers/auth');
+
+const { protect } = require('../middleware/auth');
 
 router.route('/register').post(register);
 router.route('/login').post(login);
 router.route('/forgot-password').post(forgotPassword);
 router.route('/resetpassword/:token').put(resetPassword);
+router.route('/user-admin-details').get(protect, getUserAdminDetails);
 
 module.exports = router;
