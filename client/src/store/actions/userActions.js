@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  USER_ADMIN_DETAILS_FAILURE,
+  USER_ADMIN_DETAILS_REQUEST,
+  USER_ADMIN_DETAILS_SUCCESS,
   USER_FORGOT_EMAIL_FAILURE,
   USER_FORGOT_EMAIL_REQUEST,
   USER_FORGOT_EMAIL_SUCCESS,
@@ -135,6 +138,40 @@ export const userResetPasswordAction = (updatedInfo) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_RESET_PASSWORD_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+//GET: USER Admin details
+export const userAdminDetailsAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_ADMIN_DETAILS_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      `api/auth/private/user-admin-details`,
+      config,
+    );
+
+    dispatch({ type: USER_ADMIN_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_ADMIN_DETAILS_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

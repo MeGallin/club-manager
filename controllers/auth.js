@@ -126,6 +126,7 @@ const sendToken = (user, statusCode, res) => {
 // @access: PRIVATE
 exports.getUserAdminDetails = async (req, res, next) => {
   const {
+    _id,
     username,
     email,
     isAdmin,
@@ -136,6 +137,7 @@ exports.getUserAdminDetails = async (req, res, next) => {
   } = await User.findById(req.user.id);
   res.status(200).json({
     success: true,
+    _id,
     username,
     email,
     isAdmin,
