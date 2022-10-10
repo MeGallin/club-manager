@@ -1,4 +1,7 @@
 import {
+  USER_ADMIN_DETAILS_FAILURE,
+  USER_ADMIN_DETAILS_REQUEST,
+  USER_ADMIN_DETAILS_SUCCESS,
   USER_FORGOT_EMAIL_FAILURE,
   USER_FORGOT_EMAIL_REQUEST,
   USER_FORGOT_EMAIL_SUCCESS,
@@ -70,6 +73,23 @@ export const userResetPasswordReducer = (state = {}, action) => {
     case USER_RESET_PASSWORD_SUCCESS:
       return { loading: false, success: true, data: action.payload };
     case USER_RESET_PASSWORD_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+// GET: USER admin details reducer
+export const userAdminDetailsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_ADMIN_DETAILS_REQUEST:
+      return { loading: true };
+    case USER_ADMIN_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        userAdmin: action.payload,
+      };
+    case USER_ADMIN_DETAILS_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return { ...state };
