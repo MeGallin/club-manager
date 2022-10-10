@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
@@ -125,25 +126,71 @@ const sendToken = (user, statusCode, res) => {
 // @route: GET /api/auth/user
 // @access: PRIVATE
 exports.getUserAdminDetails = async (req, res, next) => {
-  const {
-    _id,
-    username,
-    email,
-    isAdmin,
-    isConfirmed,
-    isSuspended,
-    createdAt,
-    updatedAt,
-  } = await User.findById(req.user.id);
-  res.status(200).json({
-    success: true,
-    _id,
-    username,
-    email,
-    isAdmin,
-    isConfirmed,
-    isSuspended,
-    createdAt,
-    updatedAt,
+  try {
+    const {
+      _id,
+      username,
+      email,
+      isAdmin,
+      isConfirmed,
+      isSuspended,
+      createdAt,
+      updatedAt,
+    } = await User.findById(req.user.id);
+    res.status(200).json({
+      success: true,
+      _id,
+      username,
+      email,
+      isAdmin,
+      isConfirmed,
+      isSuspended,
+      createdAt,
+      updatedAt,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @description: USER ADMIN DETAIL UPDATE
+// @route: PUT /api/auth/user/:id
+// @access: Private
+exports.userUpdateAdminDetails = async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  try {
+    if (user) {
+      // hash the Password
+      // const salt = await bcrypt.genSalt(10);
+      // const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+      user.username = req.body.username || user.username;
+      user.email = req.body.email || user.email;
+
+      if (req.body.password) {
+        user.password = req.body.password || user.password;
+      }
+
+      const updatedUser = await user.save();
+
+      res.json({
+        success: true,
+        username: updatedUser.username,
+        email: updatedUser.email,
+        token: generateToken(updatedUser._id),
+      });
+    } else {
+      return next(new ErrorResponse('User not found', 400));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Generate a secret token for the user
+const generateToken = (id, email) => {
+  return jwt.sign({ id, email }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
   });
 };
