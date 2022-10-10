@@ -120,3 +120,30 @@ const sendToken = (user, statusCode, res) => {
     .status(statusCode)
     .json({ success: true, token, username: user.username });
 };
+
+// @description: Get user data of logged in in user
+// @route: GET /api/auth/user
+// @access: PRIVATE
+exports.getUserAdminDetails = async (req, res, next) => {
+  const {
+    _id,
+    username,
+    email,
+    isAdmin,
+    isConfirmed,
+    isSuspended,
+    createdAt,
+    updatedAt,
+  } = await User.findById(req.user.id);
+  res.status(200).json({
+    success: true,
+    _id,
+    username,
+    email,
+    isAdmin,
+    isConfirmed,
+    isSuspended,
+    createdAt,
+    updatedAt,
+  });
+};

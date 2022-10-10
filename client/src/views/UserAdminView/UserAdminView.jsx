@@ -21,12 +21,12 @@ const UserAdminView = () => {
     <>
       <div className="user-admin-wrapper">
         <fieldset className="fieldSet">
-          <legend>USER ADMIN PANEL</legend>
-          <UserAdminPanel />
-        </fieldset>
-        <fieldset className="fieldSet">
           <legend>USER DISPLAY PANEL</legend>
           <UserDisplayPanel />
+        </fieldset>
+        <fieldset className="fieldSet">
+          <legend>USER ADMIN PANEL</legend>
+          <UserAdminPanel />
         </fieldset>
       </div>
     </>
