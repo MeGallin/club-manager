@@ -55,9 +55,10 @@ const UserAdminPanel = () => {
       {updateSuccess ? (
         <SuccessComponent message={'Update was successful'} />
       ) : null}
+
       {updateLoading ? <SpinnerComponent /> : null}
 
-      {success ? (
+      {success && userAdmin?.isConfirmed ? (
         <>
           <form onSubmit={handleUpdateSubmit}>
             <InputComponent
