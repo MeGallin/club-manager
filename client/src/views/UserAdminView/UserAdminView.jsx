@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './UserAdminView.scss';
 
-import UserAdminPanel from '../../components/User/UserAdminPanel';
 import UserDisplayPanel from '../../components/User/UserDisplayPanel';
 
 const UserAdminView = () => {
@@ -23,10 +22,6 @@ const UserAdminView = () => {
         <fieldset className="fieldSet">
           <legend>USER DISPLAY PANEL</legend>
           <UserDisplayPanel />
-        </fieldset>
-        <fieldset className="fieldSet">
-          <legend>USER ADMIN PANEL</legend>
-          <UserAdminPanel />
         </fieldset>
       </div>
     </>

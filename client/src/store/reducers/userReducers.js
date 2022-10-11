@@ -15,6 +15,9 @@ import {
   USER_RESET_PASSWORD_FAILURE,
   USER_RESET_PASSWORD_REQUEST,
   USER_RESET_PASSWORD_SUCCESS,
+  USER_UPDATE_USER_ADMIN_DETAILS_FAILURE,
+  USER_UPDATE_USER_ADMIN_DETAILS_REQUEST,
+  USER_UPDATE_USER_ADMIN_DETAILS_SUCCESS,
 } from '../constants/userConstants';
 
 //Register a USER
@@ -90,6 +93,23 @@ export const userAdminDetailsReducer = (state = {}, action) => {
         userAdmin: action.payload,
       };
     case USER_ADMIN_DETAILS_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+// GET: USER admin UPDATE details reducer
+export const userUpdateAdminDetailsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_UPDATE_USER_ADMIN_DETAILS_REQUEST:
+      return { loading: true };
+    case USER_UPDATE_USER_ADMIN_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        userAdmin: action.payload,
+      };
+    case USER_UPDATE_USER_ADMIN_DETAILS_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return { ...state };
