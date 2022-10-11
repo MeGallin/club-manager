@@ -7,6 +7,7 @@ import {
   userForgotEmailReducer,
   userResetPasswordReducer,
   userAdminDetailsReducer,
+  userUpdateAdminDetailsReducer,
 } from './reducers/userReducers';
 
 //Initialise state to hold user info if logged in.
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   userForgotEmail: userForgotEmailReducer,
   userResetPassword: userResetPasswordReducer,
   userAdminDetails: userAdminDetailsReducer,
+  userUpdateAdminDetails: userUpdateAdminDetailsReducer,
 });
 
 const initialState = {

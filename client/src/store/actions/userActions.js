@@ -16,6 +16,9 @@ import {
   USER_RESET_PASSWORD_FAILURE,
   USER_RESET_PASSWORD_REQUEST,
   USER_RESET_PASSWORD_SUCCESS,
+  USER_UPDATE_USER_ADMIN_DETAILS_FAILURE,
+  USER_UPDATE_USER_ADMIN_DETAILS_REQUEST,
+  USER_UPDATE_USER_ADMIN_DETAILS_SUCCESS,
 } from '../constants/userConstants';
 
 // USER Registration
@@ -126,13 +129,13 @@ export const userResetPasswordAction = (updatedInfo) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    console.log(updatedInfo);
+
     const { data } = await axios.put(
       `http://localhost:5000/api/auth/resetpassword/${updatedInfo.resetPasswordToken}`,
       updatedInfo,
       config,
     );
-    console.log(data);
+
     dispatch({ type: USER_RESET_PASSWORD_SUCCESS, payload: data });
     // localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -179,3 +182,41 @@ export const userAdminDetailsAction = () => async (dispatch, getState) => {
     });
   }
 };
+
+//GET: USER UPDATE Admin details
+export const userUpdateAdminDetailsAction =
+  (formData) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: USER_UPDATE_USER_ADMIN_DETAILS_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `api/auth/user/${formData.id}`,
+        formData,
+        config,
+      );
+
+      dispatch({ type: USER_UPDATE_USER_ADMIN_DETAILS_SUCCESS, payload: data });
+      dispatch(userAdminDetailsAction());
+    } catch (error) {
+      dispatch({
+        type: USER_UPDATE_USER_ADMIN_DETAILS_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
