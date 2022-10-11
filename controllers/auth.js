@@ -161,10 +161,6 @@ exports.userUpdateAdminDetails = async (req, res, next) => {
 
   try {
     if (user) {
-      // hash the Password
-      // const salt = await bcrypt.genSalt(10);
-      // const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
       user.username = req.body.username || user.username;
       user.email = req.body.email || user.email;
 
@@ -176,9 +172,7 @@ exports.userUpdateAdminDetails = async (req, res, next) => {
 
       res.json({
         success: true,
-        username: updatedUser.username,
-        email: updatedUser.email,
-        token: generateToken(updatedUser._id),
+        updatedUser,
       });
     } else {
       return next(new ErrorResponse('User not found', 400));
@@ -186,11 +180,4 @@ exports.userUpdateAdminDetails = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-
-// Generate a secret token for the user
-const generateToken = (id, email) => {
-  return jwt.sign({ id, email }, process.env.JWT_SECRET, {
-    expiresIn: '30d',
-  });
 };

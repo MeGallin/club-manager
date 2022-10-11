@@ -1,10 +1,15 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import LogoutComponent from '../LogoutComponent/LogoutComponent';
 import './HeaderComponent.scss';
+
+import LogoutComponent from '../LogoutComponent/LogoutComponent';
+
 const HeaderComponent = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const userAdminDetails = useSelector((state) => state.userAdminDetails);
+  const { userAdmin } = userAdminDetails;
 
   return (
     <>
@@ -26,7 +31,7 @@ const HeaderComponent = () => {
                   className={(navData) => (navData.isActive ? 'active' : '')}
                   to="/user-admin"
                 >
-                  {userInfo.username} Admin
+                  {userAdmin?.username} Admin Area
                 </NavLink>
               </span>
 
