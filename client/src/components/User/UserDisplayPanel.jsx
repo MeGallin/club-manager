@@ -31,20 +31,28 @@ const UserDisplayPanel = () => {
 
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { success, error, userAdmin } = userAdminDetails;
-
+  console.log('xxx', userAdmin);
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
-      <ButtonComponent
-        type="button"
-        text={showInputs ? 'EDIT' : 'DISPLAY INFO'}
-        variant="dark"
-        disabled={false}
-        onClick={() => setShowInputs(!showInputs)}
-      />
-      {success ? (
+
+      {!userAdmin?.isConfirmed ? (
+        <ErrorComponent
+          error={
+            'Please confirm your email address with the link that was provided.'
+          }
+        />
+      ) : null}
+      {success && userAdmin?.isConfirmed ? (
         showInputs ? (
           <>
+            <ButtonComponent
+              type="button"
+              text={showInputs ? 'EDIT' : 'DISPLAY INFO'}
+              variant="dark"
+              disabled={false}
+              onClick={() => setShowInputs(!showInputs)}
+            />
             <div>
               <p>Photo to follow</p>
               <p>USER NAME : {userAdmin?.username}</p>
