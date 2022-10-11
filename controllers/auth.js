@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
+const jwt = require('jsonwebtoken');
 
 exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -13,10 +13,43 @@ exports.register = async (req, res, next) => {
       email,
       password,
     });
-    sendToken(user, 201, res);
+
+    // sendToken(user, 201, res);
+
+    // const resetToken = user.getResetPasswordToken();
+    const link = `${
+      process.env.MAILER_LOCAL_URL
+    }api/confirm-email/${generateToken(user._id)}`;
+
+    const message = `<h1>Hi ${username}</h1><p>You have successfully registered with Club Manager</p><p>Please click the link below to verify your email address.</p><h4>Please note, in order to get full functionality you must confirm your mail address with the link below.</h4></p><p><a href=${link} id='link'>Click here to verify</a></p><p>Thank you Your Corporate Memory management</p>`;
+
+    try {
+      // Send Email
+      sendEmail({
+        from: process.env.MAILER_FROM,
+        to: user.email,
+        subject: 'Club Manager Registration',
+        html: message,
+      });
+
+      res.status(200).json({ success: true, data: 'Email sent successfully' });
+    } catch (error) {
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+
+      await user.save();
+      return next(new ErrorResponse('Email could not be set', 500));
+    }
   } catch (error) {
     next(error);
   }
+};
+
+// Generate a secret token for the user
+const generateToken = (id, email) => {
+  return jwt.sign({ id, email }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
+  });
 };
 
 //LOGIN
