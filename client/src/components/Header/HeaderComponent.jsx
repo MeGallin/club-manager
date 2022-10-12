@@ -34,7 +34,6 @@ const HeaderComponent = () => {
                   {userAdmin?.username} Admin Area
                 </NavLink>
               </span>
-
               <span>
                 <LogoutComponent />
               </span>

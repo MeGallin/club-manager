@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import './UserAdminPanel';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 import { userAdminDetailsAction } from '../../store/actions/userActions';
 
@@ -31,7 +32,7 @@ const UserDisplayPanel = () => {
 
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { success, error, userAdmin } = userAdminDetails;
-  console.log('xxx', userAdmin);
+
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
@@ -43,16 +44,35 @@ const UserDisplayPanel = () => {
           }
         />
       ) : null}
+
+      <ButtonComponent
+        type="button"
+        text={showInputs ? 'EDIT' : 'DISPLAY INFO'}
+        variant="dark"
+        disabled={false}
+        onClick={() => setShowInputs(!showInputs)}
+      />
+      {userAdmin?.isAdmin ? (
+        <>
+          <ButtonComponent
+            type="button"
+            text={
+              <NavLink
+                className={(navData) => (navData.isActive ? 'active' : '')}
+                to="/admin"
+              >
+                Admin View
+              </NavLink>
+            }
+            variant="light"
+            disabled={false}
+          />
+        </>
+      ) : null}
+
       {success && userAdmin?.isConfirmed ? (
         showInputs ? (
           <>
-            <ButtonComponent
-              type="button"
-              text={showInputs ? 'EDIT' : 'DISPLAY INFO'}
-              variant="dark"
-              disabled={false}
-              onClick={() => setShowInputs(!showInputs)}
-            />
             <div>
               <p>Photo to follow</p>
               <p>USER NAME : {userAdmin?.username}</p>
@@ -60,15 +80,27 @@ const UserDisplayPanel = () => {
               <p>EMAIL : {userAdmin?.email}</p>
               <p>
                 IS ADMIN :{' '}
-                {userAdmin?.isAdmin === false ? <FaTimes /> : <FaCheck />}
+                {userAdmin?.isAdmin === false ? (
+                  <FaThumbsDown className="ra-thumbs-down" />
+                ) : (
+                  <FaThumbsUp className="ra-thumbs-up" />
+                )}
               </p>
               <p>
                 IS CONFIRMED :{' '}
-                {userAdmin?.isConfirmed === false ? <FaTimes /> : <FaCheck />}
+                {userAdmin?.isConfirmed === false ? (
+                  <FaThumbsDown className="ra-thumbs-down" />
+                ) : (
+                  <FaThumbsUp className="ra-thumbs-up" />
+                )}
               </p>
               <p>
                 IS SUSPENDED :{' '}
-                {userAdmin?.isSuspended === false ? <FaTimes /> : <FaCheck />}
+                {userAdmin?.isSuspended === false ? (
+                  <FaThumbsDown className="ra-thumbs-down" />
+                ) : (
+                  <FaThumbsUp className="ra-thumbs-up" />
+                )}
               </p>
               <p>CREATED : {userAdmin?.createdAt}</p>
               <p>UPDATED : {userAdmin?.updatedAt}</p>
