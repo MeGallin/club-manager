@@ -11,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/', require('./routes/adminRoutes'));
 app.use('/api/', require('./routes/confirmEmailRoute'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/auth/private', require('./routes/auth'));
