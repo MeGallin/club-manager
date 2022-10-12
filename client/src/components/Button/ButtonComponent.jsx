@@ -121,7 +121,7 @@ ButtonComponent.defaultProps = {
 ButtonComponent.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string,
-  text: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   className: PropTypes.string,
   variant: PropTypes.string,
   onClick: PropTypes.func,

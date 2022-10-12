@@ -203,7 +203,14 @@ hr.style-one {
   );
 }
 @import './css/scrollBar.scss';
-
+.ra-thumbs-down {
+  margin-left: 0.2em;
+  color: $danger;
+}
+.ra-thumbs-up {
+  margin-left: 0.2em;
+  color: $success;
+}
 .border-temp {
   border: 2px solid green;
 }
