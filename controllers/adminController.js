@@ -6,6 +6,5 @@ const User = require('../models/User');
 
 exports.getAllUsers = async (req, res) => {
   const users = await User.find({});
-  const allUsers = [...users];
-  res.status(200).json({ success: true, allUsers });
+  res.status(200).json({ success: true, users });
 };

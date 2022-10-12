@@ -10,6 +10,7 @@ import AboutView from './views/AboutView/AboutView';
 import LoginView from './views/LoginView/LoginView';
 import PWResetView from './views/PWRestView/PWResetView';
 import UserAdminView from './views/UserAdminView/UserAdminView';
+import AdminView from './views/AdminView/AdminView';
 
 const App = () => {
   return (
@@ -24,7 +25,8 @@ const App = () => {
             <Route path="/contact" element={<ContactView />} exact />
             <Route path="/login" element={<LoginView />} exact />
             <Route path="/password-reset/:token" element={<PWResetView />} />
-            <Route path="/user-admin" element={<UserAdminView />} />
+            <Route path="/user-admin" element={<UserAdminView />} exact />
+            <Route path="/admin" element={<AdminView />} exact />
             <Route path="*" element={<ErrorView />} exact />
           </Routes>
         </div>
