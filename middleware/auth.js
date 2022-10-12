@@ -30,3 +30,16 @@ exports.protect = async (req, res, next) => {
     );
   }
 };
+
+exports.admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    return next(
+      new ErrorResponse(
+        'You are not ADMIN and not authorized to access this route',
+        401,
+      ),
+    );
+  }
+};
