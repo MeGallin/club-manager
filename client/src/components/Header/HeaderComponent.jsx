@@ -31,7 +31,7 @@ const HeaderComponent = () => {
                   className={(navData) => (navData.isActive ? 'active' : '')}
                   to="/user-admin"
                 >
-                  {userAdmin?.username} Admin Area
+                  {userAdmin?.username} Admin
                 </NavLink>
               </span>
               <span>
