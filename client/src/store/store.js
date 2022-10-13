@@ -12,6 +12,7 @@ import {
 import {
   adminUsersDetailsReducer,
   adminIsAdminReducer,
+  adminIsSuspendedReducer,
 } from './reducers/adminReducers';
 
 //Initialise state to hold user info if logged in.
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   userUpdateAdminDetails: userUpdateAdminDetailsReducer,
   adminUsersDetails: adminUsersDetailsReducer,
   adminIsAdmin: adminIsAdminReducer,
+  adminIsSuspended: adminIsSuspendedReducer,
 });
 
 const initialState = {

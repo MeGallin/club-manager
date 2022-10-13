@@ -37,3 +37,24 @@ exports.toggleIsAdmin = async (req, res, next) => {
     next(error);
   }
 };
+
+// @description: Toggle is SUSPENDED
+// @route: GET /api/admin/user-is-suspended/:id
+// @access: Admin and Private
+exports.toggleIsSuspended = async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  try {
+    if (user) {
+      user.isSuspended = req.body.isSuspended;
+      await user.save();
+      res
+        .status(200)
+        .json({ success: true, message: 'Suspension changed successfully' });
+    } else {
+      return next(new ErrorResponse('Could not make your request', 400));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
