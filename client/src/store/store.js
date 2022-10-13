@@ -9,7 +9,10 @@ import {
   userAdminDetailsReducer,
   userUpdateAdminDetailsReducer,
 } from './reducers/userReducers';
-import { adminUsersDetailsReducer } from './reducers/adminReducers';
+import {
+  adminUsersDetailsReducer,
+  adminIsAdminReducer,
+} from './reducers/adminReducers';
 
 //Initialise state to hold user info if logged in.
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -24,6 +27,7 @@ const reducer = combineReducers({
   userAdminDetails: userAdminDetailsReducer,
   userUpdateAdminDetails: userUpdateAdminDetailsReducer,
   adminUsersDetails: adminUsersDetailsReducer,
+  adminIsAdmin: adminIsAdminReducer,
 });
 
 const initialState = {
