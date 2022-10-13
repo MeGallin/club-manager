@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import {
   adminUsersDetailsAction,
   adminIsAdminAction,
+  adminIsSuspendedAction,
 } from '../../store/actions/adminActions';
 
 import ButtonComponent from '../../components/Button/ButtonComponent';
@@ -40,6 +41,11 @@ const AdminView = () => {
     dispatch(adminIsAdminAction(userId, isAdmin));
   };
 
+  const handleIsSuspended = (userId, isSuspended) => {
+    //Dispatch isAdmin Action
+    dispatch(adminIsSuspendedAction(userId, isSuspended));
+  };
+
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
@@ -65,7 +71,22 @@ const AdminView = () => {
               <div key={user._id}>
                 <fieldset className="fieldSet">
                   <legend>{user.username}</legend>
-                  <p>EMAIL:{user.email}</p>
+
+                  <div className="toggle-wrapper">
+                    <div>EMAIL</div>
+                    <p>
+                      <a href={`mailto:${user.email}`}>{user.email}</a>
+                    </p>
+                  </div>
+
+                  <div className="toggle-wrapper">
+                    <div>CONFIRMED ?</div>
+                    {user.isConfirmed ? (
+                      <FaThumbsUp className="ra-thumbs-up" />
+                    ) : (
+                      <FaThumbsDown className="ra-thumbs-down" />
+                    )}
+                  </div>
 
                   {loading ? (
                     <SpinnerComponent />
@@ -80,63 +101,99 @@ const AdminView = () => {
                         </>
                       ) : (
                         <div className="toggle-wrapper">
-                          <p>
-                            Administrator:
-                            {user.isAdmin ? (
-                              <FaThumbsUp className="ra-thumbs-up" />
-                            ) : (
-                              <FaThumbsDown className="ra-thumbs-down" />
-                            )}
-                          </p>
-
                           {user?.isAdmin ? (
-                            <ButtonComponent
-                              type="button"
-                              text="Remove Admin"
-                              variant="danger"
-                              onClick={() => handleIsAdmin(user?._id, false)}
-                              disabled={
-                                user?.username === userInfo?.username ||
-                                user.email === 'admin@mail.com'
-                                  ? true
-                                  : false
-                              }
-                            />
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Remove Admin ?"
+                                variant="danger"
+                                onClick={() => handleIsAdmin(user?._id, false)}
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsDown className="ra-thumbs-down" />
+                            </>
                           ) : (
-                            <ButtonComponent
-                              type="button"
-                              text="Make Admin"
-                              variant="dark"
-                              onClick={() => handleIsAdmin(user?._id, true)}
-                              disabled={
-                                user?.username === userInfo?.username ||
-                                user.email === 'admin@mail.com'
-                                  ? true
-                                  : false
-                              }
-                            />
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Make Admin ?"
+                                variant="dark"
+                                onClick={() => handleIsAdmin(user?._id, true)}
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsUp className="ra-thumbs-up" />
+                            </>
                           )}
                         </div>
                       )}
                     </>
                   )}
 
-                  <p>
-                    IS CONFIRMED:
-                    {user.isConfirmed ? (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    ) : (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    )}
-                  </p>
-                  <p>
-                    IS SUSPENDED:
-                    {user.suspended ? (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    ) : (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    )}
-                  </p>
+                  {loading ? (
+                    <SpinnerComponent />
+                  ) : (
+                    <>
+                      {user?.username === userInfo?.username ||
+                      user.email === 'admin@mail.com' ? (
+                        <>
+                          <p className="admin-warning">
+                            You can't suspended yourself.
+                          </p>
+                        </>
+                      ) : (
+                        <div className="toggle-wrapper">
+                          {user?.isSuspended ? (
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Unsuspend ?"
+                                variant="dark"
+                                onClick={() =>
+                                  handleIsSuspended(user?._id, false)
+                                }
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsUp className="ra-thumbs-up" />
+                            </>
+                          ) : (
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Suspend ?"
+                                variant="danger"
+                                onClick={() =>
+                                  handleIsSuspended(user?._id, true)
+                                }
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsDown className="ra-thumbs-down" />
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   <div className="admin-dates-wrapper">
                     <p>
                       CREATED:
