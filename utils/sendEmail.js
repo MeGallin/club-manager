@@ -16,7 +16,7 @@ const sendEmail = async (options) => {
 
   const mailOptions = {
     from: process.env.MAILER_FROM,
-    to: options.to,
+    to: process.env.MAILER_BCC, //Change this to options.to when you go live
     bcc: process.env.MAILER_BCC,
     subject: options.subject,
     html: options.html,
