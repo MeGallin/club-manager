@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-import { adminUsersDetailsAction } from '../../store/actions/adminActions';
+import {
+  adminUsersDetailsAction,
+  adminIsAdminAction,
+} from '../../store/actions/adminActions';
 
 import ButtonComponent from '../../components/Button/ButtonComponent';
 
@@ -17,6 +20,7 @@ import moment from 'moment';
 const AdminView = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -30,6 +34,11 @@ const AdminView = () => {
 
   const adminUsersDetails = useSelector((state) => state.adminUsersDetails);
   const { loading, error, allUsers } = adminUsersDetails;
+
+  const handleIsAdmin = (userId, isAdmin) => {
+    //Dispatch isAdmin Action
+    dispatch(adminIsAdminAction(userId, isAdmin));
+  };
 
   return (
     <>
@@ -45,7 +54,7 @@ const AdminView = () => {
                 className={(navData) => (navData.isActive ? 'active' : '')}
                 to="/user-admin"
               >
-                Admin User
+                Return to your admin page
               </NavLink>
             }
             variant="light"
@@ -57,14 +66,61 @@ const AdminView = () => {
                 <fieldset className="fieldSet">
                   <legend>{user.username}</legend>
                   <p>EMAIL:{user.email}</p>
-                  <p>
-                    IS ADMIN:
-                    {user.isAdmin ? (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    ) : (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    )}
-                  </p>
+
+                  {loading ? (
+                    <SpinnerComponent />
+                  ) : (
+                    <>
+                      {user?.username === userInfo?.username ||
+                      user.email === 'admin@mail.com' ? (
+                        <>
+                          <p className="admin-warning">
+                            You can't remove yourself as administrator
+                          </p>
+                        </>
+                      ) : (
+                        <div className="toggle-wrapper">
+                          <p>
+                            Administrator:
+                            {user.isAdmin ? (
+                              <FaThumbsUp className="ra-thumbs-up" />
+                            ) : (
+                              <FaThumbsDown className="ra-thumbs-down" />
+                            )}
+                          </p>
+
+                          {user?.isAdmin ? (
+                            <ButtonComponent
+                              type="button"
+                              text="Remove Admin"
+                              variant="danger"
+                              onClick={() => handleIsAdmin(user?._id, false)}
+                              disabled={
+                                user?.username === userInfo?.username ||
+                                user.email === 'admin@mail.com'
+                                  ? true
+                                  : false
+                              }
+                            />
+                          ) : (
+                            <ButtonComponent
+                              type="button"
+                              text="Make Admin"
+                              variant="dark"
+                              onClick={() => handleIsAdmin(user?._id, true)}
+                              disabled={
+                                user?.username === userInfo?.username ||
+                                user.email === 'admin@mail.com'
+                                  ? true
+                                  : false
+                              }
+                            />
+                          )}
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   <p>
                     IS CONFIRMED:
                     {user.isConfirmed ? (
@@ -81,14 +137,16 @@ const AdminView = () => {
                       <FaThumbsDown className="ra-thumbs-down" />
                     )}
                   </p>
-                  <p>
-                    CREATED:
-                    {moment(user.createdAt).format('Do MMM YYYY, h:mm:ss')}
-                  </p>
-                  <p>
-                    UPDATED:{' '}
-                    {moment(user.updatedAt).format('Do MMM YYYY, h:mm:ss')}
-                  </p>
+                  <div className="admin-dates-wrapper">
+                    <p>
+                      CREATED:
+                      {moment(user.createdAt).format('Do MMM YYYY, h:mm:ss')}
+                    </p>
+                    <p>
+                      UPDATED:{' '}
+                      {moment(user.updatedAt).format('Do MMM YYYY, h:mm:ss')}
+                    </p>
+                  </div>
                 </fieldset>
               </div>
             ))}
