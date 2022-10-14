@@ -39,6 +39,12 @@ const UserSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    profileImage: {
+      type: String,
+    },
+    cloudinaryId: {
+      type: String,
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },
