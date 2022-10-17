@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 import './UserAdminPanel';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
-
 import { userAdminDetailsAction } from '../../store/actions/userActions';
 
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
@@ -45,13 +44,6 @@ const UserDisplayPanel = () => {
         />
       ) : null}
 
-      <ButtonComponent
-        type="button"
-        text={showInputs ? 'EDIT' : 'DISPLAY INFO'}
-        variant="dark"
-        disabled={false}
-        onClick={() => setShowInputs(!showInputs)}
-      />
       {userAdmin?.isAdmin ? (
         <>
           <ButtonComponent
@@ -112,6 +104,13 @@ const UserDisplayPanel = () => {
       ) : (
         <SpinnerComponent />
       )}
+      <ButtonComponent
+        type="button"
+        text={showInputs ? 'EDIT' : 'DISPLAY INFO'}
+        variant="dark"
+        disabled={false}
+        onClick={() => setShowInputs(!showInputs)}
+      />
       {userAdmin === undefined ? (
         <>
           <p>{tokenExpiration}</p>

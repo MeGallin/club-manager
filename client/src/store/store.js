@@ -14,6 +14,10 @@ import {
   adminIsAdminReducer,
   adminIsSuspendedReducer,
 } from './reducers/adminReducers';
+import {
+  profileGetProfileReducer,
+  profileCreateProfileReducer,
+} from './reducers/profileReducers';
 
 //Initialise state to hold user info if logged in.
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -30,6 +34,8 @@ const reducer = combineReducers({
   adminUsersDetails: adminUsersDetailsReducer,
   adminIsAdmin: adminIsAdminReducer,
   adminIsSuspended: adminIsSuspendedReducer,
+  profileGetProfile: profileGetProfileReducer,
+  profileCreateProfile: profileCreateProfileReducer,
 });
 
 const initialState = {
