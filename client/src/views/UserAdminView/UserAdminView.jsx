@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './UserAdminView.scss';
 
 import UserDisplayPanel from '../../components/User/UserDisplayPanel';
+import CreateProfileComponent from '../../components/Profile/CreateProfieComponent/CreateProfileComponent';
 
 const UserAdminView = () => {
   const navigate = useNavigate();
@@ -22,6 +23,10 @@ const UserAdminView = () => {
         <fieldset className="fieldSet">
           <legend>USER DISPLAY PANEL</legend>
           <UserDisplayPanel />
+        </fieldset>
+        <fieldset className="fieldSet">
+          <legend>User Create Profile</legend>
+          <CreateProfileComponent />
         </fieldset>
       </div>
     </>

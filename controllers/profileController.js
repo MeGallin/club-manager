@@ -1,5 +1,4 @@
 const Profile = require('../models/ProfileModel');
-const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 
 // @description: Create a new PROFILE
@@ -40,4 +39,21 @@ exports.createProfile = async (req, res, next) => {
   }
 
   next();
+};
+
+// @description: Get PROFILE
+// @route: GET /api/profile/:id
+// @access: PRIVATE
+exports.getProfile = async (req, res, next) => {
+  console.log(req.params);
+  const profile = await Profile.find({ user: req.params.id });
+  try {
+    if (!profile) {
+      return next(new ErrorResponse('Profile does not exist', 500));
+    } else {
+      res.status(200).json({ success: true, profile });
+    }
+  } catch (error) {
+    return next(new ErrorResponse('Profile does not exist', 500));
+  }
 };
