@@ -17,7 +17,8 @@ const profileSchema = mongoose.Schema(
     },
     email: {
       type: String,
-      required: [false, 'Optional'],
+      required: [true, 'We need this to make sure its you.'],
+      unique: true,
       match: [
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/,
         'Please provide a valid email address.',

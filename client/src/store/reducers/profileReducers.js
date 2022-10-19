@@ -16,7 +16,7 @@ export const profileGetProfileReducer = (state = {}, action) => {
       return {
         loading: false,
         success: true,
-        profile: action.payload,
+        ...action.payload,
       };
     case PROFILE_GET_PROFILE_FAILURE:
       return { loading: false, error: action.payload };

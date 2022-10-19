@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import './CreateProfileComponent.scss';
 import InputComponent from '../../../components/Input/InputComponent';
 import ButtonComponent from '../../../components/Button/ButtonComponent';
-import SpinnerComponent from '../../Spinner/SpinnerComponent';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../../Success/SuccessComponent';
 
@@ -37,10 +36,15 @@ const CreateProfileComponent = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const profileGetProfile = useSelector((state) => state.profileGetProfile);
+  const { profile } = profileGetProfile;
+
   const profileCreateProfile = useSelector(
     (state) => state.profileCreateProfile,
   );
-  const { loading, success, error } = profileCreateProfile;
+  const { success, error } = profileCreateProfile;
+
+  console.log('Create success', success, error);
 
   const handleOnChange = (e) => {
     setFormData((previousState) => ({
@@ -51,7 +55,7 @@ const CreateProfileComponent = () => {
 
   const handleCreateProfileSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
     if (userInfo) {
       //Dispatch your CREATE action
       dispatch(profileCreateProfileAction(formData));
@@ -73,9 +77,7 @@ const CreateProfileComponent = () => {
       {success ? (
         <SuccessComponent message="Registration has been successful" />
       ) : null}
-      {loading ? (
-        <SpinnerComponent />
-      ) : (
+      {!profile ? (
         <fieldset className="fieldSet">
           <legend>Create Profile Form</legend>
           <div>
@@ -183,7 +185,7 @@ const CreateProfileComponent = () => {
             </form>
           </div>
         </fieldset>
-      )}
+      ) : null}
     </>
   );
 };
