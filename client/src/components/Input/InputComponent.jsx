@@ -72,6 +72,7 @@ InputComponent.defaultProps = {
 };
 
 InputComponent.propTypes = {
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   text: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,

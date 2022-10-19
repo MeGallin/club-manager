@@ -208,7 +208,7 @@ exports.userUpdateAdminDetails = async (req, res, next) => {
         updatedUser,
       });
     } else {
-      return next(new ErrorResponse('User not found', 400));
+      return new ErrorResponse('User not found', 400);
     }
   } catch (error) {
     next(error);

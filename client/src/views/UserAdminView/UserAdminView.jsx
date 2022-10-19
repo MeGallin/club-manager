@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './UserAdminView.scss';
 
-import UserDisplayPanel from '../../components/User/UserDisplayPanel';
-import CreateProfileComponent from '../../components/Profile/CreateProfileComponent/CreateProfileComponent';
+import UserAdminComponent from '../../components/User/UserAdminComponent';
 
 const UserAdminView = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const UserAdminView = () => {
 
   return (
     <>
-      <UserDisplayPanel />
+      <UserAdminComponent />
     </>
   );
 };

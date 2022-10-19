@@ -20,14 +20,13 @@ const ProfileComponent = () => {
   const profileGetProfile = useSelector((state) => state.profileGetProfile);
   const { loading, profile } = profileGetProfile;
 
-  //   console.log('profileComp', profile);
-
   return loading ? (
     <SpinnerComponent />
   ) : profile ? (
     <fieldset className="fieldSet">
       <legend>Profile Details</legend>
       <div>
+        <h3>PHOTO TO FOLLOW</h3>
         <p>Name {profile?.name}</p>
         <p>Email {profile?.email}</p>
         <p>Date of Birth {profile?.dateOfBirth}</p>

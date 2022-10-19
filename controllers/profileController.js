@@ -63,6 +63,7 @@ exports.getProfile = async (req, res, next) => {
 // @access: PRIVATE
 exports.editProfile = async (req, res, next) => {
   const profile = await Profile.findById(req.params.id);
+
   try {
     if (profile) {
       const info = {
@@ -85,5 +86,4 @@ exports.editProfile = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  res.status(200).json('route working');
 };
