@@ -6,7 +6,7 @@ const ErrorResponse = require('../utils/errorResponse');
 // @access: PRIVATE
 exports.createProfile = async (req, res, next) => {
   // if profile already exists, create
-  const profileExists = await Profile.findOne({ name: req.body.name });
+  const profileExists = await Profile.findOne({ name: req.body.email });
 
   const {
     name,
@@ -45,8 +45,8 @@ exports.createProfile = async (req, res, next) => {
 // @route: GET /api/profile/:id
 // @access: PRIVATE
 exports.getProfile = async (req, res, next) => {
-  console.log(req.params);
-  const profile = await Profile.find({ user: req.params.id });
+  const profile = await Profile.findOne({ user: req.params.id });
+
   try {
     if (!profile) {
       return next(new ErrorResponse('Profile does not exist', 500));

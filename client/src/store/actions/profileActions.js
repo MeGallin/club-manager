@@ -11,7 +11,6 @@ import {
 //PUT: ADMIN isSuspended toggle
 export const profileGetProfileAction =
   (userId) => async (dispatch, getState) => {
-    console.log('action', userId);
     try {
       dispatch({
         type: PROFILE_GET_PROFILE_REQUEST,
@@ -42,7 +41,6 @@ export const profileGetProfileAction =
 //POST: USER create profile as user
 export const profileCreateProfileAction =
   (formData) => async (dispatch, getState) => {
-    console.log('action', formData);
     try {
       dispatch({
         type: PROFILE_CREATE_PROFILE_REQUEST,
@@ -59,6 +57,7 @@ export const profileCreateProfileAction =
 
       const { data } = await axios.post(`api/profile`, formData, config);
       dispatch({ type: PROFILE_CREATE_PROFILE_SUCCESS, payload: data });
+      dispatch(profileGetProfileAction(data.profile?.user));
     } catch (error) {
       dispatch({
         type: PROFILE_CREATE_PROFILE_FAILURE,
