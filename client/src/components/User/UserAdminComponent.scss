@@ -1,0 +1,11 @@
+@import '../../index.scss';
+.wrapper {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+
+  .cont-wrapper {
+    border: 1px solid $border-colour-dark;
+    padding: 0.5em;
+  }
+}

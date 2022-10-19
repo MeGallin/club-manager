@@ -22,8 +22,10 @@ button {
   box-shadow: 0 0 4px #999;
   outline: none;
   opacity: 0.8;
-  width: 100%;
   margin-bottom: 0.2em;
+  width: webkit-fill-available;
+  text-align: center;
+  width: max-content;
 }
 
 button.primary {

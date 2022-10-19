@@ -57,3 +57,33 @@ exports.getProfile = async (req, res, next) => {
     return next(new ErrorResponse('Profile does not exist', 500));
   }
 };
+
+// @description: Edit PROFILE details
+// @route: PUT /api/profile-edit/:id
+// @access: PRIVATE
+exports.editProfile = async (req, res, next) => {
+  const profile = await Profile.findById(req.params.id);
+
+  try {
+    if (profile) {
+      const info = {
+        name: req.body.name,
+        dateOfBirth: req.body.dateOfBirth,
+        email: req.body.email,
+        description: req.body.description,
+        preferredPosition: req.body.preferredPosition,
+        preferredNumber: req.body.preferredNumber,
+      };
+
+      const updatedInfo = await Profile.findByIdAndUpdate(req.params.id, info, {
+        new: true,
+      });
+
+      res.status(200).json({ success: true, updatedInfo });
+    } else {
+      return next(new ErrorResponse('Profile ot found', 400));
+    }
+  } catch (error) {
+    next(error);
+  }
+};

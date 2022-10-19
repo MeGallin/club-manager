@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './UserDisplayPanel.scss';
+import './UserAdminEditComponent.scss';
 
 import { userUpdateAdminDetailsAction } from '../../store/actions/userActions';
 
-import InputComponent from '../../components/Input/InputComponent';
-import ButtonComponent from '../../components/Button/ButtonComponent';
+import InputComponent from '../Input/InputComponent';
+import ButtonComponent from '../Button/ButtonComponent';
 import SpinnerComponent from '../Spinner/SpinnerComponent';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../Success/SuccessComponent';
@@ -61,7 +61,7 @@ const UserAdminPanel = () => {
       {success && userAdmin?.isConfirmed ? (
         <>
           <fieldset className="fieldSet">
-            <legend>Edit Your Details</legend>
+            <legend>Edit Your USER Details</legend>
             <form onSubmit={handleUpdateSubmit}>
               <InputComponent
                 label="User Name"
