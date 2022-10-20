@@ -11,9 +11,13 @@ import SuccessComponent from '../../Success/SuccessComponent';
 
 const EditProfileComponent = () => {
   const dispatch = useDispatch();
-  const nameRegEx = /[a-zA-Z]{4,}/;
+
+  const nameRegEx = /[a-zA-Z]{3,}/;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+  const dobRegEx =
+    /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+  const preferredNumberRegEx = /^[0-9]$|^[1-9][0-9]$|^(100)$/;
 
   const profileGetProfile = useSelector((state) => state.profileGetProfile);
   const { profile } = profileGetProfile;
@@ -77,7 +81,7 @@ const EditProfileComponent = () => {
             className={!nameRegEx.test(name) ? 'invalid' : 'entered'}
             error={
               !nameRegEx.test(name) && name?.length !== 0
-                ? `Username must contain at least 5 characters`
+                ? `Username must contain at least 3 characters`
                 : null
             }
             onChange={handleOnChange}
@@ -102,10 +106,10 @@ const EditProfileComponent = () => {
             type="text"
             name="dateOfBirth"
             required
-            className={dateOfBirth.length <= 5 ? 'invalid' : 'entered'}
+            className={!dobRegEx.test(dateOfBirth) ? 'invalid' : 'entered'}
             error={
-              dateOfBirth.length <= 5 && dateOfBirth?.length !== 0
-                ? `Password must contain at least 6 characters`
+              !dobRegEx.test(dateOfBirth) && dateOfBirth?.length !== 0
+                ? `yyyy-mm-dd`
                 : null
             }
             onChange={handleOnChange}
@@ -116,10 +120,10 @@ const EditProfileComponent = () => {
             type="text"
             name="description"
             required
-            className={description.length <= 5 ? 'invalid' : 'entered'}
+            className={description.length <= 15 ? 'invalid' : 'entered'}
             error={
-              description.length <= 5 && description?.length !== 0
-                ? `Password must contain at least 6 characters`
+              description.length <= 15 && description?.length !== 0
+                ? `Description must contain at least 16 characters`
                 : null
             }
             onChange={handleOnChange}
@@ -133,7 +137,7 @@ const EditProfileComponent = () => {
             className={preferredPosition.length <= 5 ? 'invalid' : 'entered'}
             error={
               preferredPosition.length <= 5 && preferredPosition.length !== 0
-                ? `Date of birth must contain at least 6 characters`
+                ? `Your preferred position must contain at least 6 characters`
                 : null
             }
             onChange={handleOnChange}
@@ -144,10 +148,15 @@ const EditProfileComponent = () => {
             type="number"
             name="preferredNumber"
             required
-            className={preferredNumber.length <= 1 ? 'invalid' : 'entered'}
+            className={
+              !preferredNumberRegEx.test(preferredNumber)
+                ? 'invalid'
+                : 'entered'
+            }
             error={
-              preferredNumber.length <= 1 && preferredNumber.length !== 0
-                ? `Number field cant be empty`
+              !preferredNumberRegEx.test(preferredNumber) &&
+              preferredNumber?.length !== 0
+                ? `Please choose a number between 1 and 100`
                 : null
             }
             onChange={handleOnChange}
@@ -155,9 +164,25 @@ const EditProfileComponent = () => {
 
           <ButtonComponent
             type="submit"
-            text="submit"
+            text={
+              !emailRegEx.test(email) ||
+              !nameRegEx.test(name) ||
+              !dobRegEx.test(dateOfBirth) ||
+              description.length <= 15 ||
+              !preferredNumberRegEx.test(preferredNumber) ||
+              preferredPosition.length <= 5
+                ? 'Disabled'
+                : 'submit'
+            }
             variant="primary"
-            disabled={!emailRegEx.test(email) || !nameRegEx.test(name)}
+            disabled={
+              !emailRegEx.test(email) ||
+              !nameRegEx.test(name) ||
+              !dobRegEx.test(dateOfBirth) ||
+              description.length <= 15 ||
+              !preferredNumberRegEx.test(preferredNumber) ||
+              preferredPosition.length <= 5
+            }
           />
         </form>
       </fieldset>

@@ -68,7 +68,6 @@ const UserAdminComponent = () => {
       <div className="wrapper">
         <div className="cont-wrapper">
           <fieldset className="fieldSet">
-            <legend>EDIT/DISPLAY USER</legend>
             <ButtonComponent
               type="button"
               text={
@@ -131,7 +130,6 @@ const UserAdminComponent = () => {
 
         <div className="cont-wrapper">
           <fieldset className="fieldSet">
-            <legend>EDIT/DISPLAY PROFILE</legend>
             <ButtonComponent
               type="button"
               text={
