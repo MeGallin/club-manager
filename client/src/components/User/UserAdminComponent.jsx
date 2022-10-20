@@ -142,7 +142,6 @@ const UserAdminComponent = () => {
               onClick={() => setShowProfileInputs(!showProfileInputs)}
             />
           </fieldset>
-
           {showProfileInputs ? (
             <>
               <CreateProfileComponent />

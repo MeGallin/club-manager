@@ -47,8 +47,6 @@ const CreateProfileComponent = () => {
   );
   const { success, error } = profileCreateProfile;
 
-  console.log('Create success', success, error);
-
   const handleOnChange = (e) => {
     setFormData((previousState) => ({
       ...previousState,
@@ -122,7 +120,7 @@ const CreateProfileComponent = () => {
                 className={!dobRegEx.test(dateOfBirth) ? 'invalid' : 'entered'}
                 error={
                   !dobRegEx.test(dateOfBirth) && dateOfBirth?.length !== 0
-                    ? `yyyy-mm-dd`
+                    ? `dd-mm-yyyy`
                     : null
                 }
                 onChange={handleOnChange}

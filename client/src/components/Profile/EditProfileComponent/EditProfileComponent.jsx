@@ -109,7 +109,7 @@ const EditProfileComponent = () => {
             className={!dobRegEx.test(dateOfBirth) ? 'invalid' : 'entered'}
             error={
               !dobRegEx.test(dateOfBirth) && dateOfBirth?.length !== 0
-                ? `yyyy-mm-dd`
+                ? `dd-mm-yyyy`
                 : null
             }
             onChange={handleOnChange}
