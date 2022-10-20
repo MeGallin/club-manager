@@ -1,0 +1,7 @@
+@import '../../index.scss';
+.validation-error {
+  color: $danger;
+  padding: 0.2em;
+  font-weight: bold;
+  font-size: 0.8em;
+}

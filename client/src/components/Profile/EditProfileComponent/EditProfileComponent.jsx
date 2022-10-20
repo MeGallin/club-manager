@@ -15,6 +15,7 @@ import {
   dobRegEx,
   preferredNumberRegEx,
 } from '../../../utils/regEx';
+import TextAreaComponent from '../../TextArea/TextAreaComponent';
 
 const EditProfileComponent = () => {
   const dispatch = useDispatch();
@@ -114,13 +115,11 @@ const EditProfileComponent = () => {
             }
             onChange={handleOnChange}
           />
-          <InputComponent
+          <TextAreaComponent
             label="Description"
-            value={description}
-            type="text"
+            id="description"
             name="description"
-            required
-            className={description.length <= 15 ? 'invalid' : 'entered'}
+            value={description}
             error={
               description.length <= 15 && description?.length !== 0
                 ? `Description must contain at least 16 characters`
@@ -161,7 +160,6 @@ const EditProfileComponent = () => {
             }
             onChange={handleOnChange}
           />
-
           <ButtonComponent
             type="submit"
             text={

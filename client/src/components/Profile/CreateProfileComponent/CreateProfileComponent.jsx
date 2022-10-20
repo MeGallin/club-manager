@@ -15,6 +15,7 @@ import {
 } from '../../../utils/regEx';
 
 import { profileCreateProfileAction } from '../../../store/actions/profileActions';
+import TextAreaComponent from '../../TextArea/TextAreaComponent';
 
 const CreateProfileComponent = () => {
   const dispatch = useDispatch();
@@ -125,13 +126,11 @@ const CreateProfileComponent = () => {
                 }
                 onChange={handleOnChange}
               />
-              <InputComponent
+              <TextAreaComponent
                 label="Description"
-                value={description}
-                type="text"
+                id="description"
                 name="description"
-                required
-                className={description.length <= 15 ? 'invalid' : 'entered'}
+                value={description}
                 error={
                   description.length <= 15 && description?.length !== 0
                     ? `Description must contain at least 16 characters`
