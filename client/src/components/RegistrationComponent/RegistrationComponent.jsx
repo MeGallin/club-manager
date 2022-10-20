@@ -9,6 +9,8 @@ import SpinnerComponent from '../Spinner/SpinnerComponent';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../Success/SuccessComponent';
 
+import { usernameRegEx, emailRegEx } from '../../utils/regEx';
+
 const RegistrationComponent = () => {
   const dispatch = useDispatch();
 
@@ -18,10 +20,6 @@ const RegistrationComponent = () => {
     password: '',
   });
   const { username, email, password } = formData;
-
-  const usernameRegEx = /[a-zA-Z]{4,}/;
-  const emailRegEx =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
   const userRegistration = useSelector((state) => state.userRegistration);
   const { loading, error, success } = userRegistration;
