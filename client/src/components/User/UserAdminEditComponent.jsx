@@ -10,11 +10,10 @@ import SpinnerComponent from '../Spinner/SpinnerComponent';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../Success/SuccessComponent';
 
+import { usernameRegEx, emailRegEx } from '../../utils/regEx';
+
 const UserAdminPanel = () => {
   const dispatch = useDispatch();
-  const usernameRegEx = /[a-zA-Z]{4,}/;
-  const emailRegEx =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { loading, success, error, userAdmin } = userAdminDetails;

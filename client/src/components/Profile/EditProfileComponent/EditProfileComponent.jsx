@@ -9,15 +9,15 @@ import ButtonComponent from '../../Button/ButtonComponent';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../../Success/SuccessComponent';
 
+import {
+  nameRegEx,
+  emailRegEx,
+  dobRegEx,
+  preferredNumberRegEx,
+} from '../../../utils/regEx';
+
 const EditProfileComponent = () => {
   const dispatch = useDispatch();
-
-  const nameRegEx = /[a-zA-Z]{3,}/;
-  const emailRegEx =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
-  const dobRegEx =
-    /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
-  const preferredNumberRegEx = /^[0-9]$|^[1-9][0-9]$|^(100)$/;
 
   const profileGetProfile = useSelector((state) => state.profileGetProfile);
   const { profile } = profileGetProfile;
@@ -63,7 +63,7 @@ const EditProfileComponent = () => {
   };
 
   const profileEditProfile = useSelector((state) => state.profileEditProfile);
-  const { loading, error, success } = profileEditProfile;
+  const { error, success } = profileEditProfile;
 
   return (
     <div>
