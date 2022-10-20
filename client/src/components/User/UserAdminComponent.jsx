@@ -13,6 +13,8 @@ import ProfileComponent from '../Profile/ProfileComponent/ProfileComponent';
 import CreateProfileComponent from '../Profile/CreateProfileComponent/CreateProfileComponent';
 import EditProfileComponent from '../Profile/EditProfileComponent/EditProfileComponent';
 
+import moment from 'moment';
+
 const UserAdminComponent = () => {
   const dispatch = useDispatch();
 
@@ -68,7 +70,6 @@ const UserAdminComponent = () => {
       <div className="wrapper">
         <div className="cont-wrapper">
           <fieldset className="fieldSet">
-            <legend>EDIT/DISPLAY USER</legend>
             <ButtonComponent
               type="button"
               text={
@@ -116,8 +117,9 @@ const UserAdminComponent = () => {
                         <FaThumbsUp className="ra-thumbs-up" />
                       )}
                     </p>
-                    <p>CREATED : {userAdmin?.createdAt}</p>
-                    <p>UPDATED : {userAdmin?.updatedAt}</p>
+
+                    <p>CREATED {moment(userAdmin?.createdAt).fromNow()}</p>
+                    <p>UPDATED {moment(userAdmin?.updatedAt).fromNow()}</p>
                   </div>
                 </fieldset>
               </>
@@ -131,7 +133,6 @@ const UserAdminComponent = () => {
 
         <div className="cont-wrapper">
           <fieldset className="fieldSet">
-            <legend>EDIT/DISPLAY PROFILE</legend>
             <ButtonComponent
               type="button"
               text={
@@ -144,7 +145,6 @@ const UserAdminComponent = () => {
               onClick={() => setShowProfileInputs(!showProfileInputs)}
             />
           </fieldset>
-
           {showProfileInputs ? (
             <>
               <CreateProfileComponent />

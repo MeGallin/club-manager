@@ -18,6 +18,7 @@ import {
   profileGetProfileReducer,
   profileCreateProfileReducer,
   profileEditProfileReducer,
+  profileDeleteProfileReducer,
 } from './reducers/profileReducers';
 
 //Initialise state to hold user info if logged in.
@@ -38,6 +39,7 @@ const reducer = combineReducers({
   profileGetProfile: profileGetProfileReducer,
   profileCreateProfile: profileCreateProfileReducer,
   profileEditProfile: profileEditProfileReducer,
+  profileDeleteProfile: profileDeleteProfileReducer,
 });
 
 const initialState = {
