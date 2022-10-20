@@ -2,6 +2,9 @@ import {
   PROFILE_CREATE_PROFILE_FAILURE,
   PROFILE_CREATE_PROFILE_REQUEST,
   PROFILE_CREATE_PROFILE_SUCCESS,
+  PROFILE_DELETE_PROFILE_FAILURE,
+  PROFILE_DELETE_PROFILE_REQUEST,
+  PROFILE_DELETE_PROFILE_SUCCESS,
   PROFILE_EDIT_PROFILE_FAILURE,
   PROFILE_EDIT_PROFILE_REQUEST,
   PROFILE_EDIT_PROFILE_SUCCESS,
@@ -55,6 +58,22 @@ export const profileEditProfileReducer = (state = {}, action) => {
         ...action.payload,
       };
     case PROFILE_EDIT_PROFILE_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+// DELETE: USER DELETE your profile as user
+export const profileDeleteProfileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROFILE_DELETE_PROFILE_REQUEST:
+      return { loading: true };
+    case PROFILE_DELETE_PROFILE_SUCCESS:
+      return {
+        loading: false,
+        ...action.payload,
+      };
+    case PROFILE_DELETE_PROFILE_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return { ...state };

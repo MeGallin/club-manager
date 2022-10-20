@@ -87,3 +87,19 @@ exports.editProfile = async (req, res, next) => {
     next(error);
   }
 };
+// @description: USER Delete a profile
+// @route: DELETE /api/profile-delete/:id
+// @access: Private
+exports.deleteProfile = async (req, res, next) => {
+  const profile = await Profile.findById(req.params.id);
+  try {
+    if (profile) {
+      await profile.remove();
+      res.status(200).json({ success: true });
+    } else {
+      return next(new ErrorResponse('Profile ot found', 401));
+    }
+  } catch (error) {
+    next(error);
+  }
+};

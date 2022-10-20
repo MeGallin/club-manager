@@ -68,14 +68,13 @@ const InputComponent = ({
 };
 
 InputComponent.defaultProps = {
-  type: 'text',
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 InputComponent.propTypes = {
-  type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   text: PropTypes.string,
   name: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   error: PropTypes.string,
   onChange: PropTypes.func,

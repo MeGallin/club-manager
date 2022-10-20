@@ -3,6 +3,10 @@ import {
   PROFILE_CREATE_PROFILE_FAILURE,
   PROFILE_CREATE_PROFILE_REQUEST,
   PROFILE_CREATE_PROFILE_SUCCESS,
+  PROFILE_DELETE_PROFILE_FAILURE,
+  PROFILE_DELETE_PROFILE_REQUEST,
+  PROFILE_DELETE_PROFILE_SUCCESS,
+  PROFILE_EDIT_PROFILE_FAILURE,
   PROFILE_EDIT_PROFILE_REQUEST,
   PROFILE_EDIT_PROFILE_SUCCESS,
   PROFILE_GET_PROFILE_FAILURE,
@@ -97,7 +101,41 @@ export const profileEditProfileAction =
       dispatch(profileGetProfileAction(data.updatedInfo?.user));
     } catch (error) {
       dispatch({
-        type: PROFILE_CREATE_PROFILE_FAILURE,
+        type: PROFILE_EDIT_PROFILE_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+//DELETE: USER DELETE profile as user
+export const profileDeleteProfileAction =
+  (profileId, userId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PROFILE_DELETE_PROFILE_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.delete(
+        `api/profile-delete/${profileId}`,
+        config,
+      );
+
+      dispatch({ type: PROFILE_DELETE_PROFILE_SUCCESS, payload: data });
+      dispatch(profileGetProfileAction(userId));
+    } catch (error) {
+      dispatch({
+        type: PROFILE_DELETE_PROFILE_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
