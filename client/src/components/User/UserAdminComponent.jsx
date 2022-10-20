@@ -13,6 +13,8 @@ import ProfileComponent from '../Profile/ProfileComponent/ProfileComponent';
 import CreateProfileComponent from '../Profile/CreateProfileComponent/CreateProfileComponent';
 import EditProfileComponent from '../Profile/EditProfileComponent/EditProfileComponent';
 
+import moment from 'moment';
+
 const UserAdminComponent = () => {
   const dispatch = useDispatch();
 
@@ -115,8 +117,9 @@ const UserAdminComponent = () => {
                         <FaThumbsUp className="ra-thumbs-up" />
                       )}
                     </p>
-                    <p>CREATED : {userAdmin?.createdAt}</p>
-                    <p>UPDATED : {userAdmin?.updatedAt}</p>
+
+                    <p>CREATED {moment(userAdmin?.createdAt).fromNow()}</p>
+                    <p>UPDATED {moment(userAdmin?.updatedAt).fromNow()}</p>
                   </div>
                 </fieldset>
               </>
