@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 
 import { profileGetProfileAction } from '../../../store/actions/profileActions';
 
@@ -33,8 +34,10 @@ const ProfileComponent = () => {
         <p>Description {profile?.description}</p>
         <p>Preferred Position {profile?.preferredPosition}</p>
         <p>Preferred Number {profile?.preferredNumber}</p>
-        <p>Created {profile?.createdAt}</p>
-        <p>Updated {profile?.updatedAt}</p>
+
+        <p>Created {moment(profile?.createdAt).fromNow()}</p>
+
+        <p>Updated {moment(profile?.updatedAt).fromNow()}</p>
       </div>
     </fieldset>
   ) : null;
