@@ -52,15 +52,6 @@ const EditProfileComponent = () => {
     e.preventDefault();
     //Dispatch EDit profile action
     dispatch(profileEditProfileAction(formData));
-
-    setFormData({
-      name: '',
-      email: '',
-      dateOfBirth: '',
-      description: '',
-      preferredPosition: '',
-      preferredNumber: '',
-    });
   };
 
   const profileEditProfile = useSelector((state) => state.profileEditProfile);

@@ -68,6 +68,7 @@ export const userLoginAction = (email, password) => async (dispatch) => {
     );
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+    dispatch(userAdminDetailsAction());
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
