@@ -9,7 +9,7 @@ const SuccessComponent = ({ message }) => {
     setTimeout(() => {
       setClear('clear');
     }, 6000);
-  }, []);
+  }, [clear]);
 
   return (
     <div className=" animate__animated animate__bounceInLeft">
