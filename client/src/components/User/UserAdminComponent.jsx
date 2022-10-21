@@ -75,7 +75,7 @@ const UserAdminComponent = () => {
               text={
                 showUserAdminInputs
                   ? 'EDIT USER DETAILS'
-                  : 'DISPLAY USER DETAILS'
+                  : 'BACK TO USER DETAILS'
               }
               variant="dark"
               disabled={false}
@@ -138,7 +138,7 @@ const UserAdminComponent = () => {
               text={
                 showProfileInputs
                   ? 'EDIT PROFILE DETAILS'
-                  : 'DISPLAY PROFILE DETAILS'
+                  : 'BACK TO PROFILE DETAILS'
               }
               variant="warning"
               disabled={false}
