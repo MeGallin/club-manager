@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/', require('./routes/adminRoutes'));
+app.use('/api/', require('./routes/AdminProfileRoutes'));
 app.use('/api/', require('./routes/confirmEmailRoute'));
 app.use('/api/', require('./routes/profileRoutes'));
 app.use('/api/auth', require('./routes/auth'));
