@@ -31,7 +31,10 @@ const HeaderComponent = () => {
                   className={(navData) => (navData.isActive ? 'active' : '')}
                   to="/user-admin"
                 >
-                  {userAdmin?.username} Admin
+                  <div className="logged-in-user-wrapper">
+                    <div>USER:</div>
+                    <div className="logged-in-user">{userAdmin?.username}</div>
+                  </div>
                 </NavLink>
               </span>
               <span>

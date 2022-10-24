@@ -6,6 +6,15 @@ import {
   ADMIN_IS_ADMIN_FAILURE,
   ADMIN_IS_ADMIN_REQUEST,
   ADMIN_IS_ADMIN_SUCCESS,
+  ADMIN_IS_COACH_FAILURE,
+  ADMIN_IS_COACH_REQUEST,
+  ADMIN_IS_COACH_SUCCESS,
+  ADMIN_IS_PARENT_FAILURE,
+  ADMIN_IS_PARENT_REQUEST,
+  ADMIN_IS_PARENT_SUCCESS,
+  ADMIN_IS_PLAYER_FAILURE,
+  ADMIN_IS_PLAYER_REQUEST,
+  ADMIN_IS_PLAYER_SUCCESS,
   ADMIN_IS_SUSPENDED_FAILURE,
   ADMIN_IS_SUSPENDED_REQUEST,
   ADMIN_IS_SUSPENDED_SUCCESS,
@@ -99,6 +108,111 @@ export const adminIsSuspendedAction =
     } catch (error) {
       dispatch({
         type: ADMIN_IS_SUSPENDED_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//PUT: ADMIN isCoach toggle
+export const adminIsCoachAction =
+  (userId, isCoach) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_IS_COACH_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `api/admin/user-is-coach/${userId}`,
+        { isCoach },
+        config,
+      );
+      dispatch({ type: ADMIN_IS_COACH_SUCCESS, payload: data });
+      dispatch(adminUsersDetailsAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_IS_COACH_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//PUT: ADMIN isParent toggle
+export const adminIsParentAction =
+  (userId, isParent) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_IS_PARENT_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `api/admin/user-is-parent/${userId}`,
+        { isParent },
+        config,
+      );
+      dispatch({ type: ADMIN_IS_PARENT_SUCCESS, payload: data });
+      dispatch(adminUsersDetailsAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_IS_PARENT_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//PUT: ADMIN isPlayer toggle
+export const adminIsPlayerAction =
+  (userId, isPlayer) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_IS_PLAYER_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `api/admin/user-is-player/${userId}`,
+        { isPlayer },
+        config,
+      );
+      dispatch({ type: ADMIN_IS_PLAYER_SUCCESS, payload: data });
+      dispatch(adminUsersDetailsAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_IS_PLAYER_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

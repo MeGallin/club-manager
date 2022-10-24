@@ -4,7 +4,7 @@
 $btn-primary: #3b71ca;
 $btn-secondary: #9fa6b2;
 $btn-success: #14a44d;
-$btn-danger: #dc4c64;
+$btn-danger: crimson;
 $btn-warning: #e4a11b;
 $btn-info: #54b4d3;
 $btn-light: #fbfbfb;
@@ -54,21 +54,21 @@ button.dark {
 }
 
 /* Ripple effect */
-// .ripple {
-//   background-position: center;
-//   transition: background 0.8s;
-// }
-// .ripple:hover {
-//   background: rgba(190, 190, 190, 1)
-//     radial-gradient(circle, transparent 1%, rgba(190, 190, 190, 1) 1%)
-//     center/15000%;
-//   opacity: 1;
-// }
-// .ripple:active {
-//   background-color: $btn-danger;
-//   background-size: 100%;
-//   transition: background 0s;
-// }
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: rgba(190, 190, 190, 1)
+    radial-gradient(circle, transparent 1%, rgba(190, 190, 190, 1) 1%)
+    center/15000%;
+  opacity: 1;
+}
+.ripple:active {
+  background-color: $btn-danger;
+  background-size: 100%;
+  transition: background 0s;
+}
 
 button:disabled,
 button[disabled] {
