@@ -29,6 +29,21 @@ const UserSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    isCoach: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    isPlayer: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    isParent: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     isConfirmed: {
       type: Boolean,
       required: true,

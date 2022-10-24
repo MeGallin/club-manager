@@ -94,7 +94,7 @@ const UserAdminComponent = () => {
 
                     <p>EMAIL : {userAdmin?.email}</p>
                     <p>
-                      IS ADMIN :{' '}
+                      ADMIN :{' '}
                       {userAdmin?.isAdmin === false ? (
                         <FaThumbsDown className="ra-thumbs-down" />
                       ) : (
@@ -102,7 +102,31 @@ const UserAdminComponent = () => {
                       )}
                     </p>
                     <p>
-                      IS CONFIRMED :{' '}
+                      COACH :{' '}
+                      {userAdmin?.isCoach === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                    <p>
+                      PLAYER :{' '}
+                      {userAdmin?.isPlayer === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                    <p>
+                      PARENT :{' '}
+                      {userAdmin?.isParent === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                    <p>
+                      CONFIRMED :{' '}
                       {userAdmin?.isConfirmed === false ? (
                         <FaThumbsDown className="ra-thumbs-down" />
                       ) : (
@@ -110,7 +134,7 @@ const UserAdminComponent = () => {
                       )}
                     </p>
                     <p>
-                      IS SUSPENDED :{' '}
+                      SUSPENDED :{' '}
                       {userAdmin?.isSuspended === false ? (
                         <FaThumbsDown className="ra-thumbs-down" />
                       ) : (
