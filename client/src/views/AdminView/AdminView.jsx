@@ -7,6 +7,9 @@ import {
   adminUsersDetailsAction,
   adminIsAdminAction,
   adminIsSuspendedAction,
+  adminIsCoachAction,
+  adminIsParentAction,
+  adminIsPlayerAction,
 } from '../../store/actions/adminActions';
 
 import ButtonComponent from '../../components/Button/ButtonComponent';
@@ -37,13 +40,22 @@ const AdminView = () => {
   const { loading, error, allUsers } = adminUsersDetails;
 
   const handleIsAdmin = (userId, isAdmin) => {
-    //Dispatch isAdmin Action
     dispatch(adminIsAdminAction(userId, isAdmin));
   };
 
   const handleIsSuspended = (userId, isSuspended) => {
-    //Dispatch isAdmin Action
     dispatch(adminIsSuspendedAction(userId, isSuspended));
+  };
+
+  const handleIsCoach = (userId, isCoach) => {
+    dispatch(adminIsCoachAction(userId, isCoach));
+  };
+
+  const handleIsParent = (userId, isParent) => {
+    dispatch(adminIsParentAction(userId, isParent));
+  };
+  const handleIsPlayer = (userId, isPlayer) => {
+    dispatch(adminIsPlayerAction(userId, isPlayer));
   };
 
   return (
@@ -80,13 +92,166 @@ const AdminView = () => {
                   </div>
 
                   <div className="toggle-wrapper">
-                    <div>CONFIRMED ?</div>
+                    <div>CONFIRMED</div>
                     {user.isConfirmed ? (
                       <FaThumbsUp className="ra-thumbs-up" />
                     ) : (
                       <FaThumbsDown className="ra-thumbs-down" />
                     )}
                   </div>
+
+                  {loading ? (
+                    <SpinnerComponent />
+                  ) : (
+                    <>
+                      {user?.username === userInfo?.username ||
+                      user.email === 'admin@mail.com' ? (
+                        <>
+                          <p className="admin-warning">
+                            You can't remove yourself as administrator
+                          </p>
+                        </>
+                      ) : (
+                        <div className="toggle-wrapper">
+                          {user?.isCoach ? (
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Remove Coach ?"
+                                variant="danger"
+                                onClick={() => handleIsCoach(user?._id, false)}
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsDown className="ra-thumbs-down" />
+                            </>
+                          ) : (
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Confirm is Coach ?"
+                                variant="dark"
+                                onClick={() => handleIsCoach(user?._id, true)}
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsUp className="ra-thumbs-up" />
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {loading ? (
+                    <SpinnerComponent />
+                  ) : (
+                    <>
+                      {user?.username === userInfo?.username ||
+                      user.email === 'admin@mail.com' ? (
+                        <>
+                          <p className="admin-warning">
+                            You can't remove yourself as administrator
+                          </p>
+                        </>
+                      ) : (
+                        <div className="toggle-wrapper">
+                          {user?.isPlayer ? (
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Remove Player ?"
+                                variant="danger"
+                                onClick={() => handleIsPlayer(user?._id, false)}
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsDown className="ra-thumbs-down" />
+                            </>
+                          ) : (
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Confirm is Player ?"
+                                variant="dark"
+                                onClick={() => handleIsPlayer(user?._id, true)}
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsUp className="ra-thumbs-up" />
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {loading ? (
+                    <SpinnerComponent />
+                  ) : (
+                    <>
+                      {user?.username === userInfo?.username ||
+                      user.email === 'admin@mail.com' ? (
+                        <>
+                          <p className="admin-warning">
+                            You can't remove yourself as administrator
+                          </p>
+                        </>
+                      ) : (
+                        <div className="toggle-wrapper">
+                          {user?.isParent ? (
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Remove Parent ?"
+                                variant="danger"
+                                onClick={() => handleIsParent(user?._id, false)}
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsDown className="ra-thumbs-down" />
+                            </>
+                          ) : (
+                            <>
+                              <ButtonComponent
+                                type="button"
+                                text="Confirm is Parent ?"
+                                variant="dark"
+                                onClick={() => handleIsParent(user?._id, true)}
+                                disabled={
+                                  user?.username === userInfo?.username ||
+                                  user.email === 'admin@mail.com'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <FaThumbsUp className="ra-thumbs-up" />
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  )}
 
                   {loading ? (
                     <SpinnerComponent />
