@@ -156,19 +156,6 @@ const UserAdminComponent = () => {
         </div>
 
         <div className="cont-wrapper">
-          <fieldset className="fieldSet">
-            <ButtonComponent
-              type="button"
-              text={
-                showProfileInputs
-                  ? 'EDIT PROFILE DETAILS'
-                  : 'BACK TO PROFILE DETAILS'
-              }
-              variant="warning"
-              disabled={false}
-              onClick={() => setShowProfileInputs(!showProfileInputs)}
-            />
-          </fieldset>
           {showProfileInputs ? (
             <>
               <ProfileComponent />

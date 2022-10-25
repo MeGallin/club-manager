@@ -161,7 +161,7 @@ const AdminComponent = () => {
               onClick={() => handleCreateAdminProfile()}
             />
           </fieldset> */}
-          <fieldset className="fieldSet">
+          {/* <fieldset className="fieldSet">
             <ButtonComponent
               type="button"
               text={
@@ -173,7 +173,7 @@ const AdminComponent = () => {
               disabled={false}
               onClick={() => setShowProfileInputs(!showProfileInputs)}
             />
-          </fieldset>
+          </fieldset> */}
           {showProfileInputs ? (
             <>
               <AdminProfileComponent />

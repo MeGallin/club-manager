@@ -6,6 +6,9 @@ import {
   ADMIN_CREATE_PROFILE_FAILURE,
   ADMIN_CREATE_PROFILE_REQUEST,
   ADMIN_CREATE_PROFILE_SUCCESS,
+  ADMIN_EDIT_PROFILE_FAILURE,
+  ADMIN_EDIT_PROFILE_REQUEST,
+  ADMIN_EDIT_PROFILE_SUCCESS,
   ADMIN_GET_ALL_USERS_FAILURE,
   ADMIN_GET_ALL_USERS_REQUEST,
   ADMIN_GET_ALL_USERS_SUCCESS,
@@ -231,7 +234,7 @@ export const adminIsPlayerAction =
   };
 
 //POST: ADMIN create ADMI profile
-export const AdminCreateProfileAction =
+export const adminCreateProfileAction =
   (formData) => async (dispatch, getState) => {
     try {
       dispatch({
@@ -322,3 +325,38 @@ export const adminProfileAction = (userId) => async (dispatch, getState) => {
     });
   }
 };
+
+//PUT: ADMIN isParent toggle
+export const adminEditProfileAction =
+  (formData) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_EDIT_PROFILE_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `api/admin/profile-edit/${formData.id}`,
+        formData,
+        config,
+      );
+      dispatch({ type: ADMIN_EDIT_PROFILE_SUCCESS, payload: data });
+      dispatch(adminAllProfilesAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_EDIT_PROFILE_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

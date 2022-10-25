@@ -5,6 +5,9 @@ import {
   ADMIN_CREATE_PROFILE_FAILURE,
   ADMIN_CREATE_PROFILE_REQUEST,
   ADMIN_CREATE_PROFILE_SUCCESS,
+  ADMIN_EDIT_PROFILE_FAILURE,
+  ADMIN_EDIT_PROFILE_REQUEST,
+  ADMIN_EDIT_PROFILE_SUCCESS,
   ADMIN_GET_ALL_USERS_FAILURE,
   ADMIN_GET_ALL_USERS_REQUEST,
   ADMIN_GET_ALL_USERS_SUCCESS,
@@ -183,6 +186,24 @@ export const adminCreateProfileReducer = (state = {}, action) => {
         ...action.payload,
       };
     case ADMIN_CREATE_PROFILE_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// PUT: ADMIN EDIT profile reducer
+export const adminEditProfileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_EDIT_PROFILE_REQUEST:
+      return { loading: true };
+    case ADMIN_EDIT_PROFILE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        ...action.payload,
+      };
+    case ADMIN_EDIT_PROFILE_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return { ...state };
