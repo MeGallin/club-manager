@@ -6,9 +6,11 @@ const {
   getAdminProfile,
   editAdminProfile,
   deleteAdminProfile,
+  getAdminProfiles,
 } = require('../controllers/AdminProfileController');
 const { protect, admin } = require('../middleware/auth');
 
+router.route('/admin/profiles').get(protect, admin, getAdminProfiles);
 router.route('/admin/profile-create').post(protect, admin, createAdminProfile);
 router
   .route('/admin/profile-delete/:id')
