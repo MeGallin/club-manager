@@ -1,5 +1,14 @@
 import axios from 'axios';
 import {
+  ADMIN_ALL_PROFILES_FAILURE,
+  ADMIN_ALL_PROFILES_REQUEST,
+  ADMIN_ALL_PROFILES_SUCCESS,
+  ADMIN_CREATE_PROFILE_FAILURE,
+  ADMIN_CREATE_PROFILE_REQUEST,
+  ADMIN_CREATE_PROFILE_SUCCESS,
+  ADMIN_EDIT_PROFILE_FAILURE,
+  ADMIN_EDIT_PROFILE_REQUEST,
+  ADMIN_EDIT_PROFILE_SUCCESS,
   ADMIN_GET_ALL_USERS_FAILURE,
   ADMIN_GET_ALL_USERS_REQUEST,
   ADMIN_GET_ALL_USERS_SUCCESS,
@@ -18,6 +27,9 @@ import {
   ADMIN_IS_SUSPENDED_FAILURE,
   ADMIN_IS_SUSPENDED_REQUEST,
   ADMIN_IS_SUSPENDED_SUCCESS,
+  ADMIN_PROFILE_FAILURE,
+  ADMIN_PROFILE_REQUEST,
+  ADMIN_PROFILE_SUCCESS,
 } from '../constants/adminConstants';
 
 //GET: USER Admin details
@@ -213,6 +225,134 @@ export const adminIsPlayerAction =
     } catch (error) {
       dispatch({
         type: ADMIN_IS_PLAYER_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//POST: ADMIN create ADMI profile
+export const adminCreateProfileAction =
+  (formData) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_CREATE_PROFILE_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `api/admin/profile-create`,
+        formData,
+        config,
+      );
+      dispatch({ type: ADMIN_CREATE_PROFILE_SUCCESS, payload: data });
+      dispatch(adminAllProfilesAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_CREATE_PROFILE_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//GET: ADMIN ALL profiles
+export const adminAllProfilesAction =
+  (userId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_ALL_PROFILES_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.get(`api/admin/profiles`, config);
+      dispatch({ type: ADMIN_ALL_PROFILES_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: ADMIN_ALL_PROFILES_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+//GET: ADMIN profile
+export const adminProfileAction = (userId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ADMIN_PROFILE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`api/admin/profile/${userId}`, config);
+    dispatch({ type: ADMIN_PROFILE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_PROFILE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+//PUT: ADMIN isParent toggle
+export const adminEditProfileAction =
+  (formData) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_EDIT_PROFILE_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `api/admin/profile-edit/${formData.id}`,
+        formData,
+        config,
+      );
+      dispatch({ type: ADMIN_EDIT_PROFILE_SUCCESS, payload: data });
+      dispatch(adminAllProfilesAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_EDIT_PROFILE_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

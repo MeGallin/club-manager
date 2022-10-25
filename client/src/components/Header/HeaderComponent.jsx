@@ -26,20 +26,49 @@ const HeaderComponent = () => {
 
           {userInfo ? (
             <>
-              <span>
-                <NavLink
-                  className={(navData) => (navData.isActive ? 'active' : '')}
-                  to="/user-admin"
-                >
-                  <div className="logged-in-user-wrapper">
-                    <div>USER:</div>
-                    <div className="logged-in-user">{userAdmin?.username}</div>
-                  </div>
-                </NavLink>
-              </span>
-              <span>
-                <LogoutComponent />
-              </span>
+              {userAdmin?.isAdmin ? (
+                <>
+                  <span>
+                    <NavLink
+                      className={(navData) =>
+                        navData.isActive ? 'active' : ''
+                      }
+                      to="/admin-profile"
+                    >
+                      <div className="logged-in-user-wrapper">
+                        <div>Admin Profile:</div>
+                        <div className="logged-in-user">
+                          {userAdmin?.username}
+                        </div>
+                      </div>
+                    </NavLink>
+                  </span>
+                  <span>
+                    <LogoutComponent />
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span>
+                    <NavLink
+                      className={(navData) =>
+                        navData.isActive ? 'active' : ''
+                      }
+                      to="/user-admin"
+                    >
+                      <div className="logged-in-user-wrapper">
+                        <div>USER:</div>
+                        <div className="logged-in-user">
+                          {userAdmin?.username}
+                        </div>
+                      </div>
+                    </NavLink>
+                  </span>
+                  <span>
+                    <LogoutComponent />
+                  </span>
+                </>
+              )}
             </>
           ) : (
             <>
