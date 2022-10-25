@@ -6,7 +6,6 @@ const ErrorResponse = require('../utils/errorResponse');
 // @access: ADMIN && PRIVATE
 exports.createAdminProfile = async (req, res, next) => {
   const user = req.user._id;
-  console.log(req.body);
   const { name, dateOfBirth, email, phone, description } = req.body;
 
   // if profile already exists, create

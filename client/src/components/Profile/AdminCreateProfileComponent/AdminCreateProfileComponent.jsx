@@ -3,14 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './AdminCreateProfileComponent.scss';
 
-import { AdminCreateProfileAction } from '../../../store/actions/adminActions';
+import { adminCreateProfileAction } from '../../../store/actions/adminActions';
 
 import InputComponent from '../../../components/Input/InputComponent';
 import ButtonComponent from '../../../components/Button/ButtonComponent';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../../Success/SuccessComponent';
 
-import { nameRegEx, emailRegEx, dobRegEx } from '../../../utils/regEx';
+import {
+  nameRegEx,
+  emailRegEx,
+  dobRegEx,
+  phoneRegEx,
+} from '../../../utils/regEx';
 import TextAreaComponent from '../../TextArea/TextAreaComponent';
 
 const AdminCreateProfileComponent = () => {
@@ -45,20 +50,25 @@ const AdminCreateProfileComponent = () => {
       navigate('/login');
     } else {
       //Dispatch your CREATE action
-      dispatch(AdminCreateProfileAction(formData));
+      dispatch(adminCreateProfileAction(formData));
     }
 
-    // setFormData({
-    //   name: '',
-    //   email: '',
-    //   dateOfBirth: '',
-    //   description: '',
-    //   phone: '',
-    // });
+    setFormData({
+      name: '',
+      email: '',
+      dateOfBirth: '',
+      description: '',
+      phone: '',
+    });
   };
 
+  const adminCreateProfile = useSelector((state) => state.adminCreateProfile);
+  const { error, success } = adminCreateProfile;
+
   return (
-    <div>
+    <>
+      {error ? <ErrorComponent /> : null}
+      {success ? <SuccessComponent /> : null}
       <fieldset className="fieldSet">
         <legend>Create ADMIN Profile</legend>
         <div>
@@ -97,10 +107,10 @@ const AdminCreateProfileComponent = () => {
               type="text"
               name="phone"
               required
-              className={phone.length <= 5 ? 'invalid' : 'entered'}
+              className={!phoneRegEx.test(phone) ? 'invalid' : 'entered'}
               error={
-                phone.length <= 5 && phone.length !== 0
-                  ? `Your preferred position must contain at least 6 characters`
+                !phoneRegEx.test(phone) && phone?.length !== 0
+                  ? `123-123-12345`
                   : null
               }
               onChange={handleOnChange}
@@ -141,7 +151,7 @@ const AdminCreateProfileComponent = () => {
                 !nameRegEx.test(name) ||
                 !dobRegEx.test(dateOfBirth) ||
                 description.length <= 15 ||
-                phone.length <= 5
+                !phoneRegEx.test(phone)
                   ? 'Disabled'
                   : 'submit'
               }
@@ -151,13 +161,13 @@ const AdminCreateProfileComponent = () => {
                 !nameRegEx.test(name) ||
                 !dobRegEx.test(dateOfBirth) ||
                 description.length <= 15 ||
-                phone.length <= 5
+                !phoneRegEx.test(phone)
               }
             />
           </form>
         </div>
       </fieldset>
-    </div>
+    </>
   );
 };
 
