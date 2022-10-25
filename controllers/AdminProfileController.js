@@ -6,6 +6,7 @@ const ErrorResponse = require('../utils/errorResponse');
 // @access: ADMIN && PRIVATE
 exports.createAdminProfile = async (req, res, next) => {
   const user = req.user._id;
+  console.log(req.body);
   const { name, dateOfBirth, email, phone, description } = req.body;
 
   // if profile already exists, create
@@ -72,6 +73,22 @@ exports.editAdminProfile = async (req, res, next) => {
       res.status(200).json({ success: true, updateAdminProfileDetails });
     } else {
       return next(new ErrorResponse('Profile ot found', 400));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @description: GET ALL ADMIN PROFILES
+// @route: PUT /api/admin/profiles
+// @access: ADMIN && PRIVATE
+exports.getAdminProfiles = async (req, res, next) => {
+  const profiles = await AdminProfile.find({});
+  try {
+    if (profiles) {
+      res.status(200).json({ success: true, profiles });
+    } else {
+      return next(new ErrorResponse('No user could be found', 500));
     }
   } catch (error) {
     next(error);
