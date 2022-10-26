@@ -70,7 +70,7 @@ const AdminView = () => {
             text={
               <NavLink
                 className={(navData) => (navData.isActive ? 'active' : '')}
-                to="/user-admin"
+                to="/admin-profile"
               >
                 Return to your admin page
               </NavLink>

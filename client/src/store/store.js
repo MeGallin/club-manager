@@ -17,7 +17,6 @@ import {
   adminIsParentReducer,
   adminIsPlayerReducer,
   adminAllProfilesReducer,
-  adminProfileReducer,
   adminCreateProfileReducer,
   adminEditProfileReducer,
 } from './reducers/adminReducers';
@@ -47,7 +46,6 @@ const reducer = combineReducers({
   adminIsParent: adminIsParentReducer,
   adminIsPlayer: adminIsPlayerReducer,
   adminAllProfiles: adminAllProfilesReducer,
-  adminProfile: adminProfileReducer,
   adminCreateProfile: adminCreateProfileReducer,
   adminEditProfile: adminEditProfileReducer,
   profileGetProfile: profileGetProfileReducer,
