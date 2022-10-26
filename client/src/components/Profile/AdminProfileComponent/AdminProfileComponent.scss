@@ -2,6 +2,7 @@
 
 .inner-content-wrapper {
   display: flex;
+  flex-wrap: wrap;
   .inner-inner-wrapper {
     flex-grow: 1;
     flex-basis: 0;
