@@ -77,14 +77,45 @@ const AdminProfileComponent = () => {
                   <legend>ADMIN Profile</legend>
                   {adminProfile?.map((profile) => (
                     <div key={profile._id}>
-                      <h3>PHOTO TO FOLLOW</h3>
-                      <p>Name: {profile.name}</p>
-                      <p>Email: {profile.email}</p>
-                      <p>Phone: {profile.phone}</p>
-                      <p> Description: {profile.description}</p>
-                      <p> DoB: {profile.dateOfBirth}</p>
-                      <p> Created: {moment(profile.createdAt).fromNow()}</p>
-                      <p> Updated: {moment(profile.updatedAt).fromNow()}</p>
+                      <div className="inner-content-wrapper">
+                        <div
+                          className="user-profile-image inner-inner-wrapper"
+                          style={{
+                            backgroundImage: `url('../assets/female.png')`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover',
+                            margin: '0.2em',
+                          }}
+                        ></div>
+
+                        <div className="inner-inner-wrapper">
+                          <p>Name: {profile.name}</p>
+                          <p>Email: {profile.email}</p>
+                          <p>Phone: {profile.phone}</p>
+                          <p> Description: {profile.description}</p>
+                          <p>
+                            Date of Birth {profile?.dateOfBirth} [
+                            <span>
+                              {Math.floor(
+                                moment(new Date()).diff(
+                                  moment(
+                                    profile.dateOfBirth,
+                                    'dd-mm-yyyy' || 'dd/mm/yyyy',
+                                  ),
+                                  'years',
+                                  true,
+                                ),
+                              )}
+                            </span>{' '}
+                            years old]
+                          </p>
+                        </div>
+                      </div>
+                      <div className="dates-wrapper">
+                        <p> Created: {moment(profile.createdAt).fromNow()}</p>
+                        <p> Updated: {moment(profile.updatedAt).fromNow()}</p>
+                      </div>
                     </div>
                   ))}
                 </fieldset>

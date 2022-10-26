@@ -26,9 +26,6 @@ import {
   ADMIN_IS_SUSPENDED_FAILURE,
   ADMIN_IS_SUSPENDED_REQUEST,
   ADMIN_IS_SUSPENDED_SUCCESS,
-  ADMIN_PROFILE_FAILURE,
-  ADMIN_PROFILE_REQUEST,
-  ADMIN_PROFILE_SUCCESS,
 } from '../constants/adminConstants';
 
 // GET: ADMIN All USERS details reducer
@@ -150,24 +147,6 @@ export const adminAllProfilesReducer = (state = {}, action) => {
         ...action.payload,
       };
     case ADMIN_ALL_PROFILES_FAILURE:
-      return { loading: false, error: action.payload };
-    default:
-      return { ...state };
-  }
-};
-
-// GET: ADMIN PROFILE reducer
-export const adminProfileReducer = (state = {}, action) => {
-  switch (action.type) {
-    case ADMIN_PROFILE_REQUEST:
-      return { loading: true };
-    case ADMIN_PROFILE_SUCCESS:
-      return {
-        loading: false,
-        success: true,
-        ...action.payload,
-      };
-    case ADMIN_PROFILE_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return { ...state };

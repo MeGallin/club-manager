@@ -27,9 +27,6 @@ import {
   ADMIN_IS_SUSPENDED_FAILURE,
   ADMIN_IS_SUSPENDED_REQUEST,
   ADMIN_IS_SUSPENDED_SUCCESS,
-  ADMIN_PROFILE_FAILURE,
-  ADMIN_PROFILE_REQUEST,
-  ADMIN_PROFILE_SUCCESS,
 } from '../constants/adminConstants';
 
 //GET: USER Admin details
@@ -297,36 +294,8 @@ export const adminAllProfilesAction =
       });
     }
   };
-//GET: ADMIN profile
-export const adminProfileAction = (userId) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: ADMIN_PROFILE_REQUEST,
-    });
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
 
-    const { data } = await axios.get(`api/admin/profile/${userId}`, config);
-    dispatch({ type: ADMIN_PROFILE_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: ADMIN_PROFILE_FAILURE,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
-
-//PUT: ADMIN isParent toggle
+//PUT: ADMIN edit profile
 export const adminEditProfileAction =
   (formData) => async (dispatch, getState) => {
     try {

@@ -1,1 +1,13 @@
 @import '../../../index.scss';
+
+.inner-content-wrapper {
+  display: flex;
+  .inner-inner-wrapper {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+  .user-profile-image {
+    width: 25%;
+    height: 250px;
+  }
+}
