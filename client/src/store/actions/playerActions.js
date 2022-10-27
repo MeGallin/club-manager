@@ -8,6 +8,7 @@ import {
 //POST: ADMIN create PLAYER profile
 export const adminCreatePlayerAction =
   (formData) => async (dispatch, getState) => {
+    console.log('action', formData);
     try {
       dispatch({
         type: ADMIN_CREATE_PLAYER_REQUEST,

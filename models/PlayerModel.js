@@ -23,7 +23,7 @@ const playerSchema = mongoose.Schema(
       type: String,
       required: [true, 'Tell us where you live.'],
     },
-    GovernmentId: {
+    governmentId: {
       type: String,
       required: [true, 'Tell us where you live.'],
     },
@@ -41,7 +41,7 @@ const playerSchema = mongoose.Schema(
     },
     renewalMethod: {
       type: String,
-      required: [true, 'Manual or automatic renewal'],
+      required: [true, 'Manual or online renewal'],
     },
     status: {
       type: String,

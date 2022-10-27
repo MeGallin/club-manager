@@ -23,7 +23,6 @@ const AdminPlayersView = () => {
         />
       </fieldset>
       <AdminCreatePlayer />
-      <h1>Component to manage players details here</h1>
     </div>
   );
 };

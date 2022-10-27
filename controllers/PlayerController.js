@@ -12,7 +12,7 @@ exports.adminCreatePlayer = async (req, res, next) => {
     shirtNumber,
     nameOnShirt,
     villageName,
-    GovernmentId,
+    governmentId,
     dateOfBirth,
     startDate,
     endDate,
@@ -29,12 +29,13 @@ exports.adminCreatePlayer = async (req, res, next) => {
     if (playerExists) {
       return next(new ErrorResponse('Profile already exists', 500));
     } else {
-      const player = await Player.create({
+      await Player.create({
+        user,
         name,
         shirtNumber,
         nameOnShirt,
         villageName,
-        GovernmentId,
+        governmentId,
         dateOfBirth,
         startDate,
         endDate,
@@ -45,7 +46,7 @@ exports.adminCreatePlayer = async (req, res, next) => {
         notes,
       });
 
-      res.status(200).json({ success: true, player });
+      res.status(200).json({ success: true });
     }
   } catch (error) {
     next(error);

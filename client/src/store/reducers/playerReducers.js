@@ -13,6 +13,7 @@ export const adminCreatePlayerReducer = (state = {}, action) => {
       return {
         loading: false,
         success: true,
+        ...action.payload,
       };
     case ADMIN_CREATE_PLAYER_FAILURE:
       return { loading: false, error: action.payload };
