@@ -12,6 +12,7 @@ import SpinnerComponent from '../../Spinner/SpinnerComponent';
 
 import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
+import AdminEditPlayer from '../AdminEditPlayer/AdminEditPlayer';
 
 const AdminGetPlayers = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,6 @@ const AdminGetPlayers = () => {
 
   const adminGetPlayers = useSelector((state) => state.adminGetPlayers);
   const { loading, success, error, players } = adminGetPlayers;
-
-  console.log(loading, error, players);
 
   return (
     <>
@@ -83,42 +82,36 @@ const AdminGetPlayers = () => {
                         years old]
                       </p>
                       <p>
-                        Start Date {player?.startDate} [
+                        Start Date {player?.startDate} -
                         <span>
-                          {Math.floor(
-                            moment(new Date()).diff(
-                              moment(
-                                player.startDate,
-                                'dd-mm-yyyy' || 'dd/mm/yyyy',
-                              ),
-                              'years',
-                              true,
-                            ),
-                          )}
-                        </span>{' '}
-                        years ago]
+                          {moment(
+                            player?.startDate,
+                            'dd-mm-yyyy' || 'dd/mm/yyyy',
+                          ).fromNow()}
+                        </span>
                       </p>
                       <p>
-                        End Date {player?.endDate} [
+                        End Date {player?.endDate} -
                         <span>
-                          {Math.floor(
-                            moment(new Date()).diff(
-                              moment(
-                                player.endDate,
+                          {}
+                          {player?.endDate !== 'null' ? (
+                            <>
+                              {moment(
+                                player?.endDate,
                                 'dd-mm-yyyy' || 'dd/mm/yyyy',
-                              ),
-                              'years',
-                              true,
-                            ),
+                              ).fromNow()}
+                            </>
+                          ) : (
+                            ' [Still active]'
                           )}
-                        </span>{' '}
-                        years ago]
+                        </span>
                       </p>
                       <p>{player.notes}</p>
                       <div className="dates-wrapper">
                         <p> Created: {moment(player.createdAt).fromNow()}</p>
                         <p> Updated: {moment(player.updatedAt).fromNow()}</p>
                       </div>
+                      <AdminEditPlayer playerId={player._id} />
                     </fieldset>
                   </div>
                 ))}

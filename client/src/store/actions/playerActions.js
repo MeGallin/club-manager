@@ -3,6 +3,9 @@ import {
   ADMIN_CREATE_PLAYER_FAILURE,
   ADMIN_CREATE_PLAYER_REQUEST,
   ADMIN_CREATE_PLAYER_SUCCESS,
+  ADMIN_EDIT_PLAYER_FAILURE,
+  ADMIN_EDIT_PLAYER_REQUEST,
+  ADMIN_EDIT_PLAYER_SUCCESS,
   ADMIN_GET_PLAYERS_FAILURE,
   ADMIN_GET_PLAYERS_REQUEST,
   ADMIN_GET_PLAYERS_SUCCESS,
@@ -40,7 +43,6 @@ export const adminGetPlayersAction = () => async (dispatch, getState) => {
 //POST: ADMIN create PLAYER profile
 export const adminCreatePlayerAction =
   (formData) => async (dispatch, getState) => {
-    console.log('action', formData);
     try {
       dispatch({
         type: ADMIN_CREATE_PLAYER_REQUEST,
@@ -65,6 +67,41 @@ export const adminCreatePlayerAction =
     } catch (error) {
       dispatch({
         type: ADMIN_CREATE_PLAYER_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//PUT: ADMIN edit PLAYER profile
+export const adminEditPlayerAction =
+  (formData) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_EDIT_PLAYER_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `api/admin/player-edit/${formData.id}`,
+        formData,
+        config,
+      );
+      dispatch({ type: ADMIN_EDIT_PLAYER_SUCCESS, payload: data });
+      dispatch(adminGetPlayersAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_EDIT_PLAYER_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
