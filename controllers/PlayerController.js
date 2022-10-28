@@ -68,3 +68,43 @@ exports.adminGetPlayers = async (req, res, next) => {
     next(error);
   }
 };
+
+// @description: EDIT and UPDATE A players profile
+// @route: GET /api/admin/player-edit/:id
+// @access: ADMIN && PRIVATE
+exports.adminEditPlayer = async (req, res, next) => {
+  const player = await Player.findById(req.params.id);
+
+  try {
+    if (player) {
+      const playerInfo = {
+        name: req.body.name,
+        shirtNumber: req.body.shirtNumber,
+        nameOnShirt: req.body.nameOnShirt,
+        villageName: req.body.villageName,
+        governmentId: req.body.governmentId,
+        dateOfBirth: req.body.dateOfBirth,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        renewalMethod: req.body.renewalMethod,
+        status: req.body.status,
+        uniform: req.body.uniform,
+        email: req.body.email,
+        notes: req.body.notes,
+      };
+
+      const updatePlayerProfile = await Player.findByIdAndUpdate(
+        req.params.id,
+        playerInfo,
+        {
+          new: true,
+        },
+      );
+      res.status(200).json({ success: true, updatePlayerProfile });
+    } else {
+      return next(new ErrorResponse('Profile not found', 400));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
