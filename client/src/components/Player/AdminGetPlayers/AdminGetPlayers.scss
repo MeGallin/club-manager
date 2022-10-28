@@ -1,0 +1,11 @@
+@import '../../../index.scss';
+
+.inner-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  .inner-inner-wrapper {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+}

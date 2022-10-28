@@ -52,3 +52,19 @@ exports.adminCreatePlayer = async (req, res, next) => {
     next(error);
   }
 };
+
+// @description: GET ALL PLAYERS PROFILES
+// @route: GET /api/admin/players
+// @access: ADMIN && PRIVATE
+exports.adminGetPlayers = async (req, res, next) => {
+  const players = await Player.find({});
+  try {
+    if (players) {
+      res.status(200).json({ success: true, players });
+    } else {
+      return next(new ErrorResponse('No players could be found', 500));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
