@@ -27,7 +27,10 @@ import {
   profileDeleteProfileReducer,
 } from './reducers/profileReducers';
 
-import { adminCreatePlayerReducer } from './reducers/playerReducers';
+import {
+  adminCreatePlayerReducer,
+  adminGetPlayersReducer,
+} from './reducers/playerReducers';
 
 //Initialise state to hold user info if logged in.
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -55,6 +58,7 @@ const reducer = combineReducers({
   profileEditProfile: profileEditProfileReducer,
   profileDeleteProfile: profileDeleteProfileReducer,
   adminCreatePlayer: adminCreatePlayerReducer,
+  adminGetPlayers: adminGetPlayersReducer,
 });
 
 const initialState = {

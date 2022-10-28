@@ -3,6 +3,7 @@ import './AdminPlayersView.scss';
 
 import ButtonComponent from '../../components/Button/ButtonComponent';
 import AdminCreatePlayer from '../../components/Player/AdminCreatePlayer/AdminCreatePlayer';
+import AdminGetPlayers from '../../components/Player/AdminGetPlayers/AdminGetPlayers';
 
 const AdminPlayersView = () => {
   return (
@@ -23,6 +24,7 @@ const AdminPlayersView = () => {
         />
       </fieldset>
       <AdminCreatePlayer />
+      <AdminGetPlayers />
     </div>
   );
 };
