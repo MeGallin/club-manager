@@ -10,7 +10,6 @@ import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import UserAdminEditComponent from '../User/UserAdminEditComponent';
 import ButtonComponent from '../Button/ButtonComponent';
 import AdminProfileComponent from '../Profile/AdminProfileComponent/AdminProfileComponent';
-import AdminEditProfileComponent from '../Profile/AdminEditProfileComponent/AdminEditProfileComponent';
 
 import moment from 'moment';
 
@@ -20,7 +19,6 @@ const AdminComponent = () => {
     'You are about to be logged out. Your token has expired.',
   );
   const [showUserAdminInputs, setShowUserAdminInputs] = useState(true);
-  const [showProfileInputs, setShowProfileInputs] = useState(true);
 
   useEffect(() => {
     //Dispatch your get action
@@ -29,10 +27,6 @@ const AdminComponent = () => {
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { success, error, userAdmin } = userAdminDetails;
 
-  // const handleCreateAdminProfile = () => {
-  //   //Dispatch create admin profile action
-  //   console.log('create admin profile action');
-  // };
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
@@ -47,19 +41,34 @@ const AdminComponent = () => {
 
       <div>
         {userAdmin?.isAdmin ? (
-          <ButtonComponent
-            type="button"
-            text={
-              <NavLink
-                className={(navData) => (navData.isActive ? 'active' : '')}
-                to="/admin"
-              >
-                Admin View
-              </NavLink>
-            }
-            variant="danger"
-            disabled={false}
-          />
+          <div className="admin-nav-buttons-wrapper">
+            <ButtonComponent
+              type="button"
+              text={
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/admin"
+                >
+                  Manage Users
+                </NavLink>
+              }
+              variant="info"
+              disabled={false}
+            />
+            <ButtonComponent
+              type="button"
+              text={
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/admin-players"
+                >
+                  Manage Players
+                </NavLink>
+              }
+              variant="info"
+              disabled={false}
+            />
+          </div>
         ) : null}
       </div>
 
@@ -84,62 +93,74 @@ const AdminComponent = () => {
               <>
                 <fieldset className="fieldSet">
                   <legend>USER DETAILS</legend>
-                  <div>
-                    <h3>PHOTO TO FOLLOW</h3>
-                    <p>USER NAME : {userAdmin?.username}</p>
+                  <div className="inner-content-wrapper">
+                    <div
+                      className="user-profile-image inner-inner-wrapper"
+                      style={{
+                        backgroundImage: `url('../assets/male.png')`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        margin: '0.2em',
+                      }}
+                    ></div>
 
-                    <p>EMAIL : {userAdmin?.email}</p>
-                    <p>
-                      ADMIN :{' '}
-                      {userAdmin?.isAdmin === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      COACH :{' '}
-                      {userAdmin?.isCoach === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      PLAYER :{' '}
-                      {userAdmin?.isPlayer === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      PARENT :{' '}
-                      {userAdmin?.isParent === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      CONFIRMED :{' '}
-                      {userAdmin?.isConfirmed === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      SUSPENDED :{' '}
-                      {userAdmin?.isSuspended === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-
-                    <p>CREATED {moment(userAdmin?.createdAt).fromNow()}</p>
-                    <p>UPDATED {moment(userAdmin?.updatedAt).fromNow()}</p>
+                    <div className="inner-inner-wrapper">
+                      <p>USER NAME : {userAdmin?.username}</p>
+                      <p>EMAIL : {userAdmin?.email}</p>
+                      <p>
+                        ADMIN :{' '}
+                        {userAdmin?.isAdmin === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        COACH :{' '}
+                        {userAdmin?.isCoach === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        PLAYER :{' '}
+                        {userAdmin?.isPlayer === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        PARENT :{' '}
+                        {userAdmin?.isParent === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        CONFIRMED :{' '}
+                        {userAdmin?.isConfirmed === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        SUSPENDED :{' '}
+                        {userAdmin?.isSuspended === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="dates-wrapper">
+                    <p>Created {moment(userAdmin?.createdAt).fromNow()}</p>
+                    <p>Updated {moment(userAdmin?.updatedAt).fromNow()}</p>
                   </div>
                 </fieldset>
               </>
@@ -152,35 +173,7 @@ const AdminComponent = () => {
         </div>
 
         <div className="cont-wrapper">
-          {/* <fieldset className="fieldSet">
-            <ButtonComponent
-              type="button"
-              text="Create Admin Profile"
-              variant="info"
-              disabled={false}
-              onClick={() => handleCreateAdminProfile()}
-            />
-          </fieldset> */}
-          {/* <fieldset className="fieldSet">
-            <ButtonComponent
-              type="button"
-              text={
-                showProfileInputs
-                  ? 'EDIT PROFILE DETAILS'
-                  : 'BACK TO PROFILE DETAILS'
-              }
-              variant="warning"
-              disabled={false}
-              onClick={() => setShowProfileInputs(!showProfileInputs)}
-            />
-          </fieldset> */}
-          {showProfileInputs ? (
-            <>
-              <AdminProfileComponent />
-            </>
-          ) : (
-            <AdminEditProfileComponent />
-          )}
+          <AdminProfileComponent />
         </div>
       </div>
 

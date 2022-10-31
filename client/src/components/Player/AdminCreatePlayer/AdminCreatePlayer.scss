@@ -1,0 +1,15 @@
+@import '../../../index.scss';
+
+.player-dropdown-wrapper {
+  border: 2px solid $border-colour-light;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 0.2em;
+  margin: 0.2em;
+  .player-dropdown-wrapper__inner {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+}

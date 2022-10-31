@@ -71,7 +71,7 @@ exports.editAdminProfile = async (req, res, next) => {
 
       res.status(200).json({ success: true, updateAdminProfileDetails });
     } else {
-      return next(new ErrorResponse('Profile ot found', 400));
+      return next(new ErrorResponse('Profile not found', 400));
     }
   } catch (error) {
     next(error);

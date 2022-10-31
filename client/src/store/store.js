@@ -17,7 +17,6 @@ import {
   adminIsParentReducer,
   adminIsPlayerReducer,
   adminAllProfilesReducer,
-  adminProfileReducer,
   adminCreateProfileReducer,
   adminEditProfileReducer,
 } from './reducers/adminReducers';
@@ -27,6 +26,13 @@ import {
   profileEditProfileReducer,
   profileDeleteProfileReducer,
 } from './reducers/profileReducers';
+
+import {
+  adminCreatePlayerReducer,
+  adminGetPlayersReducer,
+  adminDeletePlayerReducer,
+  adminEditPlayerReducer,
+} from './reducers/playerReducers';
 
 //Initialise state to hold user info if logged in.
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -47,13 +53,16 @@ const reducer = combineReducers({
   adminIsParent: adminIsParentReducer,
   adminIsPlayer: adminIsPlayerReducer,
   adminAllProfiles: adminAllProfilesReducer,
-  adminProfile: adminProfileReducer,
   adminCreateProfile: adminCreateProfileReducer,
   adminEditProfile: adminEditProfileReducer,
   profileGetProfile: profileGetProfileReducer,
   profileCreateProfile: profileCreateProfileReducer,
   profileEditProfile: profileEditProfileReducer,
   profileDeleteProfile: profileDeleteProfileReducer,
+  adminCreatePlayer: adminCreatePlayerReducer,
+  adminGetPlayers: adminGetPlayersReducer,
+  adminDeletePlayer: adminDeletePlayerReducer,
+  adminEditPlayer: adminEditPlayerReducer,
 });
 
 const initialState = {

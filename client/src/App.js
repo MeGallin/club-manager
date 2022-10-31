@@ -12,6 +12,7 @@ import PWResetView from './views/PWRestView/PWResetView';
 import UserAdminView from './views/UserAdminView/UserAdminView';
 import AdminView from './views/AdminView/AdminView';
 import AdminProfileView from './views/AdminView/AdminProfileView';
+import AdminPlayersView from './views/AdminView/AdminPlayersView';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/password-reset/:token" element={<PWResetView />} />
             <Route path="/user-admin" element={<UserAdminView />} exact />
             <Route path="/admin-profile" element={<AdminProfileView />} exact />
+            <Route path="/admin-players" element={<AdminPlayersView />} exact />
             <Route path="/admin" element={<AdminView />} exact />
             <Route path="*" element={<ErrorView />} exact />
           </Routes>

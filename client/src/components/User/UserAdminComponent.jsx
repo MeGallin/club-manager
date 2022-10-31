@@ -14,6 +14,7 @@ import ProfileComponent from '../Profile/ProfileComponent/ProfileComponent';
 import EditProfileComponent from '../Profile/EditProfileComponent/EditProfileComponent';
 
 import moment from 'moment';
+import CreateProfileComponent from '../Profile/CreateProfileComponent/CreateProfileComponent';
 
 const UserAdminComponent = () => {
   const dispatch = useDispatch();
@@ -88,60 +89,72 @@ const UserAdminComponent = () => {
               <>
                 <fieldset className="fieldSet">
                   <legend>USER DETAILS</legend>
-                  <div>
-                    <h3>PHOTO TO FOLLOW</h3>
-                    <p>USER NAME : {userAdmin?.username}</p>
+                  <div className="inner-content-wrapper">
+                    <div
+                      className="user-profile-image inner-inner-wrapper"
+                      style={{
+                        backgroundImage: `url('../assets/male.png')`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        margin: '0.2em',
+                      }}
+                    ></div>
+                    <div className="inner-inner-wrapper">
+                      <p>USER NAME : {userAdmin?.username}</p>
+                      <p>EMAIL : {userAdmin?.email}</p>
+                      <p>
+                        ADMIN :{' '}
+                        {userAdmin?.isAdmin === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        COACH :{' '}
+                        {userAdmin?.isCoach === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        PLAYER :{' '}
+                        {userAdmin?.isPlayer === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        PARENT :{' '}
+                        {userAdmin?.isParent === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        CONFIRMED :{' '}
+                        {userAdmin?.isConfirmed === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                      <p>
+                        SUSPENDED :{' '}
+                        {userAdmin?.isSuspended === false ? (
+                          <FaThumbsDown className="ra-thumbs-down" />
+                        ) : (
+                          <FaThumbsUp className="ra-thumbs-up" />
+                        )}
+                      </p>
+                    </div>
+                  </div>
 
-                    <p>EMAIL : {userAdmin?.email}</p>
-                    <p>
-                      ADMIN :{' '}
-                      {userAdmin?.isAdmin === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      COACH :{' '}
-                      {userAdmin?.isCoach === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      PLAYER :{' '}
-                      {userAdmin?.isPlayer === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      PARENT :{' '}
-                      {userAdmin?.isParent === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      CONFIRMED :{' '}
-                      {userAdmin?.isConfirmed === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      SUSPENDED :{' '}
-                      {userAdmin?.isSuspended === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-
+                  <div className="dates-wrapper">
                     <p>CREATED {moment(userAdmin?.createdAt).fromNow()}</p>
                     <p>UPDATED {moment(userAdmin?.updatedAt).fromNow()}</p>
                   </div>
@@ -156,8 +169,22 @@ const UserAdminComponent = () => {
         </div>
 
         <div className="cont-wrapper">
+          <fieldset className="fieldSet">
+            <ButtonComponent
+              type="button"
+              text={
+                !showProfileInputs
+                  ? ' BACK TO PROFILE DETAILS'
+                  : 'EDIT ADMIN PROFILE DETAILS'
+              }
+              variant="warning"
+              disabled={false}
+              onClick={() => setShowProfileInputs(!showProfileInputs)}
+            />
+          </fieldset>
           {showProfileInputs ? (
             <>
+              <CreateProfileComponent />
               <ProfileComponent />
             </>
           ) : (
