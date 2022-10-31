@@ -22,7 +22,6 @@ import SelectOptionComponent from '../../SelectOptionComponent/SelectOptionCompo
 const AdminCreatePlayer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showCreatePlayer, setShowCreatePlayer] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -83,7 +82,6 @@ const AdminCreatePlayer = () => {
         notes: '',
       });
     }
-    setShowCreatePlayer(false);
   };
 
   const adminCreatePlayer = useSelector((state) => state.adminCreatePlayer);
@@ -110,232 +108,213 @@ const AdminCreatePlayer = () => {
         <SuccessComponent message={'Your profile was successfully created'} />
       ) : null}
 
-      <ButtonComponent
-        type="submit"
-        text={
-          showCreatePlayer
-            ? 'Hide Create Players profile'
-            : 'Create a Players profile'
-        }
-        variant="primary"
-        disabled={false}
-        onClick={() => setShowCreatePlayer(!showCreatePlayer)}
-      />
-      {showCreatePlayer ? (
-        <fieldset className="fieldSet">
-          <legend>Create Player Profile</legend>
-          <div>
-            <form onSubmit={handleCreateAdminPlayerSubmit}>
-              <InputComponent
-                label="Full name and Surname"
-                value={name}
-                type="text"
-                name="name"
-                required
-                className={!nameRegEx.test(name) ? 'invalid' : 'entered'}
-                error={
-                  !nameRegEx.test(name) && name.length !== 0
-                    ? `Name must contain at least 5 characters`
-                    : null
-                }
-                onChange={(e) => handleOnChange(e.target)}
-              />
+      <fieldset className="fieldSet">
+        <legend>Create Player Profile</legend>
+        <div>
+          <form onSubmit={handleCreateAdminPlayerSubmit}>
+            <InputComponent
+              label="Full name and Surname"
+              value={name}
+              type="text"
+              name="name"
+              required
+              className={!nameRegEx.test(name) ? 'invalid' : 'entered'}
+              error={
+                !nameRegEx.test(name) && name.length !== 0
+                  ? `Name must contain at least 5 characters`
+                  : null
+              }
+              onChange={(e) => handleOnChange(e.target)}
+            />
 
-              <InputComponent
-                label="Shirt Number"
-                value={shirtNumber}
-                type="number"
-                name="shirtNumber"
-                required
-                className={
-                  !preferredNumberRegEx.test(shirtNumber)
-                    ? 'invalid'
-                    : 'entered'
-                }
-                error={
-                  !preferredNumberRegEx.test(shirtNumber) &&
-                  shirtNumber?.length !== 0
-                    ? `Please choose a number between 1 and 100`
-                    : null
-                }
-                onChange={(e) => handleOnChange(e.target)}
-              />
+            <InputComponent
+              label="Shirt Number"
+              value={shirtNumber}
+              type="number"
+              name="shirtNumber"
+              required
+              className={
+                !preferredNumberRegEx.test(shirtNumber) ? 'invalid' : 'entered'
+              }
+              error={
+                !preferredNumberRegEx.test(shirtNumber) &&
+                shirtNumber?.length !== 0
+                  ? `Please choose a number between 1 and 100`
+                  : null
+              }
+              onChange={(e) => handleOnChange(e.target)}
+            />
 
-              <InputComponent
-                label="Name on Shirt"
-                value={nameOnShirt}
-                type="text"
-                name="nameOnShirt"
-                required
-                className={!nameRegEx.test(nameOnShirt) ? 'invalid' : 'entered'}
-                error={
-                  !nameRegEx.test(nameOnShirt) && nameOnShirt.length !== 0
-                    ? `Name must contain at least 5 characters`
-                    : null
-                }
-                onChange={(e) => handleOnChange(e.target)}
-              />
+            <InputComponent
+              label="Name on Shirt"
+              value={nameOnShirt}
+              type="text"
+              name="nameOnShirt"
+              required
+              className={!nameRegEx.test(nameOnShirt) ? 'invalid' : 'entered'}
+              error={
+                !nameRegEx.test(nameOnShirt) && nameOnShirt.length !== 0
+                  ? `Name must contain at least 5 characters`
+                  : null
+              }
+              onChange={(e) => handleOnChange(e.target)}
+            />
 
-              <InputComponent
-                label="Village Name"
-                value={villageName}
-                type="text"
-                name="villageName"
-                required
-                className={!nameRegEx.test(villageName) ? 'invalid' : 'entered'}
-                error={
-                  !nameRegEx.test(villageName) && villageName.length !== 0
-                    ? `Name must contain at least 5 characters`
-                    : null
-                }
-                onChange={(e) => handleOnChange(e.target)}
-              />
+            <InputComponent
+              label="Village Name"
+              value={villageName}
+              type="text"
+              name="villageName"
+              required
+              className={!nameRegEx.test(villageName) ? 'invalid' : 'entered'}
+              error={
+                !nameRegEx.test(villageName) && villageName.length !== 0
+                  ? `Name must contain at least 5 characters`
+                  : null
+              }
+              onChange={(e) => handleOnChange(e.target)}
+            />
 
-              <InputComponent
-                label="Government ID"
-                value={governmentId}
-                type="text"
-                name="governmentId"
-                required
-                className={
-                  !nameRegEx.test(governmentId) ? 'invalid' : 'entered'
-                }
-                error={
-                  !nameRegEx.test(governmentId) && governmentId.length !== 0
-                    ? `Name must contain at least 5 characters`
-                    : null
-                }
-                onChange={(e) => handleOnChange(e.target)}
-              />
+            <InputComponent
+              label="Government ID"
+              value={governmentId}
+              type="text"
+              name="governmentId"
+              required
+              className={!nameRegEx.test(governmentId) ? 'invalid' : 'entered'}
+              error={
+                !nameRegEx.test(governmentId) && governmentId.length !== 0
+                  ? `Name must contain at least 5 characters`
+                  : null
+              }
+              onChange={(e) => handleOnChange(e.target)}
+            />
 
-              <div className="player-dropdown-wrapper">
-                <div className="player-dropdown-wrapper__inner">
-                  <InputComponent
-                    label="Date of Birth"
-                    value={dateOfBirth}
-                    type="text"
-                    name="dateOfBirth"
-                    required
-                    className={
-                      !dobRegEx.test(dateOfBirth) ? 'invalid' : 'entered'
-                    }
-                    error={
-                      !dobRegEx.test(dateOfBirth) && dateOfBirth?.length !== 0
-                        ? `dd-mm-yyyy`
-                        : null
-                    }
-                    onChange={(e) => handleOnChange(e.target)}
-                  />
-                </div>
-                <div className="player-dropdown-wrapper__inner">
-                  <InputComponent
-                    label="Start Date"
-                    value={startDate}
-                    type="text"
-                    name="startDate"
-                    required
-                    className={
-                      !dobRegEx.test(startDate) ? 'invalid' : 'entered'
-                    }
-                    error={
-                      !dobRegEx.test(startDate) && dateOfBirth?.length !== 0
-                        ? `dd-mm-yyyy`
-                        : null
-                    }
-                    onChange={(e) => handleOnChange(e.target)}
-                  />
-                </div>
-                <div className="player-dropdown-wrapper__inner">
-                  <InputComponent
-                    label="End Date"
-                    value={endDate}
-                    type="text"
-                    name="endDate"
-                    required
-                    className={!dobRegEx.test(endDate) ? 'invalid' : 'entered'}
-                    error={
-                      !dobRegEx.test(endDate) && dateOfBirth?.length !== 0
-                        ? `dd-mm-yyyy`
-                        : null
-                    }
-                    onChange={(e) => handleOnChange(e.target)}
-                  />
-                </div>
+            <div className="player-dropdown-wrapper">
+              <div className="player-dropdown-wrapper__inner">
+                <InputComponent
+                  label="Date of Birth"
+                  value={dateOfBirth}
+                  type="text"
+                  name="dateOfBirth"
+                  required
+                  className={
+                    !dobRegEx.test(dateOfBirth) ? 'invalid' : 'entered'
+                  }
+                  error={
+                    !dobRegEx.test(dateOfBirth) && dateOfBirth?.length !== 0
+                      ? `dd-mm-yyyy`
+                      : null
+                  }
+                  onChange={(e) => handleOnChange(e.target)}
+                />
               </div>
-
-              <div className="player-dropdown-wrapper">
-                <div className="player-dropdown-wrapper__inner">
-                  <SelectOptionComponent
-                    onChange={handleOnChange}
-                    options={renewalInputOptions}
-                    label="Renewal"
-                  />
-                </div>
-                <div className="player-dropdown-wrapper__inner">
-                  <SelectOptionComponent
-                    onChange={handleOnChange}
-                    options={statusInputOptions}
-                    label="Status"
-                  />
-                </div>
-                <div className="player-dropdown-wrapper__inner">
-                  <SelectOptionComponent
-                    onChange={handleOnChange}
-                    options={uniformInputOptions}
-                    label="Uniform"
-                  />
-                </div>
+              <div className="player-dropdown-wrapper__inner">
+                <InputComponent
+                  label="Start Date"
+                  value={startDate}
+                  type="text"
+                  name="startDate"
+                  required
+                  className={!dobRegEx.test(startDate) ? 'invalid' : 'entered'}
+                  error={
+                    !dobRegEx.test(startDate) && dateOfBirth?.length !== 0
+                      ? `dd-mm-yyyy`
+                      : null
+                  }
+                  onChange={(e) => handleOnChange(e.target)}
+                />
               </div>
-              <InputComponent
-                label="EMAIL"
-                value={email}
-                type="email"
-                name="email"
-                required
-                className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
-                error={
-                  !emailRegEx.test(email) && email.length !== 0
-                    ? `Invalid email address.`
-                    : null
-                }
-                onChange={(e) => handleOnChange(e.target)}
-              />
+              <div className="player-dropdown-wrapper__inner">
+                <InputComponent
+                  label="End Date"
+                  value={endDate}
+                  type="text"
+                  name="endDate"
+                  required
+                  className={!dobRegEx.test(endDate) ? 'invalid' : 'entered'}
+                  error={
+                    !dobRegEx.test(endDate) && dateOfBirth?.length !== 0
+                      ? `dd-mm-yyyy`
+                      : null
+                  }
+                  onChange={(e) => handleOnChange(e.target)}
+                />
+              </div>
+            </div>
 
-              <TextAreaComponent
-                label="Notes"
-                id="notes"
-                name="notes"
-                value={notes}
-                error={
-                  notes.length <= 15 && notes?.length !== 0
-                    ? `Description must contain at least 16 characters`
-                    : null
-                }
-                onChange={(e) => handleOnChange(e.target)}
-              />
+            <div className="player-dropdown-wrapper">
+              <div className="player-dropdown-wrapper__inner">
+                <SelectOptionComponent
+                  onChange={handleOnChange}
+                  options={renewalInputOptions}
+                  label="Renewal"
+                />
+              </div>
+              <div className="player-dropdown-wrapper__inner">
+                <SelectOptionComponent
+                  onChange={handleOnChange}
+                  options={statusInputOptions}
+                  label="Status"
+                />
+              </div>
+              <div className="player-dropdown-wrapper__inner">
+                <SelectOptionComponent
+                  onChange={handleOnChange}
+                  options={uniformInputOptions}
+                  label="Uniform"
+                />
+              </div>
+            </div>
+            <InputComponent
+              label="EMAIL"
+              value={email}
+              type="email"
+              name="email"
+              required
+              className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
+              error={
+                !emailRegEx.test(email) && email.length !== 0
+                  ? `Invalid email address.`
+                  : null
+              }
+              onChange={(e) => handleOnChange(e.target)}
+            />
 
-              <ButtonComponent
-                type="submit"
-                text={
-                  !emailRegEx.test(email) ||
-                  !nameRegEx.test(name) ||
-                  !dobRegEx.test(dateOfBirth) ||
-                  notes.length <= 15
-                    ? 'Disabled'
-                    : 'submit'
-                }
-                variant="primary"
-                disabled={
-                  !emailRegEx.test(email) ||
-                  !nameRegEx.test(name) ||
-                  !dobRegEx.test(dateOfBirth) ||
-                  notes.length <= 15
-                }
-              />
-            </form>
-          </div>
-        </fieldset>
-      ) : null}
+            <TextAreaComponent
+              label="Notes"
+              id="notes"
+              name="notes"
+              value={notes}
+              error={
+                notes.length <= 15 && notes?.length !== 0
+                  ? `Description must contain at least 16 characters`
+                  : null
+              }
+              onChange={(e) => handleOnChange(e.target)}
+            />
+
+            <ButtonComponent
+              type="submit"
+              text={
+                !emailRegEx.test(email) ||
+                !nameRegEx.test(name) ||
+                !dobRegEx.test(dateOfBirth) ||
+                notes.length <= 15
+                  ? 'Disabled'
+                  : 'submit'
+              }
+              variant="primary"
+              disabled={
+                !emailRegEx.test(email) ||
+                !nameRegEx.test(name) ||
+                !dobRegEx.test(dateOfBirth) ||
+                notes.length <= 15
+              }
+            />
+          </form>
+        </div>
+      </fieldset>
     </>
   );
 };

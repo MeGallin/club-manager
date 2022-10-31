@@ -8,14 +8,13 @@ import ButtonComponent from '../../Button/ButtonComponent';
 import SpinnerComponent from '../../Spinner/SpinnerComponent';
 import SuccessComponent from '../../Success/SuccessComponent';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
+import ModalComponent from '../../ModalComponent/ModalComponent';
 
 const AdminDeletePlayer = ({ playerId }) => {
   const dispatch = useDispatch();
   const handlePlayerDelete = () => {
-    if (window.confirm(`Are you sure you want to delete ${playerId}`)) {
-      //Action Delete player
-      dispatch(adminDeletePlayerAction(playerId));
-    }
+    //Action Delete player
+    dispatch(adminDeletePlayerAction(playerId));
   };
   const adminDeletePlayer = useSelector((state) => state.adminDeletePlayer);
   const { loading, success, error } = adminDeletePlayer;
@@ -28,13 +27,28 @@ const AdminDeletePlayer = ({ playerId }) => {
       {loading ? (
         <SpinnerComponent />
       ) : (
-        <ButtonComponent
-          type="submit"
-          text="Delete"
-          variant="danger"
-          disabled={false}
-          onClick={handlePlayerDelete}
-        />
+        <>
+          <ModalComponent
+            className="create-btn"
+            openButtonTitle="Delete Profile"
+            closeButtonTitle="Close modal"
+            variant="danger"
+            props={
+              <>
+                <div>
+                  <h3>Are you sure you want to delete profile ?</h3>
+                </div>
+                <ButtonComponent
+                  type="submit"
+                  text="Delete Player Profile"
+                  variant="danger"
+                  disabled={false}
+                  onClick={handlePlayerDelete}
+                />
+              </>
+            }
+          />
+        </>
       )}
     </>
   );

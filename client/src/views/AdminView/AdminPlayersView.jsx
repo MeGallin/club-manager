@@ -4,6 +4,7 @@ import './AdminPlayersView.scss';
 import ButtonComponent from '../../components/Button/ButtonComponent';
 import AdminCreatePlayer from '../../components/Player/AdminCreatePlayer/AdminCreatePlayer';
 import AdminGetPlayers from '../../components/Player/AdminGetPlayers/AdminGetPlayers';
+import ModalComponent from '../../components/ModalComponent/ModalComponent';
 
 const AdminPlayersView = () => {
   return (
@@ -23,7 +24,17 @@ const AdminPlayersView = () => {
           disabled={false}
         />
       </fieldset>
-      <AdminCreatePlayer />
+      <ModalComponent
+        className="create-btn"
+        openButtonTitle="Create Profile"
+        closeButtonTitle="Close modal"
+        props={
+          <>
+            <AdminCreatePlayer />
+          </>
+        }
+      />
+
       <AdminGetPlayers />
     </div>
   );

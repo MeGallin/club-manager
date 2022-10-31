@@ -11,6 +11,7 @@ import SpinnerComponent from '../../Spinner/SpinnerComponent';
 import AdminDeletePlayer from '../AdminDeletePlayer/AdminDeletePlayer';
 
 import { adminGetPlayersAction } from '../../../store/actions/playerActions';
+import ModalComponent from '../../ModalComponent/ModalComponent';
 
 const AdminGetPlayers = () => {
   const dispatch = useDispatch();
@@ -110,7 +111,14 @@ const AdminGetPlayers = () => {
                         <p> Updated: {moment(player.updatedAt).fromNow()}</p>
                       </div>
                       <div className="button-wrapper">
-                        <AdminEditPlayer playerId={player._id} />
+                        <ModalComponent
+                          className="create-btn"
+                          openButtonTitle="Edit Profile"
+                          closeButtonTitle="Close modal"
+                          variant="warning"
+                          props={<AdminEditPlayer playerId={player._id} />}
+                        />
+
                         <AdminDeletePlayer playerId={player._id} />
                       </div>
                     </fieldset>
