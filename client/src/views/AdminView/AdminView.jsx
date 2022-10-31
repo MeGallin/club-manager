@@ -98,7 +98,7 @@ const AdminView = () => {
             onChange={handleSearch}
           />
           <div className="admin-wrapper">
-            {searchedUsers.map((user) => (
+            {searchedUsers?.map((user) => (
               <div key={user._id}>
                 <fieldset className="fieldSet">
                   <legend>{user.username}</legend>
