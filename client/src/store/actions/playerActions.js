@@ -3,6 +3,9 @@ import {
   ADMIN_CREATE_PLAYER_FAILURE,
   ADMIN_CREATE_PLAYER_REQUEST,
   ADMIN_CREATE_PLAYER_SUCCESS,
+  ADMIN_DELETE_PLAYER_FAILURE,
+  ADMIN_DELETE_PLAYER_REQUEST,
+  ADMIN_DELETE_PLAYER_SUCCESS,
   ADMIN_EDIT_PLAYER_FAILURE,
   ADMIN_EDIT_PLAYER_REQUEST,
   ADMIN_EDIT_PLAYER_SUCCESS,
@@ -102,6 +105,40 @@ export const adminEditPlayerAction =
     } catch (error) {
       dispatch({
         type: ADMIN_EDIT_PLAYER_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//DELETE: ADMIN delete PLAYER profile
+export const adminDeletePlayerAction =
+  (playerId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_DELETE_PLAYER_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.delete(
+        `api/admin/player-delete/${playerId}`,
+        config,
+      );
+      dispatch({ type: ADMIN_DELETE_PLAYER_SUCCESS, payload: data });
+      dispatch(adminGetPlayersAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_DELETE_PLAYER_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
