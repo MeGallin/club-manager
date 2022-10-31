@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -12,6 +12,7 @@ import AdminDeletePlayer from '../AdminDeletePlayer/AdminDeletePlayer';
 
 import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 import ModalComponent from '../../ModalComponent/ModalComponent';
+import SearchComponent from '../../SearchComponent/SearchComponent';
 
 const AdminGetPlayers = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,19 @@ const AdminGetPlayers = () => {
   const adminGetPlayers = useSelector((state) => state.adminGetPlayers);
   const { loading, success, error, players } = adminGetPlayers;
 
+  //Search for players
+  const [keyword, setKeyword] = useState('');
+  const handleSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const searchedPlayers = players?.filter((player) => {
+    if (player.name !== undefined) {
+      return player.name.toLowerCase().includes(keyword.toLowerCase());
+    }
+    return false;
+  });
+  //Search for players
+
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
@@ -41,10 +55,15 @@ const AdminGetPlayers = () => {
         <SpinnerComponent />
       ) : (
         <>
-          {success && players ? (
+          {success && searchedPlayers ? (
             <>
+              <SearchComponent
+                placeholder="search player name"
+                value={keyword}
+                onChange={handleSearch}
+              />
               <div className="inner-content-wrapper">
-                {players.map((player) => (
+                {searchedPlayers.map((player) => (
                   <div key={player._id} className="inner-inner-wrapper">
                     <fieldset className="fieldSet">
                       <legend>{player.name}</legend>

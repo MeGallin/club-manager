@@ -37,7 +37,7 @@ export const adminUsersDetailsReducer = (state = {}, action) => {
       return {
         loading: false,
         success: true,
-        allUsers: action.payload,
+        ...action.payload,
       };
     case ADMIN_GET_ALL_USERS_FAILURE:
       return { loading: false, error: action.payload };
