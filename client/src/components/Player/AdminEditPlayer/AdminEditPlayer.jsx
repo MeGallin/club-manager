@@ -126,7 +126,6 @@ const AdminEditPlayer = ({ playerId }) => {
         disabled={!disableBut}
         onClick={(click) => handleButtonClick(click)}
       />
-      {showEditPlayer ? 'TRUE' : 'FALSE'}
 
       {showEditPlayer ? (
         <fieldset className="fieldSet">

@@ -108,3 +108,20 @@ exports.adminEditPlayer = async (req, res, next) => {
     next(error);
   }
 };
+
+// @description: DELETE a PLAYERS PROFILE
+// @route: DELETE /api/admin/players-delete
+// @access: ADMIN && PRIVATE
+exports.adminDeletePlayer = async (req, res, next) => {
+  const player = await Player.findById(req.params.id);
+  try {
+    if (player) {
+      await player.remove();
+      res.status(200).json({ success: true });
+    } else {
+      return next(new ErrorResponse('Profile not found', 401));
+    }
+  } catch (error) {
+    next(error);
+  }
+};

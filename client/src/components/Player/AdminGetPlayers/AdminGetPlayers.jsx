@@ -5,14 +5,12 @@ import moment from 'moment';
 
 import './AdminGetPlayers.scss';
 
-import SpinnerComponent from '../../Spinner/SpinnerComponent';
-// import ButtonComponent from '../../Button/ButtonComponent';
-// import SuccessComponent from '../../Success/SuccessComponent';
-// import ErrorComponent from '../../ErrorComponent/ErrorComponent';
-
-import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import AdminEditPlayer from '../AdminEditPlayer/AdminEditPlayer';
+import SpinnerComponent from '../../Spinner/SpinnerComponent';
+import AdminDeletePlayer from '../AdminDeletePlayer/AdminDeletePlayer';
+
+import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 
 const AdminGetPlayers = () => {
   const dispatch = useDispatch();
@@ -49,6 +47,7 @@ const AdminGetPlayers = () => {
                   <div key={player._id} className="inner-inner-wrapper">
                     <fieldset className="fieldSet">
                       <legend>{player.name}</legend>
+
                       <p>ID: {player._id}</p>
                       <p>
                         Name on shirt: {player.nameOnShirt} - Shirt number:{' '}
@@ -64,7 +63,6 @@ const AdminGetPlayers = () => {
                         {player.uniform ? 'YES' : 'NO'}
                       </p>
                       <p>Government ID: {player.governmentId}</p>
-
                       <p>
                         Date of Birth {player?.dateOfBirth} [
                         <span>
@@ -111,7 +109,10 @@ const AdminGetPlayers = () => {
                         <p> Created: {moment(player.createdAt).fromNow()}</p>
                         <p> Updated: {moment(player.updatedAt).fromNow()}</p>
                       </div>
-                      <AdminEditPlayer playerId={player._id} />
+                      <div className="button-wrapper">
+                        <AdminEditPlayer playerId={player._id} />
+                        <AdminDeletePlayer playerId={player._id} />
+                      </div>
                     </fieldset>
                   </div>
                 ))}
