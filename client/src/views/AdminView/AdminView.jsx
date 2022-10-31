@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -20,6 +20,7 @@ import SpinnerComponent from '../../components/Spinner/SpinnerComponent';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 import moment from 'moment';
+import SearchComponent from '../../components/SearchComponent/SearchComponent';
 
 const AdminView = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const AdminView = () => {
   }, [userInfo, navigate, dispatch]);
 
   const adminUsersDetails = useSelector((state) => state.adminUsersDetails);
-  const { loading, error, allUsers } = adminUsersDetails;
+  const { loading, error, users } = adminUsersDetails;
 
   const handleIsAdmin = (userId, isAdmin) => {
     dispatch(adminIsAdminAction(userId, isAdmin));
@@ -57,6 +58,19 @@ const AdminView = () => {
   const handleIsPlayer = (userId, isPlayer) => {
     dispatch(adminIsPlayerAction(userId, isPlayer));
   };
+
+  //Search for allUsers
+  const [keyword, setKeyword] = useState('');
+  const handleSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const searchedUsers = users?.filter((user) => {
+    if (user.username !== undefined) {
+      return user.username.toLowerCase().includes(keyword.toLowerCase());
+    }
+    return false;
+  });
+  //Search for allUsers
 
   return (
     <>
@@ -78,8 +92,13 @@ const AdminView = () => {
             variant="light"
             disabled={false}
           />
+          <SearchComponent
+            placeholder="search username"
+            value={keyword}
+            onChange={handleSearch}
+          />
           <div className="admin-wrapper">
-            {allUsers?.users.map((user) => (
+            {searchedUsers.map((user) => (
               <div key={user._id}>
                 <fieldset className="fieldSet">
                   <legend>{user.username}</legend>

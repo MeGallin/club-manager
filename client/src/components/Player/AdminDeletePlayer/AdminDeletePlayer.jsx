@@ -31,7 +31,7 @@ const AdminDeletePlayer = ({ playerId }) => {
           <ModalComponent
             className="create-btn"
             openButtonTitle="Delete Profile"
-            closeButtonTitle="Close modal"
+            closeButtonTitle="No thanks"
             variant="danger"
             props={
               <>
@@ -40,7 +40,7 @@ const AdminDeletePlayer = ({ playerId }) => {
                 </div>
                 <ButtonComponent
                   type="submit"
-                  text="Delete Player Profile"
+                  text="Yes Delete Profile"
                   variant="danger"
                   disabled={false}
                   onClick={handlePlayerDelete}
