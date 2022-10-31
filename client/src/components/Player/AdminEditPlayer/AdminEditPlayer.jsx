@@ -17,11 +17,13 @@ import SelectOptionComponent from '../../SelectOptionComponent/SelectOptionCompo
 import InputComponent from '../../Input/InputComponent';
 
 import { adminEditPlayerAction } from '../../../store/actions/playerActions';
+import ErrorComponent from '../../ErrorComponent/ErrorComponent';
+import SuccessComponent from '../../Success/SuccessComponent';
+import SpinnerComponent from '../../Spinner/SpinnerComponent';
 
 const AdminEditPlayer = ({ playerId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showEditPlayer, setShowEditPlayer] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -93,7 +95,6 @@ const AdminEditPlayer = ({ playerId }) => {
         notes: '',
       });
     }
-    setShowEditPlayer(false);
   };
 
   const renewalInputOptions = [
@@ -110,24 +111,19 @@ const AdminEditPlayer = ({ playerId }) => {
     { label: 'No', value: 'false', name: 'uniform' },
   ];
 
-  const [disableBut, setDisableBut] = useState(true);
-  const handleButtonClick = (name) => {
-    console.log(name);
-    setDisableBut(true);
-    setShowEditPlayer(!showEditPlayer);
-  };
+  const adminEditPlayer = useSelector((state) => state.adminEditPlayer);
+  const { loading, success, error } = adminEditPlayer;
 
   return (
     <>
-      <ButtonComponent
-        type="submit"
-        text={showEditPlayer ? `Hide ${name}'` : `Edit ${name}`}
-        variant="info"
-        disabled={!disableBut}
-        onClick={(click) => handleButtonClick(click)}
-      />
+      {error ? <ErrorComponent error={error} /> : null}
+      {success ? (
+        <SuccessComponent message="Player profile was successfully updated" />
+      ) : null}
 
-      {showEditPlayer ? (
+      {loading ? (
+        <SpinnerComponent />
+      ) : (
         <fieldset className="fieldSet">
           <legend>Edit Player Profile</legend>
           <div>
@@ -341,7 +337,7 @@ const AdminEditPlayer = ({ playerId }) => {
             </form>
           </div>
         </fieldset>
-      ) : null}
+      )}
     </>
   );
 };
