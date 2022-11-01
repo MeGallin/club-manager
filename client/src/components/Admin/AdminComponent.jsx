@@ -12,6 +12,7 @@ import ButtonComponent from '../Button/ButtonComponent';
 import AdminProfileComponent from '../Profile/AdminProfileComponent/AdminProfileComponent';
 
 import moment from 'moment';
+import GeneralInfoComponent from '../GeneralInfoComponent/GeneralInfoComponent';
 
 const AdminComponent = () => {
   const dispatch = useDispatch();
@@ -174,6 +175,7 @@ const AdminComponent = () => {
 
         <div className="cont-wrapper">
           <AdminProfileComponent />
+          <GeneralInfoComponent />
         </div>
       </div>
 
