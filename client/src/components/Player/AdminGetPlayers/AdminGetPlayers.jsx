@@ -15,6 +15,7 @@ import ModalComponent from '../../ModalComponent/ModalComponent';
 import SearchComponent from '../../SearchComponent/SearchComponent';
 
 const AdminGetPlayers = () => {
+  const [statusChecked, setStatusChecked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,10 +41,11 @@ const AdminGetPlayers = () => {
     setKeyword(e.target.value);
   };
   const searchedPlayers = players?.filter((player) => {
-    if (player.name !== undefined) {
+    if (statusChecked) {
+      return player.status.toLowerCase().includes(keyword.toLowerCase());
+    } else {
       return player.name.toLowerCase().includes(keyword.toLowerCase());
     }
-    return false;
   });
   //Search for players
 
@@ -57,8 +59,18 @@ const AdminGetPlayers = () => {
         <>
           {success && searchedPlayers ? (
             <>
+              <div>
+                <label>
+                  <input
+                    type="checkbox"
+                    defaultChecked={statusChecked}
+                    onChange={() => setStatusChecked(!statusChecked)}
+                  />
+                  SEARCH BY STATUS
+                </label>
+              </div>
               <SearchComponent
-                placeholder="search player name"
+                placeholder={statusChecked ? 'SEARCH STATUS' : 'SEARCH NAME'}
                 value={keyword}
                 onChange={handleSearch}
               />
