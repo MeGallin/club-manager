@@ -11,6 +11,7 @@ import UserAdminEditComponent from './UserAdminEditComponent';
 import ButtonComponent from '../Button/ButtonComponent';
 
 import moment from 'moment';
+import GeneralInfoComponent from '../GeneralInfoComponent/GeneralInfoComponent';
 
 const UserAdminComponent = () => {
   const dispatch = useDispatch();
@@ -161,6 +162,7 @@ const UserAdminComponent = () => {
             )
           ) : null}
         </div>
+        <GeneralInfoComponent />
       </div>
 
       {userAdmin === undefined ? (
