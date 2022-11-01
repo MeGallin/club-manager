@@ -5,10 +5,15 @@ const DateTime = () => {
   const [dateTime, setDateTime] = useState('');
 
   useEffect(() => {
-    setInterval(() => {
-      setDateTime(moment().format('MMMM Do YYYY, h:mm:ss a'));
+    const interval = setInterval(() => {
+      setDateTime(() => moment().format('MMMM Do YYYY, h:mm:ss a'));
     }, 1000);
-  }, [dateTime]);
+
+    // Clean up function and run useEffect without dependency.
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return <>{dateTime ? <div>{dateTime}</div> : null}</>;
 };

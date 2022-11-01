@@ -24,10 +24,12 @@ const UserAdminComponent = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
+    let ignore = false;
     //Dispatch your get action
     if (userInfo) {
-      dispatch(userAdminDetailsAction());
+      if (!ignore) dispatch(userAdminDetailsAction());
     }
+    return () => (ignore = true);
   }, [userInfo, dispatch]);
 
   const userAdminDetails = useSelector((state) => state.userAdminDetails);

@@ -24,11 +24,13 @@ const AdminProfileComponent = () => {
   const { userAdmin } = userAdminDetails;
 
   useEffect(() => {
+    let ignore = false;
     if (!userInfo && !userAdmin?.isAdmin) {
       navigate('/login');
     } else {
-      dispatch(adminAllProfilesAction());
+      if (!ignore) dispatch(adminAllProfilesAction());
     }
+    return () => (ignore = true);
   }, [navigate, dispatch, userInfo, userAdmin]);
 
   const adminAllProfiles = useSelector((state) => state.adminAllProfiles);

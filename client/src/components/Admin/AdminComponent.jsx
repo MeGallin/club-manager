@@ -22,9 +22,16 @@ const AdminComponent = () => {
   const [showUserAdminInputs, setShowUserAdminInputs] = useState(true);
 
   useEffect(() => {
+    let ignore = false;
     //Dispatch your get action
-    dispatch(userAdminDetailsAction());
+    if (!ignore) {
+      dispatch(userAdminDetailsAction());
+    }
+    return () => {
+      ignore = true;
+    };
   }, [dispatch]);
+
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { success, error, userAdmin } = userAdminDetails;
 
@@ -85,7 +92,7 @@ const AdminComponent = () => {
               }
               variant="dark"
               disabled={false}
-              onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
+              onClick={() => setShowUserAdminInputs((prev) => !prev)}
             />
           </fieldset>
 

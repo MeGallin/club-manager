@@ -25,11 +25,13 @@ const AdminGetPlayers = () => {
   const { userAdmin } = userAdminDetails;
 
   useEffect(() => {
+    let ignore = false;
     if (!userInfo && !userAdmin?.isAdmin) {
       navigate('/login');
     } else {
-      dispatch(adminGetPlayersAction());
+      if (!ignore) dispatch(adminGetPlayersAction());
     }
+    return () => (ignore = true);
   }, [navigate, dispatch, userInfo, userAdmin]);
 
   const adminGetPlayers = useSelector((state) => state.adminGetPlayers);
@@ -64,7 +66,7 @@ const AdminGetPlayers = () => {
                   <input
                     type="checkbox"
                     defaultChecked={statusChecked}
-                    onChange={() => setStatusChecked(!statusChecked)}
+                    onChange={() => setStatusChecked((prev) => !prev)}
                   />
                   SEARCH BY STATUS
                 </label>
