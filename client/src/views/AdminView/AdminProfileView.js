@@ -13,9 +13,11 @@ const AdminProfileView = () => {
   const { userAdmin } = userAdminDetails;
 
   useEffect(() => {
+    let ignore = false;
     if (!userInfo && !userAdmin?.isAdmin) {
-      navigate('/home');
+      if (!ignore) navigate('/home');
     }
+    return () => (ignore = true);
   }, [navigate, userInfo, userAdmin]);
   return (
     <>
