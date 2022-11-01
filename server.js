@@ -14,11 +14,9 @@ app.use(express.json());
 app.use('/api/', require('./routes/adminRoutes'));
 app.use('/api/', require('./routes/AdminProfileRoutes'));
 app.use('/api/', require('./routes/confirmEmailRoute'));
-app.use('/api/', require('./routes/profileRoutes'));
 app.use('/api/', require('./routes/PlayerRoutes'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/auth/private', require('./routes/auth'));
-app.use('/api/private', require('./routes/private'));
 
 // Error Handlers NB should be last piece of middleware
 app.use(errorHandler);

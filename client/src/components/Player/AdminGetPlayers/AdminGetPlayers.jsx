@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -12,8 +12,10 @@ import AdminDeletePlayer from '../AdminDeletePlayer/AdminDeletePlayer';
 
 import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 import ModalComponent from '../../ModalComponent/ModalComponent';
+import SearchComponent from '../../SearchComponent/SearchComponent';
 
 const AdminGetPlayers = () => {
+  const [statusChecked, setStatusChecked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,6 +35,20 @@ const AdminGetPlayers = () => {
   const adminGetPlayers = useSelector((state) => state.adminGetPlayers);
   const { loading, success, error, players } = adminGetPlayers;
 
+  //Search for players
+  const [keyword, setKeyword] = useState('');
+  const handleSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const searchedPlayers = players?.filter((player) => {
+    if (statusChecked) {
+      return player.status.toLowerCase().includes(keyword.toLowerCase());
+    } else {
+      return player.name.toLowerCase().includes(keyword.toLowerCase());
+    }
+  });
+  //Search for players
+
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
@@ -41,10 +57,25 @@ const AdminGetPlayers = () => {
         <SpinnerComponent />
       ) : (
         <>
-          {success && players ? (
+          {success && searchedPlayers ? (
             <>
+              <div>
+                <label>
+                  <input
+                    type="checkbox"
+                    defaultChecked={statusChecked}
+                    onChange={() => setStatusChecked(!statusChecked)}
+                  />
+                  SEARCH BY STATUS
+                </label>
+              </div>
+              <SearchComponent
+                placeholder={statusChecked ? 'SEARCH STATUS' : 'SEARCH NAME'}
+                value={keyword}
+                onChange={handleSearch}
+              />
               <div className="inner-content-wrapper">
-                {players.map((player) => (
+                {searchedPlayers.map((player) => (
                   <div key={player._id} className="inner-inner-wrapper">
                     <fieldset className="fieldSet">
                       <legend>{player.name}</legend>

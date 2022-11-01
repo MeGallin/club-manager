@@ -20,12 +20,6 @@ import {
   adminCreateProfileReducer,
   adminEditProfileReducer,
 } from './reducers/adminReducers';
-import {
-  profileGetProfileReducer,
-  profileCreateProfileReducer,
-  profileEditProfileReducer,
-  profileDeleteProfileReducer,
-} from './reducers/profileReducers';
 
 import {
   adminCreatePlayerReducer,
@@ -55,10 +49,6 @@ const reducer = combineReducers({
   adminAllProfiles: adminAllProfilesReducer,
   adminCreateProfile: adminCreateProfileReducer,
   adminEditProfile: adminEditProfileReducer,
-  profileGetProfile: profileGetProfileReducer,
-  profileCreateProfile: profileCreateProfileReducer,
-  profileEditProfile: profileEditProfileReducer,
-  profileDeleteProfile: profileDeleteProfileReducer,
   adminCreatePlayer: adminCreatePlayerReducer,
   adminGetPlayers: adminGetPlayersReducer,
   adminDeletePlayer: adminDeletePlayerReducer,
