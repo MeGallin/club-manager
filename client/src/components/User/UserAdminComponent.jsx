@@ -11,6 +11,7 @@ import UserAdminEditComponent from './UserAdminEditComponent';
 import ButtonComponent from '../Button/ButtonComponent';
 
 import moment from 'moment';
+import GeneralInfoComponent from '../GeneralInfoComponent/GeneralInfoComponent';
 
 const UserAdminComponent = () => {
   const dispatch = useDispatch();
@@ -23,10 +24,12 @@ const UserAdminComponent = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
+    let ignore = false;
     //Dispatch your get action
     if (userInfo) {
-      dispatch(userAdminDetailsAction());
+      if (!ignore) dispatch(userAdminDetailsAction());
     }
+    return () => (ignore = true);
   }, [userInfo, dispatch]);
 
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
@@ -161,6 +164,7 @@ const UserAdminComponent = () => {
             )
           ) : null}
         </div>
+        <GeneralInfoComponent />
       </div>
 
       {userAdmin === undefined ? (

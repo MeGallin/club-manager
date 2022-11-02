@@ -12,6 +12,7 @@ import ButtonComponent from '../Button/ButtonComponent';
 import AdminProfileComponent from '../Profile/AdminProfileComponent/AdminProfileComponent';
 
 import moment from 'moment';
+import GeneralInfoComponent from '../GeneralInfoComponent/GeneralInfoComponent';
 
 const AdminComponent = () => {
   const dispatch = useDispatch();
@@ -21,9 +22,16 @@ const AdminComponent = () => {
   const [showUserAdminInputs, setShowUserAdminInputs] = useState(true);
 
   useEffect(() => {
+    let ignore = false;
     //Dispatch your get action
-    dispatch(userAdminDetailsAction());
+    if (!ignore) {
+      dispatch(userAdminDetailsAction());
+    }
+    return () => {
+      ignore = true;
+    };
   }, [dispatch]);
+
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { success, error, userAdmin } = userAdminDetails;
 
@@ -84,7 +92,7 @@ const AdminComponent = () => {
               }
               variant="dark"
               disabled={false}
-              onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
+              onClick={() => setShowUserAdminInputs((prev) => !prev)}
             />
           </fieldset>
 
@@ -95,7 +103,7 @@ const AdminComponent = () => {
                   <legend>USER DETAILS</legend>
                   <div className="inner-content-wrapper">
                     <div
-                      className="user-profile-image inner-inner-wrapper"
+                      className="user-profile-image"
                       style={{
                         backgroundImage: `url('../assets/male.png')`,
                         backgroundRepeat: 'no-repeat',
@@ -174,6 +182,7 @@ const AdminComponent = () => {
 
         <div className="cont-wrapper">
           <AdminProfileComponent />
+          <GeneralInfoComponent />
         </div>
       </div>
 

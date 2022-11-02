@@ -30,11 +30,14 @@ const AdminView = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
+    let ignore = false;
+
     if (!userInfo) {
       navigate('/login');
     } else {
-      dispatch(adminUsersDetailsAction());
+      if (!ignore) dispatch(adminUsersDetailsAction());
     }
+    return () => (ignore = true);
   }, [userInfo, navigate, dispatch]);
 
   const adminUsersDetails = useSelector((state) => state.adminUsersDetails);
@@ -96,6 +99,8 @@ const AdminView = () => {
             placeholder="search username"
             value={keyword}
             onChange={handleSearch}
+            quantity={searchedUsers?.length}
+            total={users?.length}
           />
           <div className="admin-wrapper">
             {searchedUsers?.map((user) => (

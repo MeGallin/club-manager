@@ -11,6 +11,8 @@ import {
   emailRegEx,
   dobRegEx,
   preferredNumberRegEx,
+  teamRegEx,
+  ageGroupRegEx,
 } from '../../../utils/regEx';
 import TextAreaComponent from '../../TextArea/TextAreaComponent';
 import SelectOptionComponent from '../../SelectOptionComponent/SelectOptionComponent';
@@ -42,6 +44,8 @@ const AdminEditPlayer = ({ playerId }) => {
   const [formData, setFormData] = useState({
     id: player[0]._id,
     name: player[0].name,
+    ageGroup: player[0].ageGroup,
+    team: player[0].team,
     shirtNumber: player[0].shirtNumber,
     nameOnShirt: player[0].nameOnShirt,
     villageName: player[0].villageName,
@@ -55,6 +59,8 @@ const AdminEditPlayer = ({ playerId }) => {
 
   const {
     name,
+    ageGroup,
+    team,
     shirtNumber,
     nameOnShirt,
     villageName,
@@ -84,6 +90,8 @@ const AdminEditPlayer = ({ playerId }) => {
       dispatch(adminEditPlayerAction(formData));
       setFormData({
         name: '',
+        ageGroup: '',
+        team: '',
         shirtNumber: '',
         nameOnShirt: '',
         villageName: '',
@@ -177,6 +185,43 @@ const AdminEditPlayer = ({ playerId }) => {
                 }
                 onChange={(e) => handleOnChange(e.target)}
               />
+
+              <div className="player-dropdown-wrapper">
+                <div className="player-dropdown-wrapper__inner">
+                  <InputComponent
+                    label="Age Group"
+                    value={ageGroup}
+                    type="text"
+                    name="ageGroup"
+                    required
+                    className={
+                      !ageGroupRegEx.test(ageGroup) ? 'invalid' : 'entered'
+                    }
+                    error={
+                      !ageGroupRegEx.test(ageGroup) && ageGroup?.length !== 0
+                        ? `Age group format '2010' must contain at least 4 characters`
+                        : null
+                    }
+                    onChange={(e) => handleOnChange(e.target)}
+                  />
+                </div>
+                <div className="player-dropdown-wrapper__inner">
+                  <InputComponent
+                    label="Team"
+                    value={team}
+                    type="text"
+                    name="team"
+                    required
+                    className={!teamRegEx.test(team) ? 'invalid' : 'entered'}
+                    error={
+                      !teamRegEx.test(team) && team?.length !== 0
+                        ? `Team should be '2014A' and must contain at least 5 characters`
+                        : null
+                    }
+                    onChange={(e) => handleOnChange(e.target)}
+                  />
+                </div>
+              </div>
 
               <InputComponent
                 label="Village Name"

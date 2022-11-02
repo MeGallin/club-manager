@@ -6,9 +6,10 @@ import 'animate.css';
 const SuccessComponent = ({ message }) => {
   const [clear, setClear] = useState('');
   useEffect(() => {
-    setTimeout(() => {
+    const interval = setTimeout(() => {
       setClear('clear');
     }, 6000);
+    return () => clearInterval(interval);
   }, [clear]);
 
   return (

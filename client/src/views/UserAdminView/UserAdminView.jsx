@@ -12,9 +12,12 @@ const UserAdminView = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
+    let ignore = false;
     if (!userInfo) {
-      navigate('/login');
+      if (!ignore) navigate('/login');
     }
+
+    return () => (ignore = true);
   }, [navigate, userInfo, dispatch]);
 
   return (
