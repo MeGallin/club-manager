@@ -103,7 +103,7 @@ const AdminComponent = () => {
                   <legend>USER DETAILS</legend>
                   <div className="inner-content-wrapper">
                     <div
-                      className="user-profile-image inner-inner-wrapper"
+                      className="user-profile-image"
                       style={{
                         backgroundImage: `url('../assets/male.png')`,
                         backgroundRepeat: 'no-repeat',

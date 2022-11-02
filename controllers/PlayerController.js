@@ -11,6 +11,8 @@ exports.adminCreatePlayer = async (req, res, next) => {
     name,
     shirtNumber,
     nameOnShirt,
+    ageGroup,
+    team,
     villageName,
     governmentId,
     dateOfBirth,
@@ -34,6 +36,8 @@ exports.adminCreatePlayer = async (req, res, next) => {
         name,
         shirtNumber,
         nameOnShirt,
+        ageGroup,
+        team,
         villageName,
         governmentId,
         dateOfBirth,
@@ -79,6 +83,8 @@ exports.adminEditPlayer = async (req, res, next) => {
     if (player) {
       const playerInfo = {
         name: req.body.name,
+        ageGroup: req.body.ageGroup,
+        team: req.body.team,
         shirtNumber: req.body.shirtNumber,
         nameOnShirt: req.body.nameOnShirt,
         villageName: req.body.villageName,

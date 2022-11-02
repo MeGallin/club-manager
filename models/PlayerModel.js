@@ -19,6 +19,14 @@ const playerSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please provide a ame for your shirt.'],
     },
+    ageGroup: {
+      type: String,
+      required: [true, 'Please tell which age group you fall under.'],
+    },
+    team: {
+      type: String,
+      required: [true, 'Please tell us which team you play for.'],
+    },
     villageName: {
       type: String,
       required: [true, 'Tell us where you live.'],

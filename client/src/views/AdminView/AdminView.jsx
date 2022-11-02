@@ -99,6 +99,8 @@ const AdminView = () => {
             placeholder="search username"
             value={keyword}
             onChange={handleSearch}
+            quantity={searchedUsers?.length}
+            total={users?.length}
           />
           <div className="admin-wrapper">
             {searchedUsers?.map((user) => (
