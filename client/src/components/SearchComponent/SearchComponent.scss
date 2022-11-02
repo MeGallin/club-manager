@@ -1,1 +1,12 @@
 @import '../../index.scss';
+
+.search-input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  align-items: center;
+
+  p {
+    font-size: 0.8em;
+  }
+}

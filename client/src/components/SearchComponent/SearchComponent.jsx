@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef } from 'react';
 import './SearchComponent.scss';
 import PropTypes from 'prop-types';
 
@@ -8,12 +8,19 @@ const SearchComponent = ({
   onChange,
   className,
   value,
-  label,
+  quantity,
+  total,
 }) => {
+  const inputRef = useRef(null);
+  const checkFocus = () => {
+    inputRef.current.focus();
+  };
+
   return (
     <>
       <div className="search-input-wrapper">
         <input
+          ref={inputRef}
           type={type}
           className={className}
           placeholder={placeholder}
@@ -21,10 +28,13 @@ const SearchComponent = ({
           value={value}
           multiple
           required
+          onClick={checkFocus}
         />
-        {/* <span className="highlight"></span> */}
-        <span className="bar"></span>
-        <label>{label}</label>
+        <p>
+          {inputRef.current
+            ? `Your search found ${quantity} out of ${total}`
+            : null}
+        </p>
       </div>
     </>
   );

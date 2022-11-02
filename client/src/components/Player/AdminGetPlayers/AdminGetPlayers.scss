@@ -4,11 +4,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.4em;
+  justify-content: space-around;
   .inner-inner-wrapper {
     flex-grow: 1;
     flex-basis: 0;
-    max-width: -moz-fit-content;
-    max-width: fit-content;
+    flex: 0 0 22.5em;
+
     .button-wrapper {
       display: flex;
       gap: 0.4em;

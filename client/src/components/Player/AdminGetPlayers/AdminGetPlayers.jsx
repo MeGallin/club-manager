@@ -75,18 +75,22 @@ const AdminGetPlayers = () => {
                 placeholder={statusChecked ? 'SEARCH STATUS' : 'SEARCH NAME'}
                 value={keyword}
                 onChange={handleSearch}
+                quantity={searchedPlayers.length}
+                total={players.length}
               />
+
               <div className="inner-content-wrapper">
                 {searchedPlayers.map((player) => (
                   <div key={player._id} className="inner-inner-wrapper">
                     <fieldset className="fieldSet">
                       <legend>{player.name}</legend>
 
-                      <p>ID: {player._id}</p>
                       <p>
                         Name on shirt: {player.nameOnShirt} - Shirt number:{' '}
                         {player.shirtNumber}
                       </p>
+                      <p>age group: {player.ageGroup}</p>
+                      <p>TEAM: {player.team}</p>
                       <p>
                         Email address: {player.email} - Village:{' '}
                         {player.villageName}
