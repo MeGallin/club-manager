@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
@@ -13,6 +13,8 @@ import AdminDeletePlayer from '../AdminDeletePlayer/AdminDeletePlayer';
 import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 import ModalComponent from '../../ModalComponent/ModalComponent';
 import SearchComponent from '../../SearchComponent/SearchComponent';
+import ButtonComponent from '../../Button/ButtonComponent';
+import AdminCreatePlayer from '../AdminCreatePlayer/AdminCreatePlayer';
 
 const AdminGetPlayers = () => {
   const [statusChecked, setStatusChecked] = useState(false);
@@ -61,24 +63,50 @@ const AdminGetPlayers = () => {
         <>
           {success && searchedPlayers ? (
             <>
-              <div>
-                <label>
-                  <input
-                    type="checkbox"
-                    defaultChecked={statusChecked}
-                    onChange={() => setStatusChecked((prev) => !prev)}
-                  />
-                  SEARCH BY STATUS
-                </label>
+              <div className="admin-get-plater__top-wrapper">
+                <SearchComponent
+                  placeholder={statusChecked ? 'SEARCH STATUS' : 'SEARCH NAME'}
+                  value={keyword}
+                  onChange={handleSearch}
+                  quantity={searchedPlayers.length}
+                  total={players.length}
+                />
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      defaultChecked={statusChecked}
+                      onChange={() => setStatusChecked((prev) => !prev)}
+                    />
+                    SEARCH BY STATUS
+                  </label>
+                </div>
+                <ButtonComponent
+                  type="button"
+                  text={
+                    <NavLink
+                      className={(navData) =>
+                        navData.isActive ? 'active' : ''
+                      }
+                      to="/admin-profile"
+                    >
+                      Go Back
+                    </NavLink>
+                  }
+                  variant="info"
+                  disabled={false}
+                />
               </div>
-              <SearchComponent
-                placeholder={statusChecked ? 'SEARCH STATUS' : 'SEARCH NAME'}
-                value={keyword}
-                onChange={handleSearch}
-                quantity={searchedPlayers.length}
-                total={players.length}
+              <ModalComponent
+                className="create-btn"
+                openButtonTitle="Create Profile"
+                closeButtonTitle="Close modal"
+                props={
+                  <>
+                    <AdminCreatePlayer />
+                  </>
+                }
               />
-
               <div className="inner-content-wrapper">
                 {searchedPlayers.map((player) => (
                   <div key={player._id} className="inner-inner-wrapper">

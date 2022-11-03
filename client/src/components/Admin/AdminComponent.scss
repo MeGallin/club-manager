@@ -2,14 +2,16 @@
 .inner-content-wrapper {
   display: flex;
   flex-wrap: wrap;
-  .inner-inner-wrapper {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
 
-  .user-profile-image {
-    width: 25%;
-    height: 250px;
+  .inner-inner-wrapper {
+    flex: 0 0 23.5em;
+
+    .user-profile-image {
+      float: left;
+      width: 25%;
+      height: auto;
+      object-fit: cover;
+    }
   }
 }
 .dates-wrapper {

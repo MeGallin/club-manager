@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-
 import './UserAdminComponent.scss';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import { userAdminDetailsAction } from '../../store/actions/userActions';
@@ -48,123 +46,95 @@ const UserAdminComponent = () => {
       ) : null}
 
       <div>
-        {userAdmin?.isAdmin ? (
+        <fieldset className="fieldSet">
           <ButtonComponent
             type="button"
             text={
-              <NavLink
-                className={(navData) => (navData.isActive ? 'active' : '')}
-                to="/admin"
-              >
-                Admin View
-              </NavLink>
+              showUserAdminInputs ? 'EDIT USER DETAILS' : 'BACK TO USER DETAILS'
             }
-            variant="danger"
+            variant="dark"
             disabled={false}
+            onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
           />
+        </fieldset>
+
+        {success && userAdmin?.isConfirmed ? (
+          showUserAdminInputs ? (
+            <div className="inner-inner-wrapper">
+              <fieldset className="fieldSet">
+                <legend>USER DETAILS</legend>
+
+                <img
+                  src="../assets/male.png"
+                  className="user-profile-image"
+                  alt={userAdmin?.name}
+                />
+                <p>USER NAME : {userAdmin?.username}</p>
+                <p>EMAIL : {userAdmin?.email}</p>
+                <p>
+                  ADMIN :{' '}
+                  {userAdmin?.isAdmin === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  COACH :{' '}
+                  {userAdmin?.isCoach === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  PLAYER :{' '}
+                  {userAdmin?.isPlayer === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  PARENT :{' '}
+                  {userAdmin?.isParent === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  CONFIRMED :{' '}
+                  {userAdmin?.isConfirmed === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  SUSPENDED :{' '}
+                  {userAdmin?.isSuspended === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+
+                <div className="dates-wrapper">
+                  <p>CREATED {moment(userAdmin?.createdAt).fromNow()}</p>
+                  <p>UPDATED {moment(userAdmin?.updatedAt).fromNow()}</p>
+                </div>
+              </fieldset>
+            </div>
+          ) : (
+            <>
+              <UserAdminEditComponent />
+            </>
+          )
         ) : null}
-      </div>
-
-      <div className="wrapper">
-        <div className="cont-wrapper">
-          <fieldset className="fieldSet">
-            <ButtonComponent
-              type="button"
-              text={
-                showUserAdminInputs
-                  ? 'EDIT USER DETAILS'
-                  : 'BACK TO USER DETAILS'
-              }
-              variant="dark"
-              disabled={false}
-              onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
-            />
-          </fieldset>
-
-          {success && userAdmin?.isConfirmed ? (
-            showUserAdminInputs ? (
-              <>
-                <fieldset className="fieldSet">
-                  <legend>USER DETAILS</legend>
-                  <div className="inner-content-wrapper">
-                    <div
-                      className="user-profile-image inner-inner-wrapper"
-                      style={{
-                        backgroundImage: `url('../assets/male.png')`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        margin: '0.2em',
-                      }}
-                    ></div>
-                    <div className="inner-inner-wrapper">
-                      <p>USER NAME : {userAdmin?.username}</p>
-                      <p>EMAIL : {userAdmin?.email}</p>
-                      <p>
-                        ADMIN :{' '}
-                        {userAdmin?.isAdmin === false ? (
-                          <FaThumbsDown className="ra-thumbs-down" />
-                        ) : (
-                          <FaThumbsUp className="ra-thumbs-up" />
-                        )}
-                      </p>
-                      <p>
-                        COACH :{' '}
-                        {userAdmin?.isCoach === false ? (
-                          <FaThumbsDown className="ra-thumbs-down" />
-                        ) : (
-                          <FaThumbsUp className="ra-thumbs-up" />
-                        )}
-                      </p>
-                      <p>
-                        PLAYER :{' '}
-                        {userAdmin?.isPlayer === false ? (
-                          <FaThumbsDown className="ra-thumbs-down" />
-                        ) : (
-                          <FaThumbsUp className="ra-thumbs-up" />
-                        )}
-                      </p>
-                      <p>
-                        PARENT :{' '}
-                        {userAdmin?.isParent === false ? (
-                          <FaThumbsDown className="ra-thumbs-down" />
-                        ) : (
-                          <FaThumbsUp className="ra-thumbs-up" />
-                        )}
-                      </p>
-                      <p>
-                        CONFIRMED :{' '}
-                        {userAdmin?.isConfirmed === false ? (
-                          <FaThumbsDown className="ra-thumbs-down" />
-                        ) : (
-                          <FaThumbsUp className="ra-thumbs-up" />
-                        )}
-                      </p>
-                      <p>
-                        SUSPENDED :{' '}
-                        {userAdmin?.isSuspended === false ? (
-                          <FaThumbsDown className="ra-thumbs-down" />
-                        ) : (
-                          <FaThumbsUp className="ra-thumbs-up" />
-                        )}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="dates-wrapper">
-                    <p>CREATED {moment(userAdmin?.createdAt).fromNow()}</p>
-                    <p>UPDATED {moment(userAdmin?.updatedAt).fromNow()}</p>
-                  </div>
-                </fieldset>
-              </>
-            ) : (
-              <>
-                <UserAdminEditComponent />
-              </>
-            )
-          ) : null}
+        <div className="inner-content-wrapper">
+          <GeneralInfoComponent />
         </div>
-        <GeneralInfoComponent />
       </div>
 
       {userAdmin === undefined ? (

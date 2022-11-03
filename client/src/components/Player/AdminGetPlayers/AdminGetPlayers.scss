@@ -1,18 +1,14 @@
 @import '../../../index.scss';
-
-.inner-content-wrapper {
+.admin-get-plater__top-wrapper {
+  border: 1px solid $border-colour-dark;
+  background-color: rgba(115, 115, 115, 0.1);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4em;
-  justify-content: space-around;
-  .inner-inner-wrapper {
-    flex-grow: 1;
-    flex-basis: 0;
-    flex: 0 0 22.5em;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .button-wrapper {
-      display: flex;
-      gap: 0.4em;
-    }
-  }
+.button-wrapper {
+  display: flex;
+  gap: 0.4em;
 }
