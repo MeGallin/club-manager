@@ -30,7 +30,9 @@ exports.adminCreateGeneralIfo = async (req, res, next) => {
 // @route: GET /api/admin/general-info
 // @access:  PRIVATE
 exports.adminGetGeneralInfo = async (req, res, next) => {
-  const posts = await GeneralInfo.find({});
+  const posts = await GeneralInfo.find({}).sort({
+    createdAt: -1,
+  });
   try {
     if (!posts) {
       return next(new ErrorResponse('No posts could be found', 401));

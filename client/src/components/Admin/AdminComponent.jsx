@@ -1,20 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import './AdminComponent.scss';
 
+import './AdminComponent.scss';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import { userAdminDetailsAction } from '../../store/actions/userActions';
 
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
+import UserAdminEditComponent from '../User/UserAdminEditComponent';
 import ButtonComponent from '../Button/ButtonComponent';
 import AdminProfileComponent from '../Profile/AdminProfileComponent/AdminProfileComponent';
-import UserAdminComponent from '../User/UserAdminComponent';
+
+import moment from 'moment';
+import ModalComponent from '../ModalComponent/ModalComponent';
+import GeneralInfoComponent from '../GeneralInfoComponent/GeneralInfoComponent';
+import AdminCreateGeneralInfoComponent from '../GeneralInfoComponent/AdminCreateGeneralInfoComponent/AdminCreateGeneralInfoComponent';
 
 const AdminComponent = () => {
   const dispatch = useDispatch();
   const [tokenExpiration] = useState(
     'You are about to be logged out. Your token has expired.',
   );
+  const [showUserAdminInputs, setShowUserAdminInputs] = useState(true);
 
   useEffect(() => {
     let ignore = false;
@@ -28,7 +35,7 @@ const AdminComponent = () => {
   }, [dispatch]);
 
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
-  const { error, userAdmin } = userAdminDetails;
+  const { success, error, userAdmin } = userAdminDetails;
 
   return (
     <>
@@ -75,9 +82,114 @@ const AdminComponent = () => {
         ) : null}
       </div>
 
-      <div className="inner-content-wrapper">
-        <UserAdminComponent />
+      <div className="wrapper">
+        <div className="inner-content-wrapper ">
+          <fieldset className="fieldSet">
+            <ButtonComponent
+              type="button"
+              text={
+                showUserAdminInputs
+                  ? 'EDIT USER DETAILS'
+                  : 'BACK TO USER DETAILS'
+              }
+              variant="dark"
+              disabled={false}
+              onClick={() => setShowUserAdminInputs((prev) => !prev)}
+            />
+          </fieldset>
+
+          {success && userAdmin?.isConfirmed ? (
+            showUserAdminInputs ? (
+              <fieldset className="fieldSet">
+                <legend>USER DETAILS</legend>
+
+                <img
+                  src="../assets/male.png"
+                  className="user-profile-image"
+                  alt={userAdmin?.name}
+                />
+
+                <p>USER NAME : {userAdmin?.username}</p>
+                <p>EMAIL : {userAdmin?.email}</p>
+                <p>
+                  ADMIN :{' '}
+                  {userAdmin?.isAdmin === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  COACH :{' '}
+                  {userAdmin?.isCoach === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  PLAYER :{' '}
+                  {userAdmin?.isPlayer === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  PARENT :{' '}
+                  {userAdmin?.isParent === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  CONFIRMED :{' '}
+                  {userAdmin?.isConfirmed === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+                <p>
+                  SUSPENDED :{' '}
+                  {userAdmin?.isSuspended === false ? (
+                    <FaThumbsDown className="ra-thumbs-down" />
+                  ) : (
+                    <FaThumbsUp className="ra-thumbs-up" />
+                  )}
+                </p>
+
+                <div className="dates-wrapper">
+                  <p>Created {moment(userAdmin?.createdAt).fromNow()}</p>
+                  <p>Updated {moment(userAdmin?.updatedAt).fromNow()}</p>
+                </div>
+              </fieldset>
+            ) : (
+              <>
+                <UserAdminEditComponent />
+              </>
+            )
+          ) : null}
+        </div>
+
         <AdminProfileComponent />
+        <div>
+          <fieldset className="fieldSet">
+            <ModalComponent
+              className="create-btn"
+              openButtonTitle="Create Profile"
+              closeButtonTitle="Close modal"
+              props={
+                <>
+                  <AdminCreateGeneralInfoComponent />
+                </>
+              }
+            />
+          </fieldset>
+
+          <GeneralInfoComponent />
+        </div>
       </div>
 
       {userAdmin === undefined ? (

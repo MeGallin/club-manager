@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
 import './AdminGetGeneralInfoComponent.scss';
-import { adminGetPlayersAction } from '../../../store/actions/adminGeneralInfoActions';
+import { adminGetGeneralInfoAction } from '../../../store/actions/adminGeneralInfoActions';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import SpinnerComponent from '../../Spinner/SpinnerComponent';
 
@@ -22,7 +22,7 @@ const AdminGetGeneralInfoComponent = () => {
     if (!userInfo && !userAdmin?.isAdmin) {
       navigate('/login');
     } else {
-      if (!ignore) dispatch(adminGetPlayersAction());
+      if (!ignore) dispatch(adminGetGeneralInfoAction());
     }
     return () => (ignore = true);
   }, [navigate, dispatch, userInfo, userAdmin]);
@@ -33,26 +33,30 @@ const AdminGetGeneralInfoComponent = () => {
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
-      <fieldset className="fieldSet">
-        <legend>General Information</legend>
-        <h3>Anorthosis Famagusta Academy - Larnaca Division</h3>
-        {loading ? (
-          <SpinnerComponent />
-        ) : success && posts ? (
-          posts?.map((post) => (
-            <div key={post._id}>
-              <h3>{post.heading}</h3>
-              <p>{post.post}</p>
-              <p>POST BY: {post.name}</p>
-              <div className="dates-wrapper">
-                <p> Created: {moment(post.createdAt).fromNow()}</p>
-                <p> Updated: {moment(post.updatedAt).fromNow()}</p>
+      <div className="inner-content-wrapper">
+        <fieldset className="fieldSet">
+          <legend>General Information</legend>
+          <h3>Anorthosis Famagusta Academy - Larnaca Division</h3>
+          {loading ? (
+            <SpinnerComponent />
+          ) : success && posts ? (
+            posts?.map((post) => (
+              <div key={post._id}>
+                <h3>{post.heading}</h3>
+                <p>{post.post}</p>
+                <p>POST BY: {post.name}</p>
+                <div className="dates-wrapper">
+                  <p> Created: {moment(post.createdAt).fromNow()}</p>
+                  <p> Updated: {moment(post.updatedAt).fromNow()}</p>
+                </div>
+                <button className="button">Edit</button>
+                <button className="button">Delete</button>
               </div>
-            </div>
-          ))
-        ) : null}
-        <h3>This will only be visible to registered members/users</h3>
-      </fieldset>
+            ))
+          ) : null}
+          <h3>This will only be visible to registered members/users</h3>
+        </fieldset>
+      </div>
     </>
   );
 };
