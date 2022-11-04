@@ -28,7 +28,7 @@ exports.adminCreateGeneralIfo = async (req, res, next) => {
 
 // @description: GET ALL POSTS
 // @route: GET /api/admin/general-info
-// @access: ADMIN && PRIVATE
+// @access:  PRIVATE
 exports.adminGetGeneralInfo = async (req, res, next) => {
   const posts = await GeneralInfo.find({});
   try {

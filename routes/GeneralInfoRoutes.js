@@ -11,7 +11,7 @@ const {
 router
   .route('/admin/general-info-create')
   .post(protect, admin, adminCreateGeneralIfo);
-router.route('/admin/general-info').get(protect, admin, adminGetGeneralInfo);
+router.route('/admin/general-info').get(protect, adminGetGeneralInfo); //Posts for all users
 router
   .route('/admin/general-info-edit/:id')
   .put(protect, admin, adminEditGeneralInfo);

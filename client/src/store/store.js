@@ -28,6 +28,8 @@ import {
   adminEditPlayerReducer,
 } from './reducers/playerReducers';
 
+import { adminGetGeneralInfoReducer } from './reducers/adminGeneralInfoReducers';
+
 //Initialise state to hold user info if logged in.
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
@@ -53,6 +55,7 @@ const reducer = combineReducers({
   adminGetPlayers: adminGetPlayersReducer,
   adminDeletePlayer: adminDeletePlayerReducer,
   adminEditPlayer: adminEditPlayerReducer,
+  adminGetGeneralInfo: adminGetGeneralInfoReducer,
 });
 
 const initialState = {
