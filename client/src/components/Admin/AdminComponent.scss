@@ -6,7 +6,8 @@
 
   .inner-content-wrapper {
     flex: 0 0 23em;
-    max-height: 30em;
+    height: 30em;
+    // max-height: 35em;
     overflow-y: auto;
 
     .user-profile-image {

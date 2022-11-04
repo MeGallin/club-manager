@@ -31,6 +31,7 @@ import {
 import {
   adminGetGeneralInfoReducer,
   adminCreateGeneralInfoReducer,
+  adminEditGeneralInfoReducer,
 } from './reducers/adminGeneralInfoReducers';
 
 //Initialise state to hold user info if logged in.
@@ -60,6 +61,7 @@ const reducer = combineReducers({
   adminEditPlayer: adminEditPlayerReducer,
   adminGetGeneralInfo: adminGetGeneralInfoReducer,
   adminCreateGeneralInfo: adminCreateGeneralInfoReducer,
+  adminEditGeneralInfo: adminEditGeneralInfoReducer,
 });
 
 const initialState = {
