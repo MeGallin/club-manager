@@ -14,7 +14,7 @@ import {
   ADMIN_GET_PLAYERS_SUCCESS,
 } from '../constants/playerConstants';
 
-//GET: ADMIN create PLAYER profile
+//GET: ADMIN get PLAYER profile
 export const adminGetPlayersAction = () => async (dispatch, getState) => {
   try {
     dispatch({
