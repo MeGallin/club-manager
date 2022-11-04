@@ -7,6 +7,8 @@ import './AdminGetGeneralInfoComponent.scss';
 import { adminGetGeneralInfoAction } from '../../../store/actions/adminGeneralInfoActions';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import SpinnerComponent from '../../Spinner/SpinnerComponent';
+import ModalComponent from '../../ModalComponent/ModalComponent';
+import AdminEditGeneralInfoComponent from '../AdminEditGeneralInfoComponent/AdminEditGeneralInfoComponent';
 
 const AdminGetGeneralInfoComponent = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const AdminGetGeneralInfoComponent = () => {
 
   const adminGetGeneralInfo = useSelector((state) => state.adminGetGeneralInfo);
   const { loading, success, error, posts } = adminGetGeneralInfo;
-  console.log(posts);
+
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
@@ -41,7 +43,7 @@ const AdminGetGeneralInfoComponent = () => {
             <SpinnerComponent />
           ) : success && posts ? (
             posts?.map((post) => (
-              <div key={post._id}>
+              <div key={post._id} className="post-wrapper">
                 <h3>{post.heading}</h3>
                 <p>{post.post}</p>
                 <p>POST BY: {post.name}</p>
@@ -49,8 +51,21 @@ const AdminGetGeneralInfoComponent = () => {
                   <p> Created: {moment(post.createdAt).fromNow()}</p>
                   <p> Updated: {moment(post.updatedAt).fromNow()}</p>
                 </div>
-                <button className="button">Edit</button>
-                <button className="button">Delete</button>
+
+                <div className="button-wrapper">
+                  <ModalComponent
+                    className="create-btn"
+                    openButtonTitle="Edit Post"
+                    closeButtonTitle="Close modal"
+                    variant="warning"
+                    props={
+                      <>
+                        <AdminEditGeneralInfoComponent postId={post._id} />
+                      </>
+                    }
+                  />
+                  <button className="button">Delete</button>
+                </div>
               </div>
             ))
           ) : null}
