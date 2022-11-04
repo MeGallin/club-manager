@@ -50,7 +50,7 @@ const AdminProfileComponent = () => {
         <SpinnerComponent />
       ) : (
         <>
-          <div>
+          <div className="inner-content-wrapper">
             {adminProfile?.length === 0 ? null : (
               <fieldset className="fieldSet">
                 <ButtonComponent
@@ -69,45 +69,43 @@ const AdminProfileComponent = () => {
 
             {adminProfile?.length !== 0 ? (
               !showProfileInputs ? (
-                <div className="inner-inner-wrapper">
-                  <fieldset className="fieldSet">
-                    <legend>ADMIN PROFILE</legend>
-                    {adminProfile?.map((profile) => (
-                      <div key={profile._id}>
-                        <img
-                          src="../assets/female.png"
-                          className="user-profile-image"
-                          alt={profile.name}
-                        />
-                        <p>Name: {profile.name}</p>
-                        <p>Email: {profile.email}</p>
-                        <p>Phone: {profile.phone}</p>
-                        <p> Description: {profile.description}</p>
-                        <p>
-                          Date of Birth {profile?.dateOfBirth} [
-                          <span>
-                            {Math.floor(
-                              moment(new Date()).diff(
-                                moment(
-                                  profile.dateOfBirth,
-                                  'dd-mm-yyyy' || 'dd/mm/yyyy',
-                                ),
-                                'years',
-                                true,
+                <fieldset className="fieldSet">
+                  <legend>ADMIN PROFILE</legend>
+                  {adminProfile?.map((profile) => (
+                    <div key={profile._id}>
+                      <img
+                        src="../assets/female.png"
+                        className="user-profile-image"
+                        alt={profile.name}
+                      />
+                      <p>Name: {profile.name}</p>
+                      <p>Email: {profile.email}</p>
+                      <p>Phone: {profile.phone}</p>
+                      <p> Description: {profile.description}</p>
+                      <p>
+                        Date of Birth {profile?.dateOfBirth} [
+                        <span>
+                          {Math.floor(
+                            moment(new Date()).diff(
+                              moment(
+                                profile.dateOfBirth,
+                                'dd-mm-yyyy' || 'dd/mm/yyyy',
                               ),
-                            )}
-                          </span>{' '}
-                          years old]
-                        </p>
+                              'years',
+                              true,
+                            ),
+                          )}
+                        </span>{' '}
+                        years old]
+                      </p>
 
-                        <div className="dates-wrapper">
-                          <p> Created: {moment(profile.createdAt).fromNow()}</p>
-                          <p> Updated: {moment(profile.updatedAt).fromNow()}</p>
-                        </div>
+                      <div className="dates-wrapper">
+                        <p> Created: {moment(profile.createdAt).fromNow()}</p>
+                        <p> Updated: {moment(profile.updatedAt).fromNow()}</p>
                       </div>
-                    ))}
-                  </fieldset>
-                </div>
+                    </div>
+                  ))}
+                </fieldset>
               ) : (
                 <AdminEditProfileComponent />
               )

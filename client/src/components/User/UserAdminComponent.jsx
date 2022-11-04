@@ -45,25 +45,26 @@ const UserAdminComponent = () => {
         />
       ) : null}
 
-      <div>
-        <fieldset className="fieldSet">
-          <ButtonComponent
-            type="button"
-            text={
-              showUserAdminInputs ? 'EDIT USER DETAILS' : 'BACK TO USER DETAILS'
-            }
-            variant="dark"
-            disabled={false}
-            onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
-          />
-        </fieldset>
+      <div className="wrapper">
+        <div className="inner-content-wrapper">
+          <fieldset className="fieldSet">
+            <ButtonComponent
+              type="button"
+              text={
+                showUserAdminInputs
+                  ? 'EDIT USER DETAILS'
+                  : 'BACK TO USER DETAILS'
+              }
+              variant="dark"
+              disabled={false}
+              onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
+            />
+          </fieldset>
 
-        {success && userAdmin?.isConfirmed ? (
-          showUserAdminInputs ? (
-            <div className="inner-inner-wrapper">
+          {success && userAdmin?.isConfirmed ? (
+            showUserAdminInputs ? (
               <fieldset className="fieldSet">
                 <legend>USER DETAILS</legend>
-
                 <img
                   src="../assets/male.png"
                   className="user-profile-image"
@@ -125,14 +126,14 @@ const UserAdminComponent = () => {
                   <p>UPDATED {moment(userAdmin?.updatedAt).fromNow()}</p>
                 </div>
               </fieldset>
-            </div>
-          ) : (
-            <>
-              <UserAdminEditComponent />
-            </>
-          )
-        ) : null}
-        <div className="inner-content-wrapper">
+            ) : (
+              <>
+                <UserAdminEditComponent />
+              </>
+            )
+          ) : null}
+        </div>
+        <div>
           <GeneralInfoComponent />
         </div>
       </div>

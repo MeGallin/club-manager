@@ -1,14 +1,8 @@
-import AdminCreateGeneralInfoComponent from './AdminCreateGeneralInfoComponent/AdminCreateGeneralInfoComponent';
 import AdminGetGeneralInfoComponent from './AdminGetGeneralInfoComponent/AdminGetGeneralInfoComponent';
 import './GeneralInfoComponent.scss';
 
 const GeneralInfoComponent = () => {
-  return (
-    <>
-      <AdminCreateGeneralInfoComponent />
-      <AdminGetGeneralInfoComponent />
-    </>
-  );
+  return <AdminGetGeneralInfoComponent />;
 };
 
 export default GeneralInfoComponent;
