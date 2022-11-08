@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
@@ -10,6 +10,9 @@ import SpinnerComponent from '../../Spinner/SpinnerComponent';
 import ModalComponent from '../../ModalComponent/ModalComponent';
 import AdminEditGeneralInfoComponent from '../AdminEditGeneralInfoComponent/AdminEditGeneralInfoComponent';
 import AdminDeleteGeneralInfoComponent from '../AdminDeleteGeneralInfoComponent/AdminDeleteGeneralInfoComponent';
+import SearchComponent from '../../SearchComponent/SearchComponent';
+import ButtonComponent from '../../Button/ButtonComponent';
+import AdminCreateGeneralInfoComponent from '../AdminCreateGeneralInfoComponent/AdminCreateGeneralInfoComponent';
 
 const AdminGetGeneralInfoComponent = () => {
   const dispatch = useDispatch();
@@ -33,28 +36,80 @@ const AdminGetGeneralInfoComponent = () => {
   const adminGetGeneralInfo = useSelector((state) => state.adminGetGeneralInfo);
   const { loading, success, error, posts } = adminGetGeneralInfo;
 
-  return (
-    <>
-      {error ? <ErrorComponent error={error} /> : null}
-      <div className="inner-content-wrapper">
-        <fieldset className="fieldSet">
-          <legend>General Information</legend>
-          <h3>Anorthosis Famagusta Academy - Larnaca Division</h3>
-          {loading ? (
-            <SpinnerComponent />
-          ) : success && posts ? (
-            posts?.map((post) => (
-              <div key={post._id} className="post-wrapper">
-                <h3>{post.heading}</h3>
-                <p>{post.post}</p>
-                <p className="small-text">BY: {post.name}</p>
-                <div className="dates-wrapper">
-                  <p> Created: {moment(post.createdAt).fromNow()}</p>
-                  <p> Updated: {moment(post.updatedAt).fromNow()}</p>
-                </div>
+  // Search posts
+  const [keyword, setKeyword] = useState('');
+  const handleSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const searchedPosts = posts?.filter((post) => {
+    if (
+      post.heading.toLowerCase().includes(keyword.toLowerCase()) ||
+      post.post.toLowerCase().includes(keyword.toLowerCase())
+    ) {
+      return post;
+    }
+    return false;
+  });
 
-                {userAdmin?.isAdmin ? (
-                  <>
+  return (
+    <div>
+      {error ? <ErrorComponent error={error} /> : null}
+      <div className="admin-get-player__top-wrapper">
+        <SearchComponent
+          placeholder="SEARCH POST"
+          value={keyword}
+          onChange={handleSearch}
+          quantity={searchedPosts?.length}
+          total={posts?.length}
+        />
+
+        {userAdmin?.isAdmin ? (
+          <ButtonComponent
+            type="button"
+            text={
+              <NavLink
+                className={(navData) => (navData.isActive ? 'active' : '')}
+                to="/admin-profile"
+              >
+                Go Back
+              </NavLink>
+            }
+            variant="info"
+            disabled={false}
+          />
+        ) : null}
+      </div>
+      {userAdmin?.isAdmin ? (
+        <ModalComponent
+          className="create-btn"
+          openButtonTitle="Create A NEW POST"
+          closeButtonTitle="Close modal"
+          variant="success"
+          props={
+            <>
+              <AdminCreateGeneralInfoComponent />
+            </>
+          }
+        />
+      ) : null}
+
+      <h3>Anorthosis Famagusta Academy - Larnaca Division</h3>
+      {loading ? (
+        <SpinnerComponent />
+      ) : success && searchedPosts ? (
+        <div className="wrapper">
+          {searchedPosts?.map((post) => (
+            <div key={post._id} className="inner-content-wrapper">
+              <div className="post-wrapper">
+                <fieldset className="fieldSet">
+                  <legend>{post.heading}</legend>
+                  <p>{post.post}</p>
+                  <p className="small-text">BY: {post.name}</p>
+                  <div className="dates-wrapper">
+                    <p> Created: {moment(post.createdAt).fromNow()}</p>
+                    <p> Updated: {moment(post.updatedAt).fromNow()}</p>
+                  </div>
+                  {userAdmin?.isAdmin ? (
                     <div className="button-wrapper">
                       <ModalComponent
                         className="create-btn"
@@ -72,15 +127,15 @@ const AdminGetGeneralInfoComponent = () => {
                         postTitle={post.heading}
                       />
                     </div>
-                  </>
-                ) : null}
+                  ) : null}
+                </fieldset>
               </div>
-            ))
-          ) : null}
-          <h3>This will only be visible to registered members/users</h3>
-        </fieldset>
-      </div>
-    </>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      <h3>This will only be visible to registered members/users</h3>
+    </div>
   );
 };
 
