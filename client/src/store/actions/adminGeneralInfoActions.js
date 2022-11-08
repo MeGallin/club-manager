@@ -1,24 +1,24 @@
 import axios from 'axios';
 import {
-  ADMIN_CREATE_PLAYER_FAILURE,
-  ADMIN_CREATE_PLAYER_REQUEST,
-  ADMIN_CREATE_PLAYER_SUCCESS,
-  ADMIN_DELETE_PLAYER_FAILURE,
-  ADMIN_DELETE_PLAYER_REQUEST,
-  ADMIN_DELETE_PLAYER_SUCCESS,
-  ADMIN_EDIT_PLAYER_FAILURE,
-  ADMIN_EDIT_PLAYER_REQUEST,
-  ADMIN_EDIT_PLAYER_SUCCESS,
-  ADMIN_GET_PLAYERS_FAILURE,
-  ADMIN_GET_PLAYERS_REQUEST,
-  ADMIN_GET_PLAYERS_SUCCESS,
-} from '../constants/playerConstants';
+  ADMIN_CREATE_GENERAL_INFO_FAILURE,
+  ADMIN_CREATE_GENERAL_INFO_REQUEST,
+  ADMIN_CREATE_GENERAL_INFO_SUCCESS,
+  ADMIN_DELETE_GENERAL_INFO_FAILURE,
+  ADMIN_DELETE_GENERAL_INFO_REQUEST,
+  ADMIN_DELETE_GENERAL_INFO_SUCCESS,
+  ADMIN_EDIT_GENERAL_INFO_FAILURE,
+  ADMIN_EDIT_GENERAL_INFO_REQUEST,
+  ADMIN_EDIT_GENERAL_INFO_SUCCESS,
+  ADMIN_GET_GENERAL_INFO_FAILURE,
+  ADMIN_GET_GENERAL_INFO_REQUEST,
+  ADMIN_GET_GENERAL_INFO_SUCCESS,
+} from '../constants/adminGeneralInfoConstants';
 
 //GET: ADMIN get PLAYER profile
-export const adminGetPlayersAction = () => async (dispatch, getState) => {
+export const adminGetGeneralInfoAction = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ADMIN_GET_PLAYERS_REQUEST,
+      type: ADMIN_GET_GENERAL_INFO_REQUEST,
     });
     const {
       userLogin: { userInfo },
@@ -30,11 +30,11 @@ export const adminGetPlayersAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`api/admin/players`, config);
-    dispatch({ type: ADMIN_GET_PLAYERS_SUCCESS, payload: data });
+    const { data } = await axios.get(`api/admin/general-info`, config);
+    dispatch({ type: ADMIN_GET_GENERAL_INFO_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: ADMIN_GET_PLAYERS_FAILURE,
+      type: ADMIN_GET_GENERAL_INFO_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -43,12 +43,12 @@ export const adminGetPlayersAction = () => async (dispatch, getState) => {
   }
 };
 
-//POST: ADMIN create PLAYER profile
-export const adminCreatePlayerAction =
+//POST: ADMIN create General info POST
+export const adminCreateGeneralInfoAction =
   (formData) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: ADMIN_CREATE_PLAYER_REQUEST,
+        type: ADMIN_CREATE_GENERAL_INFO_REQUEST,
       });
       const {
         userLogin: { userInfo },
@@ -61,15 +61,15 @@ export const adminCreatePlayerAction =
       };
 
       const { data } = await axios.post(
-        `api/admin/player-create`,
+        `api/admin/general-info-create`,
         formData,
         config,
       );
-      dispatch({ type: ADMIN_CREATE_PLAYER_SUCCESS, payload: data });
-      dispatch(adminGetPlayersAction());
+      dispatch({ type: ADMIN_CREATE_GENERAL_INFO_SUCCESS, payload: data });
+      dispatch(adminGetGeneralInfoAction());
     } catch (error) {
       dispatch({
-        type: ADMIN_CREATE_PLAYER_FAILURE,
+        type: ADMIN_CREATE_GENERAL_INFO_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
@@ -78,12 +78,12 @@ export const adminCreatePlayerAction =
     }
   };
 
-//PUT: ADMIN edit PLAYER profile
-export const adminEditPlayerAction =
+//PUT: ADMIN EDIT General info POST
+export const adminEditGeneralInfoAction =
   (formData) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: ADMIN_EDIT_PLAYER_REQUEST,
+        type: ADMIN_EDIT_GENERAL_INFO_REQUEST,
       });
       const {
         userLogin: { userInfo },
@@ -96,15 +96,15 @@ export const adminEditPlayerAction =
       };
 
       const { data } = await axios.put(
-        `api/admin/player-edit/${formData.id}`,
+        `api/admin/general-info-edit/${formData.id}`,
         formData,
         config,
       );
-      dispatch({ type: ADMIN_EDIT_PLAYER_SUCCESS, payload: data });
-      dispatch(adminGetPlayersAction());
+      dispatch({ type: ADMIN_EDIT_GENERAL_INFO_SUCCESS, payload: data });
+      dispatch(adminGetGeneralInfoAction());
     } catch (error) {
       dispatch({
-        type: ADMIN_EDIT_PLAYER_FAILURE,
+        type: ADMIN_EDIT_GENERAL_INFO_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
@@ -113,12 +113,12 @@ export const adminEditPlayerAction =
     }
   };
 
-//DELETE: ADMIN delete PLAYER profile
-export const adminDeletePlayerAction =
-  (playerId) => async (dispatch, getState) => {
+//DELETE: ADMIN Delete General info POST
+export const adminDeleteGeneralInfoAction =
+  (postId) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: ADMIN_DELETE_PLAYER_REQUEST,
+        type: ADMIN_DELETE_GENERAL_INFO_REQUEST,
       });
       const {
         userLogin: { userInfo },
@@ -131,14 +131,14 @@ export const adminDeletePlayerAction =
       };
 
       const { data } = await axios.delete(
-        `api/admin/player-delete/${playerId}`,
+        `api/admin/general-info-delete/${postId}`,
         config,
       );
-      dispatch({ type: ADMIN_DELETE_PLAYER_SUCCESS, payload: data });
-      dispatch(adminGetPlayersAction());
+      dispatch({ type: ADMIN_DELETE_GENERAL_INFO_SUCCESS, payload: data });
+      dispatch(adminGetGeneralInfoAction());
     } catch (error) {
       dispatch({
-        type: ADMIN_DELETE_PLAYER_FAILURE,
+        type: ADMIN_DELETE_GENERAL_INFO_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

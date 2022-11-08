@@ -1,24 +1,31 @@
 @import '../../index.scss';
-.inner-content-wrapper {
+.wrapper {
   display: flex;
   flex-wrap: wrap;
-  .inner-inner-wrapper {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
+  gap: 0.5em;
 
-  .user-profile-image {
-    width: 25%;
-    height: 250px;
+  .inner-content-wrapper {
+    flex: 0 0 23em;
+    // flex: 1 1 auto;
+
+    max-height: 37em;
+    overflow-y: auto;
+
+    .user-profile-image {
+      float: left;
+      width: 20%;
+      height: auto;
+      object-fit: cover;
+    }
   }
-}
-.dates-wrapper {
-  font-size: 0.7em;
-  display: flex;
-  justify-content: space-between;
-}
-.admin-nav-buttons-wrapper {
-  padding: 0.3em 0;
-  display: flex;
-  gap: 0.4em;
+  .dates-wrapper {
+    font-size: 0.7em;
+    display: flex;
+    justify-content: space-between;
+  }
+  .admin-nav-buttons-wrapper {
+    padding: 0.3em 0;
+    display: flex;
+    gap: 0.4em;
+  }
 }

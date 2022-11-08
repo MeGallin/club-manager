@@ -21,9 +21,9 @@ const UserAdminView = () => {
   }, [navigate, userInfo, dispatch]);
 
   return (
-    <>
+    <div className="inner-content-wrapper">
       <UserAdminComponent />
-    </>
+    </div>
   );
 };
 
