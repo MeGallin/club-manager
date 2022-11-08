@@ -3,6 +3,10 @@ import {
   ADMIN_CREATE_GENERAL_INFO_FAILURE,
   ADMIN_CREATE_GENERAL_INFO_REQUEST,
   ADMIN_CREATE_GENERAL_INFO_SUCCESS,
+  ADMIN_DELETE_GENERAL_INFO_FAILURE,
+  ADMIN_DELETE_GENERAL_INFO_REQUEST,
+  ADMIN_DELETE_GENERAL_INFO_SUCCESS,
+  ADMIN_EDIT_GENERAL_INFO_FAILURE,
   ADMIN_EDIT_GENERAL_INFO_REQUEST,
   ADMIN_EDIT_GENERAL_INFO_SUCCESS,
   ADMIN_GET_GENERAL_INFO_FAILURE,
@@ -100,7 +104,41 @@ export const adminEditGeneralInfoAction =
       dispatch(adminGetGeneralInfoAction());
     } catch (error) {
       dispatch({
-        type: ADMIN_CREATE_GENERAL_INFO_FAILURE,
+        type: ADMIN_EDIT_GENERAL_INFO_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//DELETE: ADMIN Delete General info POST
+export const adminDeleteGeneralInfoAction =
+  (postId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_DELETE_GENERAL_INFO_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.delete(
+        `api/admin/general-info-delete/${postId}`,
+        config,
+      );
+      dispatch({ type: ADMIN_DELETE_GENERAL_INFO_SUCCESS, payload: data });
+      dispatch(adminGetGeneralInfoAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_DELETE_GENERAL_INFO_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
