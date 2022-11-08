@@ -9,6 +9,7 @@ import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import SpinnerComponent from '../../Spinner/SpinnerComponent';
 import ModalComponent from '../../ModalComponent/ModalComponent';
 import AdminEditGeneralInfoComponent from '../AdminEditGeneralInfoComponent/AdminEditGeneralInfoComponent';
+import AdminDeleteGeneralInfoComponent from '../AdminDeleteGeneralInfoComponent/AdminDeleteGeneralInfoComponent';
 
 const AdminGetGeneralInfoComponent = () => {
   const dispatch = useDispatch();
@@ -46,26 +47,33 @@ const AdminGetGeneralInfoComponent = () => {
               <div key={post._id} className="post-wrapper">
                 <h3>{post.heading}</h3>
                 <p>{post.post}</p>
-                <p>POST BY: {post.name}</p>
+                <p className="small-text">BY: {post.name}</p>
                 <div className="dates-wrapper">
                   <p> Created: {moment(post.createdAt).fromNow()}</p>
                   <p> Updated: {moment(post.updatedAt).fromNow()}</p>
                 </div>
 
-                <div className="button-wrapper">
-                  <ModalComponent
-                    className="create-btn"
-                    openButtonTitle="Edit Post"
-                    closeButtonTitle="Close modal"
-                    variant="warning"
-                    props={
-                      <>
-                        <AdminEditGeneralInfoComponent postId={post._id} />
-                      </>
-                    }
-                  />
-                  <button className="button">Delete</button>
-                </div>
+                {userAdmin?.isAdmin ? (
+                  <>
+                    <div className="button-wrapper">
+                      <ModalComponent
+                        className="create-btn"
+                        openButtonTitle="Edit Post"
+                        closeButtonTitle="Close modal"
+                        variant="warning"
+                        props={
+                          <>
+                            <AdminEditGeneralInfoComponent postId={post._id} />
+                          </>
+                        }
+                      />
+                      <AdminDeleteGeneralInfoComponent
+                        postId={post._id}
+                        postTitle={post.heading}
+                      />
+                    </div>
+                  </>
+                ) : null}
               </div>
             ))
           ) : null}
