@@ -82,26 +82,29 @@ const AdminView = () => {
         <SpinnerComponent />
       ) : (
         <>
-          <ButtonComponent
-            type="button"
-            text={
-              <NavLink
-                className={(navData) => (navData.isActive ? 'active' : '')}
-                to="/admin-profile"
-              >
-                Return to your admin page
-              </NavLink>
-            }
-            variant="light"
-            disabled={false}
-          />
-          <SearchComponent
-            placeholder="search username"
-            value={keyword}
-            onChange={handleSearch}
-            quantity={searchedUsers?.length}
-            total={users?.length}
-          />
+          <div className="admin-get-player__top-wrapper">
+            <SearchComponent
+              placeholder="search username"
+              value={keyword}
+              onChange={handleSearch}
+              quantity={searchedUsers?.length}
+              total={users?.length}
+            />
+            <ButtonComponent
+              type="button"
+              text={
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/admin-profile"
+                >
+                  Go Back
+                </NavLink>
+              }
+              variant="info"
+              disabled={false}
+            />
+          </div>
+
           <div className="admin-wrapper">
             {searchedUsers?.map((user) => (
               <div key={user._id}>
