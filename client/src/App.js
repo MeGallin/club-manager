@@ -13,6 +13,7 @@ import UserAdminView from './views/UserAdminView/UserAdminView';
 import AdminView from './views/AdminView/AdminView';
 import AdminProfileView from './views/AdminView/AdminProfileView';
 import AdminPlayersView from './views/AdminView/AdminPlayersView';
+import AdminGeneralInformationView from './views/AdminView/AdminGeneralInformationView';
 
 const App = () => {
   return (
@@ -30,6 +31,11 @@ const App = () => {
             <Route path="/user-admin" element={<UserAdminView />} exact />
             <Route path="/admin-profile" element={<AdminProfileView />} exact />
             <Route path="/admin-players" element={<AdminPlayersView />} exact />
+            <Route
+              path="/admin-general-information"
+              element={<AdminGeneralInformationView />}
+              exact
+            />
             <Route path="/admin" element={<AdminView />} exact />
             <Route path="*" element={<ErrorView />} exact />
           </Routes>
