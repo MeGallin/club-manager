@@ -13,9 +13,9 @@ import AdminDeletePlayer from '../AdminDeletePlayer/AdminDeletePlayer';
 import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 import ModalComponent from '../../ModalComponent/ModalComponent';
 import SearchComponent from '../../SearchComponent/SearchComponent';
+import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreatePlayer from '../AdminCreatePlayer/AdminCreatePlayer';
-import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 
 const AdminGetPlayers = () => {
   const [statusChecked, setStatusChecked] = useState(false);
@@ -65,6 +65,17 @@ const AdminGetPlayers = () => {
           {success && searchedPlayers ? (
             <>
               <div className="admin-get-player__top-wrapper">
+                <ModalComponent
+                  className="create-btn"
+                  openButtonTitle="Create Player"
+                  closeButtonTitle="Close modal"
+                  variant="success"
+                  props={
+                    <>
+                      <AdminCreatePlayer />
+                    </>
+                  }
+                />
                 <SearchComponent
                   placeholder={statusChecked ? 'SEARCH STATUS' : 'SEARCH NAME'}
                   value={keyword}
@@ -98,17 +109,7 @@ const AdminGetPlayers = () => {
                   disabled={false}
                 />
               </div>
-              <ModalComponent
-                className="create-btn"
-                openButtonTitle="Create Player"
-                closeButtonTitle="Close modal"
-                variant="success"
-                props={
-                  <>
-                    <AdminCreatePlayer />
-                  </>
-                }
-              />
+
               <div className="wrapper">
                 {searchedPlayers.map((player) => (
                   <div key={player._id} className="inner-content-wrapper">
@@ -178,10 +179,7 @@ const AdminGetPlayers = () => {
                         </span>
                       </p>
                       <p>{player.notes}</p>
-                      <div className="dates-wrapper">
-                        <p> Created: {moment(player.createdAt).fromNow()}</p>
-                        <p> Updated: {moment(player.updatedAt).fromNow()}</p>
-                      </div>
+
                       <div className="button-wrapper">
                         <ModalComponent
                           className="create-btn"
@@ -192,6 +190,10 @@ const AdminGetPlayers = () => {
                         />
 
                         <AdminDeletePlayer playerId={player._id} />
+                      </div>
+                      <div className="dates-wrapper">
+                        <p> Created: {moment(player.createdAt).fromNow()}</p>
+                        <p> Updated: {moment(player.updatedAt).fromNow()}</p>
                       </div>
                     </fieldset>
                   </div>

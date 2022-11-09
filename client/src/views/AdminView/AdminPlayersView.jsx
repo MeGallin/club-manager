@@ -1,4 +1,3 @@
-import './AdminPlayersView.scss';
 import AdminGetPlayers from '../../components/Player/AdminGetPlayers/AdminGetPlayers';
 
 const AdminPlayersView = () => {

@@ -1,7 +1,8 @@
 @import '../../../index.scss';
 .admin-get-player__top-wrapper {
-  border: 1px solid $border-colour-dark;
-  background-color: rgba(115, 115, 115, 0.1);
+  padding: 0.2em;
+  margin-bottom: 1em;
+  border: 2px solid $border-colour-light;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

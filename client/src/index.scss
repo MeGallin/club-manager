@@ -3,7 +3,7 @@
 
 /* variable setup */
 $main-bg-colour: rgba(245, 245, 245, 1);
-$main-font-colour: rgba(12, 12, 12, 1);
+$main-font-colour: rgba(9, 9, 9, 1);
 $secondary-bg-colour: hsl(23, 100%, 50%);
 $light-orange: rgba(236, 127, 55, 1);
 $burnt-orange: rgba(190, 79, 12, 1);
@@ -15,8 +15,8 @@ $rating-colour: orange;
 $border-colour: rgba(200, 200, 200, 0.5);
 $border-colour-dark: hsla(0, 1%, 33%, 0.2);
 $border-colour-light: hsla(0, 0%, 78%, 0.2);
-$fieldSet-bg-colour: hsla(0, 0%, 45%, 0.1);
-$header-height: 22px;
+$fieldSet-bg-colour: hsla(0, 0%, 45%, 0.3);
+$header-height: 42px;
 $footer-height: 62px;
 $image-shadow-colour: rgba(12, 12, 12, 0.4);
 $notice-message-size: 1.2em;
@@ -88,7 +88,7 @@ a:link {
   text-decoration: none;
 }
 a {
-  color: $main-font-colour;
+  color: $main-bg-colour;
 }
 
 /* Make images easier to work with */

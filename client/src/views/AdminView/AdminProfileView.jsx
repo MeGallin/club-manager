@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import AdminProfileComponent from '../../components/Admin/AdminComponent';
-import './AdminProfileView.scss';
 
 const AdminProfileView = () => {
   const navigate = useNavigate();
@@ -19,6 +18,7 @@ const AdminProfileView = () => {
     }
     return () => (ignore = true);
   }, [navigate, userInfo, userAdmin]);
+
   return (
     <>
       <AdminProfileComponent />

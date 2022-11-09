@@ -12,6 +12,7 @@ import ButtonComponent from '../Button/ButtonComponent';
 import AdminProfileComponent from '../Profile/AdminProfileComponent/AdminProfileComponent';
 
 import moment from 'moment';
+import SpinnerComponent from '../Spinner/SpinnerComponent';
 
 const AdminComponent = () => {
   const dispatch = useDispatch();
@@ -20,19 +21,21 @@ const AdminComponent = () => {
   );
   const [showUserAdminInputs, setShowUserAdminInputs] = useState(true);
 
+  const userAdminDetails = useSelector((state) => state.userAdminDetails);
+  const { error, userAdmin } = userAdminDetails;
+
   useEffect(() => {
     let ignore = false;
     //Dispatch your get action
     if (!ignore) {
-      dispatch(userAdminDetailsAction());
+      if (!userAdmin) {
+        dispatch(userAdminDetailsAction());
+      }
     }
     return () => {
       ignore = true;
     };
-  }, [dispatch]);
-
-  const userAdminDetails = useSelector((state) => state.userAdminDetails);
-  const { success, error, userAdmin } = userAdminDetails;
+  }, [dispatch, userAdmin]);
 
   return (
     <>
@@ -48,139 +51,145 @@ const AdminComponent = () => {
 
       <div>
         {userAdmin?.isAdmin ? (
-          <div className="admin-nav-buttons-wrapper">
-            <ButtonComponent
-              type="button"
-              text={
-                <NavLink
-                  className={(navData) => (navData.isActive ? 'active' : '')}
-                  to="/admin"
-                >
-                  Manage Users
-                </NavLink>
-              }
-              variant="info"
-              disabled={false}
-            />
-            <ButtonComponent
-              type="button"
-              text={
-                <NavLink
-                  className={(navData) => (navData.isActive ? 'active' : '')}
-                  to="/admin-players"
-                >
-                  Manage Players
-                </NavLink>
-              }
-              variant="info"
-              disabled={false}
-            />
-            <ButtonComponent
-              type="button"
-              text={
-                <NavLink
-                  className={(navData) => (navData.isActive ? 'active' : '')}
-                  to="/admin-general-information"
-                >
-                  Manage General Information
-                </NavLink>
-              }
-              variant="info"
-              disabled={false}
-            />
-          </div>
+          <fieldset className="fieldSet">
+            <div className="admin-nav-buttons-wrapper">
+              <ButtonComponent
+                type="button"
+                text={
+                  <NavLink
+                    className={(navData) => (navData.isActive ? 'active' : '')}
+                    to="/admin"
+                  >
+                    Manage Users
+                  </NavLink>
+                }
+                variant="info"
+                disabled={false}
+              />
+              <ButtonComponent
+                type="button"
+                text={
+                  <NavLink
+                    className={(navData) => (navData.isActive ? 'active' : '')}
+                    to="/admin-players"
+                  >
+                    Manage Players
+                  </NavLink>
+                }
+                variant="info"
+                disabled={false}
+              />
+              <ButtonComponent
+                type="button"
+                text={
+                  <NavLink
+                    className={(navData) => (navData.isActive ? 'active' : '')}
+                    to="/admin-general-information"
+                  >
+                    Manage General Information
+                  </NavLink>
+                }
+                variant="info"
+                disabled={false}
+              />
+            </div>
+          </fieldset>
         ) : null}
       </div>
 
       <div className="wrapper">
-        <div className="inner-content-wrapper ">
+        <div className="inner-content-wrapper">
           <fieldset className="fieldSet">
             <ButtonComponent
               type="button"
               text={
                 showUserAdminInputs
-                  ? 'EDIT USER DETAILS'
+                  ? 'EDIT YOUR DETAILS'
                   : 'BACK TO USER DETAILS'
               }
-              variant="dark"
+              variant="warning"
               disabled={false}
               onClick={() => setShowUserAdminInputs((prev) => !prev)}
             />
           </fieldset>
 
-          {success && userAdmin?.isConfirmed ? (
+          {userAdmin?.isConfirmed ? (
             showUserAdminInputs ? (
-              <fieldset className="fieldSet">
-                <legend>USER DETAILS</legend>
-                <div>
-                  <img
-                    src="../assets/male.png"
-                    className="user-profile-image"
-                    alt={userAdmin?.name}
-                  />
+              <>
+                <fieldset className="fieldSet">
+                  <legend>{userAdmin?.username}</legend>
+                  <div>
+                    <img
+                      src="../assets/male.png"
+                      className="user-profile-image"
+                      alt={userAdmin?.name}
+                    />
 
-                  <p>USER NAME : {userAdmin?.username}</p>
-                  <p>EMAIL : {userAdmin?.email}</p>
-                  <p>
-                    ADMIN :{' '}
-                    {userAdmin?.isAdmin === false ? (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    ) : (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    )}
-                  </p>
-                  <p>
-                    COACH :{' '}
-                    {userAdmin?.isCoach === false ? (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    ) : (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    )}
-                  </p>
-                  <p>
-                    PLAYER :{' '}
-                    {userAdmin?.isPlayer === false ? (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    ) : (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    )}
-                  </p>
-                  <p>
-                    PARENT :{' '}
-                    {userAdmin?.isParent === false ? (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    ) : (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    )}
-                  </p>
-                  <p>
-                    CONFIRMED :{' '}
-                    {userAdmin?.isConfirmed === false ? (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    ) : (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    )}
-                  </p>
-                  <p>
-                    SUSPENDED :{' '}
-                    {userAdmin?.isSuspended === false ? (
-                      <FaThumbsDown className="ra-thumbs-down" />
-                    ) : (
-                      <FaThumbsUp className="ra-thumbs-up" />
-                    )}
-                  </p>
-                </div>
-                <div className="dates-wrapper">
-                  <p>Created {moment(userAdmin?.createdAt).fromNow()}</p>
-                  <p>Updated {moment(userAdmin?.updatedAt).fromNow()}</p>
-                </div>
-              </fieldset>
+                    <p>USER NAME : {userAdmin?.username}</p>
+                    <p>EMAIL : {userAdmin?.email}</p>
+                    <p>
+                      ADMIN :{' '}
+                      {userAdmin?.isAdmin === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                    <p>
+                      COACH :{' '}
+                      {userAdmin?.isCoach === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                    <p>
+                      PLAYER :{' '}
+                      {userAdmin?.isPlayer === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                    <p>
+                      PARENT :{' '}
+                      {userAdmin?.isParent === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                    <p>
+                      CONFIRMED :{' '}
+                      {userAdmin?.isConfirmed === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                    <p>
+                      SUSPENDED :{' '}
+                      {userAdmin?.isSuspended === false ? (
+                        <FaThumbsDown className="ra-thumbs-down" />
+                      ) : (
+                        <FaThumbsUp className="ra-thumbs-up" />
+                      )}
+                    </p>
+                  </div>
+                  <div className="dates-wrapper">
+                    <p>Created {moment(userAdmin?.createdAt).fromNow()}</p>
+                    <p>Updated {moment(userAdmin?.updatedAt).fromNow()}</p>
+                  </div>
+                </fieldset>
+              </>
             ) : (
               <>
                 <UserAdminEditComponent />
               </>
             )
-          ) : null}
+          ) : (
+            <SpinnerComponent />
+          )}
         </div>
 
         <AdminProfileComponent />
