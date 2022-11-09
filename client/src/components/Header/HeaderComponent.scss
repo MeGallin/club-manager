@@ -6,6 +6,8 @@ header {
   text-transform: uppercase;
   a {
     color: $main-font-colour;
+    padding: 0.1em 0;
+    border-radius: 4px;
   }
 
   nav {

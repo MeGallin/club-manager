@@ -56,6 +56,19 @@ const AdminGetGeneralInfoComponent = () => {
     <div>
       {error ? <ErrorComponent error={error} /> : null}
       <div className="admin-get-player__top-wrapper">
+        {userAdmin?.isAdmin ? (
+          <ModalComponent
+            className="create-btn"
+            openButtonTitle="Create A NEW POST"
+            closeButtonTitle="Close modal"
+            variant="success"
+            props={
+              <>
+                <AdminCreateGeneralInfoComponent />
+              </>
+            }
+          />
+        ) : null}
         <SearchComponent
           placeholder="SEARCH POST"
           value={keyword}
@@ -80,19 +93,6 @@ const AdminGetGeneralInfoComponent = () => {
           />
         ) : null}
       </div>
-      {userAdmin?.isAdmin ? (
-        <ModalComponent
-          className="create-btn"
-          openButtonTitle="Create A NEW POST"
-          closeButtonTitle="Close modal"
-          variant="success"
-          props={
-            <>
-              <AdminCreateGeneralInfoComponent />
-            </>
-          }
-        />
-      ) : null}
 
       <h3>Anorthosis Famagusta Academy - Larnaca Division</h3>
       {loading ? (
@@ -109,17 +109,12 @@ const AdminGetGeneralInfoComponent = () => {
                       keyword={keyword}
                     />
                   </legend>
-
                   <SearchHighlightComponent
                     value={post.post}
                     keyword={keyword}
                   />
-
                   <p className="small-text">BY: {post.name}</p>
-                  <div className="dates-wrapper">
-                    <p> Created: {moment(post.createdAt).fromNow()}</p>
-                    <p> Updated: {moment(post.updatedAt).fromNow()}</p>
-                  </div>
+
                   {userAdmin?.isAdmin ? (
                     <div className="button-wrapper">
                       <ModalComponent
@@ -139,6 +134,10 @@ const AdminGetGeneralInfoComponent = () => {
                       />
                     </div>
                   ) : null}
+                  <div className="dates-wrapper">
+                    <p> Created: {moment(post.createdAt).fromNow()}</p>
+                    <p> Updated: {moment(post.updatedAt).fromNow()}</p>
+                  </div>
                 </fieldset>
               </div>
             </div>

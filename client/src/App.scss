@@ -10,7 +10,18 @@ $grid__bp-md: 1280;
     max-width: 100%;
   }
 }
+
 .content-wrapper {
   height: calc(100vh - #{$header-height + $footer-height});
   overflow-y: auto;
+  background-color: $main-font-colour;
+  color: $main-bg-colour;
+  padding: 0.2em;
+}
+
+@media (min-width: 845px) {
+  .content-wrapper {
+    margin: 0 auto;
+    max-width: 76%;
+  }
 }

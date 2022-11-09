@@ -2,8 +2,6 @@
 .post-wrapper {
   padding: 0.4em;
   &:nth-child(odd) {
-    border-bottom: 1px solid #ccc;
     margin-bottom: 0.5em;
-    background-color: white;
   }
 }
