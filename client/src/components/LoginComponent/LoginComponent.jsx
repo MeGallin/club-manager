@@ -86,7 +86,7 @@ const LoginComponent = () => {
 
               <ButtonComponent
                 type="submit"
-                text="submit"
+                text="login"
                 variant="primary"
                 disabled={!emailRegEx.test(email) || password.length <= 5}
               />

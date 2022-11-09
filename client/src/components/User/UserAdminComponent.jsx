@@ -7,9 +7,9 @@ import { userAdminDetailsAction } from '../../store/actions/userActions';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import UserAdminEditComponent from './UserAdminEditComponent';
 import ButtonComponent from '../Button/ButtonComponent';
+import AdminGetGeneralInfoComponent from '../GeneralInfoComponent/AdminGetGeneralInfoComponent/AdminGetGeneralInfoComponent';
 
 import moment from 'moment';
-import GeneralInfoComponent from '../GeneralInfoComponent/GeneralInfoComponent';
 
 const UserAdminComponent = () => {
   const dispatch = useDispatch();
@@ -136,7 +136,7 @@ const UserAdminComponent = () => {
           ) : null}
         </div>
         <div>
-          <GeneralInfoComponent />
+          <AdminGetGeneralInfoComponent />
         </div>
       </div>
 

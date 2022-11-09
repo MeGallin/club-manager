@@ -21,6 +21,7 @@ import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 import moment from 'moment';
 import SearchComponent from '../../components/SearchComponent/SearchComponent';
+import SearchHighlightComponent from '../../components/SearchHighlightComponent/SearchHighlightComponent';
 
 const AdminView = () => {
   const dispatch = useDispatch();
@@ -82,31 +83,39 @@ const AdminView = () => {
         <SpinnerComponent />
       ) : (
         <>
-          <ButtonComponent
-            type="button"
-            text={
-              <NavLink
-                className={(navData) => (navData.isActive ? 'active' : '')}
-                to="/admin-profile"
-              >
-                Return to your admin page
-              </NavLink>
-            }
-            variant="light"
-            disabled={false}
-          />
-          <SearchComponent
-            placeholder="search username"
-            value={keyword}
-            onChange={handleSearch}
-            quantity={searchedUsers?.length}
-            total={users?.length}
-          />
+          <div className="admin-get-player__top-wrapper">
+            <SearchComponent
+              placeholder="search username"
+              value={keyword}
+              onChange={handleSearch}
+              quantity={searchedUsers?.length}
+              total={users?.length}
+            />
+            <ButtonComponent
+              type="button"
+              text={
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/admin-profile"
+                >
+                  Go Back
+                </NavLink>
+              }
+              variant="info"
+              disabled={false}
+            />
+          </div>
+
           <div className="admin-wrapper">
             {searchedUsers?.map((user) => (
               <div key={user._id}>
                 <fieldset className="fieldSet">
-                  <legend>{user.username}</legend>
+                  <legend>
+                    <SearchHighlightComponent
+                      value={user.username}
+                      keyword={keyword}
+                    />
+                  </legend>
 
                   <div className="toggle-wrapper">
                     <div>EMAIL</div>

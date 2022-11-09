@@ -15,6 +15,7 @@ import ModalComponent from '../../ModalComponent/ModalComponent';
 import SearchComponent from '../../SearchComponent/SearchComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreatePlayer from '../AdminCreatePlayer/AdminCreatePlayer';
+import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 
 const AdminGetPlayers = () => {
   const [statusChecked, setStatusChecked] = useState(false);
@@ -63,7 +64,7 @@ const AdminGetPlayers = () => {
         <>
           {success && searchedPlayers ? (
             <>
-              <div className="admin-get-plater__top-wrapper">
+              <div className="admin-get-player__top-wrapper">
                 <SearchComponent
                   placeholder={statusChecked ? 'SEARCH STATUS' : 'SEARCH NAME'}
                   value={keyword}
@@ -99,19 +100,25 @@ const AdminGetPlayers = () => {
               </div>
               <ModalComponent
                 className="create-btn"
-                openButtonTitle="Create Profile"
+                openButtonTitle="Create Player"
                 closeButtonTitle="Close modal"
+                variant="success"
                 props={
                   <>
                     <AdminCreatePlayer />
                   </>
                 }
               />
-              <div className="inner-content-wrapper">
+              <div className="wrapper">
                 {searchedPlayers.map((player) => (
-                  <div key={player._id} className="inner-inner-wrapper">
+                  <div key={player._id} className="inner-content-wrapper">
                     <fieldset className="fieldSet">
-                      <legend>{player.name}</legend>
+                      <legend>
+                        <SearchHighlightComponent
+                          value={player.name}
+                          keyword={keyword}
+                        />
+                      </legend>
 
                       <p>
                         Name on shirt: {player.nameOnShirt} - Shirt number:{' '}

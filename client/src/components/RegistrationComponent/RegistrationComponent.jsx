@@ -103,7 +103,7 @@ const RegistrationComponent = () => {
 
               <ButtonComponent
                 type="submit"
-                text="submit"
+                text="Register"
                 variant="primary"
                 disabled={
                   !emailRegEx.test(email) ||

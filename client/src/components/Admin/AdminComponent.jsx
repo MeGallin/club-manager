@@ -12,9 +12,6 @@ import ButtonComponent from '../Button/ButtonComponent';
 import AdminProfileComponent from '../Profile/AdminProfileComponent/AdminProfileComponent';
 
 import moment from 'moment';
-import ModalComponent from '../ModalComponent/ModalComponent';
-import GeneralInfoComponent from '../GeneralInfoComponent/GeneralInfoComponent';
-import AdminCreateGeneralInfoComponent from '../GeneralInfoComponent/AdminCreateGeneralInfoComponent/AdminCreateGeneralInfoComponent';
 
 const AdminComponent = () => {
   const dispatch = useDispatch();
@@ -73,6 +70,19 @@ const AdminComponent = () => {
                   to="/admin-players"
                 >
                   Manage Players
+                </NavLink>
+              }
+              variant="info"
+              disabled={false}
+            />
+            <ButtonComponent
+              type="button"
+              text={
+                <NavLink
+                  className={(navData) => (navData.isActive ? 'active' : '')}
+                  to="/admin-general-information"
+                >
+                  Manage General Information
                 </NavLink>
               }
               variant="info"
@@ -174,22 +184,6 @@ const AdminComponent = () => {
         </div>
 
         <AdminProfileComponent />
-        <div>
-          <fieldset className="fieldSet">
-            <ModalComponent
-              className="create-btn"
-              openButtonTitle="Create Profile"
-              closeButtonTitle="Close modal"
-              props={
-                <>
-                  <AdminCreateGeneralInfoComponent />
-                </>
-              }
-            />
-          </fieldset>
-
-          <GeneralInfoComponent />
-        </div>
       </div>
 
       {userAdmin === undefined ? (
