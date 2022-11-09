@@ -21,6 +21,7 @@ import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 import moment from 'moment';
 import SearchComponent from '../../components/SearchComponent/SearchComponent';
+import SearchHighlightComponent from '../../components/SearchHighlightComponent/SearchHighlightComponent';
 
 const AdminView = () => {
   const dispatch = useDispatch();
@@ -109,7 +110,12 @@ const AdminView = () => {
             {searchedUsers?.map((user) => (
               <div key={user._id}>
                 <fieldset className="fieldSet">
-                  <legend>{user.username}</legend>
+                  <legend>
+                    <SearchHighlightComponent
+                      value={user.username}
+                      keyword={keyword}
+                    />
+                  </legend>
 
                   <div className="toggle-wrapper">
                     <div>EMAIL</div>

@@ -15,6 +15,7 @@ import ModalComponent from '../../ModalComponent/ModalComponent';
 import SearchComponent from '../../SearchComponent/SearchComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreatePlayer from '../AdminCreatePlayer/AdminCreatePlayer';
+import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 
 const AdminGetPlayers = () => {
   const [statusChecked, setStatusChecked] = useState(false);
@@ -112,7 +113,12 @@ const AdminGetPlayers = () => {
                 {searchedPlayers.map((player) => (
                   <div key={player._id} className="inner-content-wrapper">
                     <fieldset className="fieldSet">
-                      <legend>{player.name}</legend>
+                      <legend>
+                        <SearchHighlightComponent
+                          value={player.name}
+                          keyword={keyword}
+                        />
+                      </legend>
 
                       <p>
                         Name on shirt: {player.nameOnShirt} - Shirt number:{' '}

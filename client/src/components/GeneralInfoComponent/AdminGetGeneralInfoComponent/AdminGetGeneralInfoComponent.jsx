@@ -13,6 +13,7 @@ import AdminDeleteGeneralInfoComponent from '../AdminDeleteGeneralInfoComponent/
 import SearchComponent from '../../SearchComponent/SearchComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreateGeneralInfoComponent from '../AdminCreateGeneralInfoComponent/AdminCreateGeneralInfoComponent';
+import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 
 const AdminGetGeneralInfoComponent = () => {
   const dispatch = useDispatch();
@@ -102,8 +103,18 @@ const AdminGetGeneralInfoComponent = () => {
             <div key={post._id} className="inner-content-wrapper">
               <div className="post-wrapper">
                 <fieldset className="fieldSet">
-                  <legend>{post.heading}</legend>
-                  <p>{post.post}</p>
+                  <legend>
+                    <SearchHighlightComponent
+                      value={post.heading}
+                      keyword={keyword}
+                    />
+                  </legend>
+
+                  <SearchHighlightComponent
+                    value={post.post}
+                    keyword={keyword}
+                  />
+
                   <p className="small-text">BY: {post.name}</p>
                   <div className="dates-wrapper">
                     <p> Created: {moment(post.createdAt).fromNow()}</p>
