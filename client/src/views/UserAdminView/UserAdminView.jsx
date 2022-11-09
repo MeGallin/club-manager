@@ -20,11 +20,7 @@ const UserAdminView = () => {
     return () => (ignore = true);
   }, [navigate, userInfo, dispatch]);
 
-  return (
-    <div className="inner-content-wrapper">
-      <UserAdminComponent />
-    </div>
-  );
+  return <UserAdminComponent />;
 };
 
 export default UserAdminView;

@@ -8,8 +8,8 @@ const SearchHighlightComponent = ({ value, keyword }) => {
         {splitWord.toLowerCase() === keyword.toLowerCase() ? (
           <b
             style={{
-              backgroundColor: 'rgba(51,51,51,0.2)',
-              color: 'rgba(12,12,12,1)',
+              backgroundColor: 'rgba(245,245,245,1)',
+              color: 'rgba(51,51,51,1)',
               paddingLeft: keyword ? '6px' : '0',
             }}
           >

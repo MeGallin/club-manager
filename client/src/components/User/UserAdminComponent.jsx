@@ -52,10 +52,10 @@ const UserAdminComponent = () => {
               type="button"
               text={
                 showUserAdminInputs
-                  ? 'EDIT USER DETAILS'
+                  ? 'EDIT YOUR DETAILS'
                   : 'BACK TO USER DETAILS'
               }
-              variant="dark"
+              variant="warning"
               disabled={false}
               onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
             />
@@ -65,7 +65,7 @@ const UserAdminComponent = () => {
             showUserAdminInputs ? (
               <div>
                 <fieldset className="fieldSet">
-                  <legend>USER DETAILS</legend>
+                  <legend>{userAdmin?.username}</legend>
                   <img
                     src="../assets/male.png"
                     className="user-profile-image"
