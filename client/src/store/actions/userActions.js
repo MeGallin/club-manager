@@ -34,7 +34,11 @@ export const userRegistrationAction = (formData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post('/api/auth/register', formData, config);
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_END_POINT}/api/auth/register`,
+      formData,
+      config,
+    );
 
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
   } catch (error) {
@@ -62,7 +66,7 @@ export const userLoginAction = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      'api/auth/login',
+      `${process.env.REACT_APP_END_POINT}/api/auth/login`,
       { email: email, password: password },
       config,
     );
@@ -101,7 +105,7 @@ export const userForgotEmailAction = (email) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      'api/auth/forgot-password',
+      `${process.env.REACT_APP_END_POINT}/api/auth/forgot-password`,
       { email: email },
       config,
     );
@@ -132,7 +136,7 @@ export const userResetPasswordAction = (updatedInfo) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/auth/resetpassword/${updatedInfo.resetPasswordToken}`,
+      `${process.env.REACT_APP_END_POINT}/api/auth/resetpassword/${updatedInfo.resetPasswordToken}`,
       updatedInfo,
       config,
     );
@@ -168,7 +172,7 @@ export const userAdminDetailsAction = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `api/auth/private/user-admin-details`,
+      `${process.env.REACT_APP_END_POINT}/api/auth/private/user-admin-details`,
       config,
     );
 
@@ -204,7 +208,7 @@ export const userUpdateAdminDetailsAction =
       };
 
       const { data } = await axios.put(
-        `api/auth/user/${formData.id}`,
+        `${process.env.REACT_APP_END_POINT}/api/auth/user/${formData.id}`,
         formData,
         config,
       );
