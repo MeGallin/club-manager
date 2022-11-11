@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
 const sendEmail = async (options) => {
   let transporter = nodemailer.createTransport({
     host: process.env.MAILER_HOST,
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    port: 465, //Default port number 587
+    secure: true, // true for 465, false for other ports
     auth: {
       user: process.env.MAILER_USER,
       pass: process.env.MAILER_PW,
