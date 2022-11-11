@@ -30,7 +30,10 @@ export const adminGetGeneralInfoAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`api/admin/general-info`, config);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_END_POINT}/api/admin/general-info`,
+      config,
+    );
     dispatch({ type: ADMIN_GET_GENERAL_INFO_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -61,7 +64,7 @@ export const adminCreateGeneralInfoAction =
       };
 
       const { data } = await axios.post(
-        `api/admin/general-info-create`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/general-info-create`,
         formData,
         config,
       );
@@ -96,7 +99,7 @@ export const adminEditGeneralInfoAction =
       };
 
       const { data } = await axios.put(
-        `api/admin/general-info-edit/${formData.id}`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/general-info-edit/${formData.id}`,
         formData,
         config,
       );
@@ -131,7 +134,7 @@ export const adminDeleteGeneralInfoAction =
       };
 
       const { data } = await axios.delete(
-        `api/admin/general-info-delete/${postId}`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/general-info-delete/${postId}`,
         config,
       );
       dispatch({ type: ADMIN_DELETE_GENERAL_INFO_SUCCESS, payload: data });
