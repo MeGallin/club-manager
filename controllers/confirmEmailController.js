@@ -20,7 +20,7 @@ exports.confirmEmail = async (req, res) => {
     user.isConfirmed = true;
     await user.save();
     if (process.env.NODE_ENV === 'production') {
-      return res.redirect('http://www.yourcorporatememory.com/');
+      return res.redirect('http://clubmanager.livenotice.co.uk');
     } else {
       return res
         .status(200)
