@@ -44,7 +44,10 @@ export const adminUsersDetailsAction = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`api/admin/users`, config);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_END_POINT}/api/admin/users`,
+      config,
+    );
     dispatch({ type: ADMIN_GET_ALL_USERS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -74,7 +77,7 @@ export const adminIsAdminAction =
       };
 
       const { data } = await axios.put(
-        `api/admin/user-is-admin/${userId}`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-admin/${userId}`,
         { isAdmin },
         config,
       );
@@ -108,7 +111,7 @@ export const adminIsSuspendedAction =
       };
 
       const { data } = await axios.put(
-        `api/admin/user-is-suspended/${userId}`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-suspended/${userId}`,
         { isSuspended },
         config,
       );
@@ -143,7 +146,7 @@ export const adminIsCoachAction =
       };
 
       const { data } = await axios.put(
-        `api/admin/user-is-coach/${userId}`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-coach/${userId}`,
         { isCoach },
         config,
       );
@@ -178,7 +181,7 @@ export const adminIsParentAction =
       };
 
       const { data } = await axios.put(
-        `api/admin/user-is-parent/${userId}`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-parent/${userId}`,
         { isParent },
         config,
       );
@@ -213,7 +216,7 @@ export const adminIsPlayerAction =
       };
 
       const { data } = await axios.put(
-        `api/admin/user-is-player/${userId}`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-player/${userId}`,
         { isPlayer },
         config,
       );
@@ -230,7 +233,7 @@ export const adminIsPlayerAction =
     }
   };
 
-//POST: ADMIN create ADMI profile
+//POST: ADMIN create ADMIN profile
 export const adminCreateProfileAction =
   (formData) => async (dispatch, getState) => {
     try {
@@ -248,7 +251,7 @@ export const adminCreateProfileAction =
       };
 
       const { data } = await axios.post(
-        `api/admin/profile-create`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/profile-create`,
         formData,
         config,
       );
@@ -282,7 +285,10 @@ export const adminAllProfilesAction =
         },
       };
 
-      const { data } = await axios.get(`api/admin/profiles`, config);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_END_POINT}/api/admin/profiles`,
+        config,
+      );
       dispatch({ type: ADMIN_ALL_PROFILES_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
@@ -313,7 +319,7 @@ export const adminEditProfileAction =
       };
 
       const { data } = await axios.put(
-        `api/admin/profile-edit/${formData.id}`,
+        `${process.env.REACT_APP_END_POINT}/api/admin/profile-edit/${formData.id}`,
         formData,
         config,
       );
