@@ -19,7 +19,7 @@ exports.register = async (req, res, next) => {
     // const resetToken = user.getResetPasswordToken();
     const link = `${
       process.env.MAILER_LOCAL_URL
-    }api/confirm-email/${generateToken(user._id)}`;
+    }/api/confirm-email/${generateToken(user._id)}`;
 
     const message = `<h1>Hi ${username}</h1><p>You have successfully registered with Club Manager</p><p>Please click the link below to verify your email address.</p><h4>Please note, in order to get full functionality you must confirm your mail address with the link below.</h4></p><p><a href=${link} id='link'>Click here to verify</a></p><p>Thank you Your Corporate Memory management</p>`;
 
@@ -93,7 +93,7 @@ exports.forgotPassword = async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
 
     await user.save();
-    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}password-reset/${resetToken}`;
+    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}/password-reset/${resetToken}`;
 
     const message = `<h1>You have requested a password reset.</h1><p>Please click on the following link to reset your password.</p><p><a href=${resetUrl} id='link'>Click here to verify</a></p>`;
 
