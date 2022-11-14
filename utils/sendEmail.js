@@ -22,9 +22,8 @@ const sendEmail = async (options) => {
     html: options.html,
   };
 
-  console.log({ options });
-
   await transporter.sendMail(mailOptions, function (err, info) {
+    console.log(err, info);
     if (err) {
       console.log(err);
     } else {

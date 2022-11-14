@@ -14,12 +14,12 @@ exports.register = async (req, res, next) => {
       password,
     });
 
-    const link = `${
-      process.env.MAILER_LOCAL_URL
-    }api/confirm-email/${generateToken(user._id)}`;
-    const message = `<h1>Hi ${username}</h1><p>You have successfully registered with Club Manager</p><p>Please click the link below to verify your email address.</p><h4>Please note, in order to get full functionality you must confirm your mail address with the link below.</h4></p><p><a href=${link} id='link'>Click here to verify</a></p><p>Thank you Your Corporate Memory management</p>`;
-
     try {
+      const link = `${
+        process.env.MAILER_LOCAL_URL
+      }api/confirm-email/${generateToken(user._id)}`;
+      const message = `<h1>Hi ${username}</h1><p>You have successfully registered with Club Manager</p><p>Please click the link below to verify your email address.</p><h4>Please note, in order to get full functionality you must confirm your mail address with the link below.</h4></p><p><a href=${link} id='link'>Click here to verify</a></p><p>Thank you Your Corporate Memory management</p>`;
+
       // Send Email
       sendEmail({
         from: process.env.MAILER_FROM,
