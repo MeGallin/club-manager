@@ -88,13 +88,11 @@ exports.forgotPassword = async (req, res, next) => {
       return next(new ErrorResponse('Email could not be set', 404));
     }
 
-    const resetToken = user.getResetPasswordToken();
-
-    await user.save();
-    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}#/password-reset/${resetToken}`;
-    const message = `<h1>You have requested a password reset.</h1><p>Please click on the following link to reset your password.</p><p><a href=${resetUrl} id='link'>Click here to verify</a></p>`;
-
     try {
+      const resetToken = user.getResetPasswordToken();
+      await user.save();
+      const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}#/password-reset/${resetToken}`;
+      const message = `<h1>You have requested a password reset.</h1><p>Please click on the following link to reset your password.</p><p><a href=${resetUrl} id='link'>Click here to verify</a></p>`;
       // Send Email
       sendEmail({
         from: process.env.MAILER_FROM,
