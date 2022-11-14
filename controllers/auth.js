@@ -91,7 +91,7 @@ exports.forgotPassword = async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
 
     await user.save();
-    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}password-reset/${resetToken}`;
+    const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}#/password-reset/${resetToken}`;
     const message = `<h1>You have requested a password reset.</h1><p>Please click on the following link to reset your password.</p><p><a href=${resetUrl} id='link'>Click here to verify</a></p>`;
 
     try {
