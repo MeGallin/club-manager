@@ -1,13 +1,6 @@
 const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
-  console.log(
-    'process',
-    process.env.MAILER_HOST,
-    process.env.MAILER_USER,
-    process.env.MAILER_PW,
-    process.env.MAILER_BCC,
-  );
   let transporter = nodemailer.createTransport({
     host: process.env.MAILER_HOST,
     port: 587, //Default port number 587
@@ -28,6 +21,8 @@ const sendEmail = async (options) => {
     subject: options.subject,
     html: options.html,
   };
+
+  console.log({ options });
 
   await transporter.sendMail(mailOptions, function (err, info) {
     if (err) {
