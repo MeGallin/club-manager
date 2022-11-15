@@ -80,7 +80,7 @@ exports.login = async (req, res, next) => {
 //Forgot PW
 exports.forgotPassword = async (req, res, next) => {
   const { email } = req.body;
-
+  console.log({ email });
   try {
     const user = await User.findOne({ email });
 
