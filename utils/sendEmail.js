@@ -21,7 +21,7 @@ const sendEmail = (options) => {
     subject: options.subject,
     html: options.html,
   };
-
+  console.log(options);
   transporter.sendMail(mailOptions, function (err, info) {
     console.log('fired');
     if (err) {
