@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = (options) => {
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
     host: process.env.MAILER_HOST,
     port: 587, //Default port number 587
     secure: false, // true for 465, false for other ports
