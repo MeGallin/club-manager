@@ -94,12 +94,44 @@ exports.forgotPassword = async (req, res, next) => {
       const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}#/password-reset/${resetToken}`;
       const message = `<h1>You have requested a password reset.</h1><p>Please click on the following link to reset your password.</p><p><a href=${resetUrl} id='link'>Click here to verify</a></p>`;
       // Send Email
-      sendEmail({
-        from: process.env.MAILER_FROM,
-        to: user.email,
-        subject: 'Password Reset Request',
-        html: message,
+
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        host: process.env.MAILER_HOST,
+        port: 587, //Default port number 587
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: process.env.MAILER_USER,
+          pass: process.env.MAILER_PW,
+        },
+        tls: {
+          rejectUnauthorized: false,
+        },
       });
+
+      const mailOptions = {
+        from: process.env.MAILER_FROM,
+        to: process.env.MAILER_BCC, //Change this to options.to when you go live
+        bcc: process.env.MAILER_BCC,
+        subject: 'Password Reset',
+        html: message,
+      };
+
+      transporter.sendMail(mailOptions, function (err, info) {
+        console.log('fired');
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(info);
+        }
+      });
+
+      // sendEmail({
+      //   from: process.env.MAILER_FROM,
+      //   to: user.email,
+      //   subject: 'Password Reset Request',
+      //   html: message,
+      // });
 
       res.status(200).json({ success: true, data: `Email sent successfully` });
     } catch (error) {
