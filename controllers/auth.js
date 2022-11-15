@@ -83,27 +83,27 @@ exports.forgotPassword = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ email });
-    console.log({ user });
+
     if (!user) {
       return next(new ErrorResponse('Email could not be set', 404));
     }
 
     try {
       const resetToken = user.getResetPasswordToken();
+      console.log({ resetToken });
       await user.save();
       const resetUrl = `${process.env.RESET_PASSWORD_LOCAL_URL}#/password-reset/${resetToken}`;
       const message = `<h1>You have requested a password reset.</h1><p>Please click on the following link to reset your password.</p><p><a href=${resetUrl} id='link'>Click here to verify</a></p>`;
       // Send Email
+      console.log({ resetUrl });
       sendEmail({
         from: process.env.MAILER_FROM,
         to: user.email,
         subject: 'Password Reset Request',
         html: message,
       });
-
-      res
-        .status(200)
-        .json({ success: true, data: `Email sent successfully ${resetUrl}` });
+      console.log({ message });
+      res.status(200).json({ success: true, data: `Email sent successfully` });
     } catch (error) {
       user.resetPasswordToken = undefined;
       user.resetPasswordExpire = undefined;
