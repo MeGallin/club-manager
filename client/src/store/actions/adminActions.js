@@ -45,7 +45,7 @@ export const adminUsersDetailsAction = () => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      `${process.env.REACT_APP_END_POINT}api/admin/users`,
+      `https://club-manager.onrender.com/api/admin/users`,
       config,
     );
     dispatch({ type: ADMIN_GET_ALL_USERS_SUCCESS, payload: data });

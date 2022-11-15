@@ -31,7 +31,7 @@ export const adminGetGeneralInfoAction = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_END_POINT}api/admin/general-info`,
+      `https://club-manager.onrender.com/api/admin/general-info`,
       config,
     );
     dispatch({ type: ADMIN_GET_GENERAL_INFO_SUCCESS, payload: data });
@@ -64,7 +64,7 @@ export const adminCreateGeneralInfoAction =
       };
 
       const { data } = await axios.post(
-        `${process.env.REACT_APP_END_POINT}api/admin/general-info-create`,
+        `https://club-manager.onrender.com/api/admin/general-info-create`,
         formData,
         config,
       );
@@ -99,7 +99,7 @@ export const adminEditGeneralInfoAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}api/admin/general-info-edit/${formData.id}`,
+        `https://club-manager.onrender.com/api/admin/general-info-edit/${formData.id}`,
         formData,
         config,
       );
@@ -134,7 +134,7 @@ export const adminDeleteGeneralInfoAction =
       };
 
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_END_POINT}api/admin/general-info-delete/${postId}`,
+        `https://club-manager.onrender.com/api/admin/general-info-delete/${postId}`,
         config,
       );
       dispatch({ type: ADMIN_DELETE_GENERAL_INFO_SUCCESS, payload: data });
