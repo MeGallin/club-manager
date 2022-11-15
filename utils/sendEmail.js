@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = (options) => {
   let transporter = nodemailer.createTransport({
+    service: 'gmail',
     host: process.env.MAILER_HOST,
     port: 587, //Default port number 587
     secure: false, // true for 465, false for other ports
@@ -21,8 +22,8 @@ const sendEmail = (options) => {
     subject: options.subject,
     html: options.html,
   };
-  console.log(mailOptions);
-  transporter.sendMail(mailOptions, (err, info) => {
+  console.log(options);
+  transporter.sendMail(mailOptions, function (err, info) {
     console.log('fired');
     if (err) {
       console.log(err);
