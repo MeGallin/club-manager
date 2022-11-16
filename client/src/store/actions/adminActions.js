@@ -45,7 +45,7 @@ export const adminUsersDetailsAction = () => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      `${process.env.REACT_APP_END_POINT}/api/admin/users`,
+      `https://club-manager.onrender.com/api/admin/users`,
       config,
     );
     dispatch({ type: ADMIN_GET_ALL_USERS_SUCCESS, payload: data });
@@ -77,7 +77,7 @@ export const adminIsAdminAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-admin/${userId}`,
+        `${process.env.REACT_APP_END_POINT}api/admin/user-is-admin/${userId}`,
         { isAdmin },
         config,
       );
@@ -111,7 +111,7 @@ export const adminIsSuspendedAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-suspended/${userId}`,
+        `${process.env.REACT_APP_END_POINT}api/admin/user-is-suspended/${userId}`,
         { isSuspended },
         config,
       );
@@ -146,7 +146,7 @@ export const adminIsCoachAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-coach/${userId}`,
+        `${process.env.REACT_APP_END_POINT}api/admin/user-is-coach/${userId}`,
         { isCoach },
         config,
       );
@@ -181,7 +181,7 @@ export const adminIsParentAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-parent/${userId}`,
+        `${process.env.REACT_APP_END_POINT}api/admin/user-is-parent/${userId}`,
         { isParent },
         config,
       );
@@ -216,7 +216,7 @@ export const adminIsPlayerAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}/api/admin/user-is-player/${userId}`,
+        `${process.env.REACT_APP_END_POINT}api/admin/user-is-player/${userId}`,
         { isPlayer },
         config,
       );
@@ -251,7 +251,7 @@ export const adminCreateProfileAction =
       };
 
       const { data } = await axios.post(
-        `${process.env.REACT_APP_END_POINT}/api/admin/profile-create`,
+        `${process.env.REACT_APP_END_POINT}api/admin/profile-create`,
         formData,
         config,
       );
@@ -286,7 +286,7 @@ export const adminAllProfilesAction =
       };
 
       const { data } = await axios.get(
-        `${process.env.REACT_APP_END_POINT}/api/admin/profiles`,
+        `${process.env.REACT_APP_END_POINT}api/admin/profiles`,
         config,
       );
       dispatch({ type: ADMIN_ALL_PROFILES_SUCCESS, payload: data });
@@ -319,7 +319,7 @@ export const adminEditProfileAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}/api/admin/profile-edit/${formData.id}`,
+        `${process.env.REACT_APP_END_POINT}api/admin/profile-edit/${formData.id}`,
         formData,
         config,
       );

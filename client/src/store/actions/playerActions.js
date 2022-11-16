@@ -31,7 +31,7 @@ export const adminGetPlayersAction = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_END_POINT}/api/admin/players`,
+      `https://club-manager.onrender.com/api/admin/players`,
       config,
     );
     dispatch({ type: ADMIN_GET_PLAYERS_SUCCESS, payload: data });
@@ -64,7 +64,7 @@ export const adminCreatePlayerAction =
       };
 
       const { data } = await axios.post(
-        `${process.env.REACT_APP_END_POINT}/api/admin/player-create`,
+        `https://club-manager.onrender.com/api/admin/player-create`,
         formData,
         config,
       );
@@ -99,7 +99,7 @@ export const adminEditPlayerAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}/api/admin/player-edit/${formData.id}`,
+        `https://club-manager.onrender.com/api/admin/player-edit/${formData.id}`,
         formData,
         config,
       );
@@ -134,7 +134,7 @@ export const adminDeletePlayerAction =
       };
 
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_END_POINT}/api/admin/player-delete/${playerId}`,
+        `https://club-manager.onrender.com/api/admin/player-delete/${playerId}`,
         config,
       );
       dispatch({ type: ADMIN_DELETE_PLAYER_SUCCESS, payload: data });

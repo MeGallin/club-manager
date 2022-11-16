@@ -23,7 +23,6 @@ const sendEmail = (options) => {
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
-    console.log('fired');
     if (err) {
       console.log(err);
     } else {

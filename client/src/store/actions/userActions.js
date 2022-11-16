@@ -35,7 +35,7 @@ export const userRegistrationAction = (formData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${process.env.REACT_APP_END_POINT}/api/auth/register`,
+      `https://club-manager.onrender.com/api/auth/register`,
       formData,
       config,
     );
@@ -66,7 +66,7 @@ export const userLoginAction = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${process.env.REACT_APP_END_POINT}/api/auth/login`,
+      `https://club-manager.onrender.com/api/auth/login`,
       { email: email, password: password },
       config,
     );
@@ -105,7 +105,7 @@ export const userForgotEmailAction = (email) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${process.env.REACT_APP_END_POINT}/api/auth/forgot-password`,
+      `https://club-manager.onrender.com/api/auth/forgot-password`,
       { email: email },
       config,
     );
@@ -136,7 +136,7 @@ export const userResetPasswordAction = (updatedInfo) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `${process.env.REACT_APP_END_POINT}/api/auth/resetpassword/${updatedInfo.resetPasswordToken}`,
+      `https://club-manager.onrender.com/api/auth/resetpassword/${updatedInfo.resetPasswordToken}`,
       updatedInfo,
       config,
     );
@@ -172,7 +172,7 @@ export const userAdminDetailsAction = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_END_POINT}/api/auth/private/user-admin-details`,
+      `https://club-manager.onrender.com/api/auth/private/user-admin-details`,
       config,
     );
 
@@ -208,7 +208,7 @@ export const userUpdateAdminDetailsAction =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_END_POINT}/api/auth/user/${formData.id}`,
+        `https://club-manager.onrender.com/api/auth/user/${formData.id}`,
         formData,
         config,
       );
