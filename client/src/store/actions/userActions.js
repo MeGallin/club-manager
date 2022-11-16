@@ -21,7 +21,7 @@ import {
   USER_UPDATE_USER_ADMIN_DETAILS_SUCCESS,
 } from '../constants/userConstants';
 
-// USER Registration
+// USER Registration Done
 export const userRegistrationAction = (formData) => async (dispatch) => {
   try {
     dispatch({
@@ -35,11 +35,10 @@ export const userRegistrationAction = (formData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://club-manager.onrender.com/api/auth/register`,
+      `${process.env.REACT_APP_END_POINT}api/auth/register`,
       formData,
       config,
     );
-
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -52,7 +51,7 @@ export const userRegistrationAction = (formData) => async (dispatch) => {
   }
 };
 
-//User Login
+//User Login Done
 export const userLoginAction = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -66,11 +65,10 @@ export const userLoginAction = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://club-manager.onrender.com/api/auth/login`,
+      `${process.env.REACT_APP_END_POINT}api/auth/login`,
       { email: email, password: password },
       config,
     );
-
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     dispatch(userAdminDetailsAction());
     localStorage.setItem('userInfo', JSON.stringify(data));
@@ -85,13 +83,13 @@ export const userLoginAction = (email, password) => async (dispatch) => {
   }
 };
 
-// USER USER_LOGOUT
+// USER USER_LOGOUT Done
 export const userLogoutAction = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT });
 };
 
-//User FORGOT EMAIL ACTION
+//User FORGOT EMAIL ACTION Done
 export const userForgotEmailAction = (email) => async (dispatch) => {
   try {
     dispatch({
@@ -105,11 +103,10 @@ export const userForgotEmailAction = (email) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://club-manager.onrender.com/api/auth/forgot-password`,
+      `${process.env.REACT_APP_END_POINT}api/auth/forgot-password`,
       { email: email },
       config,
     );
-
     dispatch({ type: USER_FORGOT_EMAIL_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -122,7 +119,7 @@ export const userForgotEmailAction = (email) => async (dispatch) => {
   }
 };
 
-//User Login
+//User Login Done
 export const userResetPasswordAction = (updatedInfo) => async (dispatch) => {
   try {
     dispatch({
@@ -136,11 +133,10 @@ export const userResetPasswordAction = (updatedInfo) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `https://club-manager.onrender.com/api/auth/resetpassword/${updatedInfo.resetPasswordToken}`,
+      `${process.env.REACT_APP_END_POINT}api/auth/resetpassword/${updatedInfo.resetPasswordToken}`,
       updatedInfo,
       config,
     );
-
     dispatch({ type: USER_RESET_PASSWORD_SUCCESS, payload: data });
     // localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -153,7 +149,7 @@ export const userResetPasswordAction = (updatedInfo) => async (dispatch) => {
     });
   }
 };
-//GET: USER Admin details
+//GET: USER Admin details Done
 export const userAdminDetailsAction = () => async (dispatch, getState) => {
   try {
     dispatch({
@@ -172,10 +168,9 @@ export const userAdminDetailsAction = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://club-manager.onrender.com/api/auth/private/user-admin-details`,
+      `${process.env.REACT_APP_END_POINT}api/auth/private/user-admin-details`,
       config,
     );
-
     dispatch({ type: USER_ADMIN_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -188,7 +183,7 @@ export const userAdminDetailsAction = () => async (dispatch, getState) => {
   }
 };
 
-//GET: USER UPDATE Admin details
+//GET: USER UPDATE Admin details Done
 export const userUpdateAdminDetailsAction =
   (formData) => async (dispatch, getState) => {
     try {
@@ -208,11 +203,10 @@ export const userUpdateAdminDetailsAction =
       };
 
       const { data } = await axios.put(
-        `https://club-manager.onrender.com/api/auth/user/${formData.id}`,
+        `${process.env.REACT_APP_END_POINT}api/auth/user/${formData.id}`,
         formData,
         config,
       );
-
       dispatch({ type: USER_UPDATE_USER_ADMIN_DETAILS_SUCCESS, payload: data });
       dispatch(userAdminDetailsAction());
     } catch (error) {
