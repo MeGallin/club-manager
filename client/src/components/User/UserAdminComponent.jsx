@@ -10,6 +10,7 @@ import ButtonComponent from '../Button/ButtonComponent';
 import AdminGetGeneralInfoComponent from '../GeneralInfoComponent/AdminGetGeneralInfoComponent/AdminGetGeneralInfoComponent';
 
 import moment from 'moment';
+import SpinnerComponent from '../Spinner/SpinnerComponent';
 
 const UserAdminComponent = () => {
   const dispatch = useDispatch();
@@ -31,13 +32,14 @@ const UserAdminComponent = () => {
   }, [userInfo, dispatch]);
 
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
-  const { success, error, userAdmin } = userAdminDetails;
+  const { loading, success, error, userAdmin } = userAdminDetails;
 
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
-
-      {!userAdmin?.isConfirmed ? (
+      {loading ? (
+        <SpinnerComponent />
+      ) : !userAdmin?.isConfirmed ? (
         <ErrorComponent
           error={
             'Please confirm your email address with the link that was provided.'
@@ -140,7 +142,7 @@ const UserAdminComponent = () => {
         </div>
       )}
 
-      {userAdmin === undefined ? (
+      {userAdmin === undefined && !loading ? (
         <>
           <p>{tokenExpiration}</p>
         </>
