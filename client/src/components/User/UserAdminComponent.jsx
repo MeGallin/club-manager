@@ -10,6 +10,7 @@ import ButtonComponent from '../Button/ButtonComponent';
 import AdminGetGeneralInfoComponent from '../GeneralInfoComponent/AdminGetGeneralInfoComponent/AdminGetGeneralInfoComponent';
 
 import moment from 'moment';
+import SpinnerComponent from '../Spinner/SpinnerComponent';
 
 const UserAdminComponent = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const UserAdminComponent = () => {
     'You are about to be logged out. Your token has expired.',
   );
   const [showUserAdminInputs, setShowUserAdminInputs] = useState(true);
+  const [hideUserInfo, setHideUserInfo] = useState(true);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -31,108 +33,126 @@ const UserAdminComponent = () => {
   }, [userInfo, dispatch]);
 
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
-  const { success, error, userAdmin } = userAdminDetails;
+  const { loading, success, error, userAdmin } = userAdminDetails;
 
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
-
-      {!userAdmin?.isConfirmed ? (
+      {loading ? (
+        <SpinnerComponent />
+      ) : !userAdmin?.isConfirmed ? (
         <ErrorComponent
           error={
             'Please confirm your email address with the link that was provided.'
           }
         />
       ) : (
-        <div className="wrapper">
+        <div>
           <div className="inner-content-wrapper">
             <fieldset className="fieldSet">
               <ButtonComponent
                 type="button"
-                text={
-                  showUserAdminInputs
-                    ? 'EDIT YOUR DETAILS'
-                    : 'BACK TO USER DETAILS'
-                }
-                variant="warning"
+                text={hideUserInfo ? 'SHOW YOUR DETAILS' : 'HIDE YOUR DETAILS'}
+                variant="info"
                 disabled={false}
-                onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
+                onClick={() => setHideUserInfo(!hideUserInfo)}
               />
             </fieldset>
 
-            {success && userAdmin?.isConfirmed ? (
-              showUserAdminInputs ? (
-                <div>
-                  <fieldset className="fieldSet">
-                    <legend>{userAdmin?.username}</legend>
-                    <img
-                      src="../assets/male.png"
-                      className="user-profile-image"
-                      alt={userAdmin?.name}
-                    />
-                    <p>USER NAME : {userAdmin?.username}</p>
-                    <p>EMAIL : {userAdmin?.email}</p>
-                    <p>
-                      ADMIN :{' '}
-                      {userAdmin?.isAdmin === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      COACH :{' '}
-                      {userAdmin?.isCoach === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      PLAYER :{' '}
-                      {userAdmin?.isPlayer === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      PARENT :{' '}
-                      {userAdmin?.isParent === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      CONFIRMED :{' '}
-                      {userAdmin?.isConfirmed === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
-                    <p>
-                      SUSPENDED :{' '}
-                      {userAdmin?.isSuspended === false ? (
-                        <FaThumbsDown className="ra-thumbs-down" />
-                      ) : (
-                        <FaThumbsUp className="ra-thumbs-up" />
-                      )}
-                    </p>
+            {hideUserInfo ? null : (
+              <>
+                <fieldset className="fieldSet">
+                  <ButtonComponent
+                    type="button"
+                    text={
+                      showUserAdminInputs
+                        ? 'EDIT YOUR DETAILS'
+                        : 'BACK TO USER DETAILS'
+                    }
+                    variant="warning"
+                    disabled={false}
+                    onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
+                  />
+                </fieldset>
+                {success && userAdmin?.isConfirmed ? (
+                  showUserAdminInputs ? (
+                    <div>
+                      <fieldset className="fieldSet">
+                        <legend>{userAdmin?.username}</legend>
+                        <img
+                          src="../assets/male.png"
+                          className="user-profile-image"
+                          alt={userAdmin?.name}
+                        />
+                        <p>USER NAME : {userAdmin?.username}</p>
+                        <p>EMAIL : {userAdmin?.email}</p>
+                        <p>
+                          ADMIN :{' '}
+                          {userAdmin?.isAdmin === false ? (
+                            <FaThumbsDown className="ra-thumbs-down" />
+                          ) : (
+                            <FaThumbsUp className="ra-thumbs-up" />
+                          )}
+                        </p>
+                        <p>
+                          COACH :{' '}
+                          {userAdmin?.isCoach === false ? (
+                            <FaThumbsDown className="ra-thumbs-down" />
+                          ) : (
+                            <FaThumbsUp className="ra-thumbs-up" />
+                          )}
+                        </p>
+                        <p>
+                          PLAYER :{' '}
+                          {userAdmin?.isPlayer === false ? (
+                            <FaThumbsDown className="ra-thumbs-down" />
+                          ) : (
+                            <FaThumbsUp className="ra-thumbs-up" />
+                          )}
+                        </p>
+                        <p>
+                          PARENT :{' '}
+                          {userAdmin?.isParent === false ? (
+                            <FaThumbsDown className="ra-thumbs-down" />
+                          ) : (
+                            <FaThumbsUp className="ra-thumbs-up" />
+                          )}
+                        </p>
+                        <p>
+                          CONFIRMED :{' '}
+                          {userAdmin?.isConfirmed === false ? (
+                            <FaThumbsDown className="ra-thumbs-down" />
+                          ) : (
+                            <FaThumbsUp className="ra-thumbs-up" />
+                          )}
+                        </p>
+                        <p>
+                          SUSPENDED :{' '}
+                          {userAdmin?.isSuspended === false ? (
+                            <FaThumbsDown className="ra-thumbs-down" />
+                          ) : (
+                            <FaThumbsUp className="ra-thumbs-up" />
+                          )}
+                        </p>
 
-                    <div className="dates-wrapper">
-                      <p>CREATED {moment(userAdmin?.createdAt).fromNow()}</p>
-                      <p>UPDATED {moment(userAdmin?.updatedAt).fromNow()}</p>
+                        <div className="dates-wrapper">
+                          <p>
+                            CREATED {moment(userAdmin?.createdAt).fromNow()}
+                          </p>
+                          <p>
+                            UPDATED {moment(userAdmin?.updatedAt).fromNow()}
+                          </p>
+                        </div>
+                      </fieldset>
                     </div>
-                  </fieldset>
-                </div>
-              ) : (
-                <>
-                  <UserAdminEditComponent />
-                </>
-              )
-            ) : null}
+                  ) : (
+                    <>
+                      <UserAdminEditComponent />
+                    </>
+                  )
+                ) : null}
+              </>
+            )}
           </div>
           <div>
             <AdminGetGeneralInfoComponent />
@@ -140,7 +160,7 @@ const UserAdminComponent = () => {
         </div>
       )}
 
-      {userAdmin === undefined ? (
+      {userAdmin === undefined && !loading ? (
         <>
           <p>{tokenExpiration}</p>
         </>

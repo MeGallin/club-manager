@@ -29,7 +29,6 @@ const ForgotPWComponent = () => {
     e.preventDefault();
     //Dispatch action
     dispatch(userForgotEmailAction(email));
-
     setEmail('');
   };
 
