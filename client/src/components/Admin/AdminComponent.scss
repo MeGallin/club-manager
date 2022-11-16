@@ -1,19 +1,11 @@
 @import '../../index.scss';
 .wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 0.2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 0.2rem;
   .inner-content-wrapper {
-    flex: 1 1 25em;
-    max-height: 37em;
-    overflow-y: auto;
-    .user-profile-image {
-      float: left;
-      width: 20%;
-      height: auto;
-      object-fit: cover;
-    }
+    border: 1px solid $border-colour-light;
+    background-color: $border-colour-dark;
   }
 
   .dates-wrapper {
@@ -23,19 +15,23 @@
   }
 }
 
+.user-profile-image {
+  border: 6px solid $border-colour-light;
+  background-color: $main-font-colour;
+  float: left;
+  width: 16%;
+  height: auto;
+  object-fit: cover;
+  margin: 0.1em;
+}
+
 .admin-nav-buttons-wrapper {
   display: flex;
   gap: 0.4em;
 }
 
-@media (max-width: 844px) {
+@media (max-width: 375px) {
   .wrapper {
-    flex-direction: column;
-    .inner-content-wrapper {
-      flex: 1 1 auto;
-    }
-  }
-  .admin-nav-buttons-wrapper {
-    flex-direction: column;
+    grid-template-columns: repeat(1, 1fr);
   }
 }

@@ -94,14 +94,14 @@ const AdminGetGeneralInfoComponent = () => {
         ) : null}
       </div>
 
-      <h3>Anorthosis Famagusta Academy - Larnaca Division</h3>
       {loading ? (
         <SpinnerComponent />
       ) : success && searchedPosts ? (
         <div className="wrapper">
+          <h3>Anorthosis Famagusta Academy - Larnaca Division</h3>
           {searchedPosts?.map((post) => (
             <div key={post._id} className="inner-content-wrapper">
-              <div className="post-wrapper">
+              <div>
                 <fieldset className="fieldSet">
                   <legend>
                     <SearchHighlightComponent
