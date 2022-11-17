@@ -1,11 +1,9 @@
 @import '../../index.scss';
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
   gap: 0.2rem;
   .inner-content-wrapper {
-    border: 1px solid $border-colour-light;
-    background-color: $border-colour-dark;
   }
 
   .dates-wrapper {

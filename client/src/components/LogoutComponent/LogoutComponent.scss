@@ -1,11 +1,13 @@
 @import '../../index.scss';
-
+header .link-effect {
+  color: $main-font-colour;
+}
 .link-effect {
-  color: #0094de;
-  border: none;
+  color: $main-bg-colour;
+  padding: 0.2em;
   &:hover {
     cursor: pointer;
-    color: blue;
+    color: rgba(39, 59, 146, 1);
     transition: color 0.8s;
   }
 }

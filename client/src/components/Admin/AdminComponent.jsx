@@ -109,6 +109,7 @@ const AdminComponent = () => {
           <div className="wrapper">
             <div className="inner-content-wrapper">
               <fieldset className="fieldSet">
+                <legend>Edit your details</legend>
                 <ButtonComponent
                   type="button"
                   text={

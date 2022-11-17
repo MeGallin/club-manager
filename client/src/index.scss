@@ -3,7 +3,7 @@
 
 /* variable setup */
 $main-bg-colour: rgba(245, 245, 245, 1);
-$main-font-colour: rgba(9, 9, 9, 1);
+$main-font-colour: rgba(0, 122, 255, 1);
 $secondary-bg-colour: hsl(23, 100%, 50%);
 $light-orange: rgba(236, 127, 55, 1);
 $burnt-orange: rgba(190, 79, 12, 1);
@@ -15,7 +15,7 @@ $rating-colour: orange;
 $border-colour: rgba(200, 200, 200, 0.5);
 $border-colour-dark: hsla(0, 1%, 33%, 0.2);
 $border-colour-light: hsla(0, 0%, 78%, 0.2);
-$fieldSet-bg-colour: hsla(0, 0%, 45%, 0.3);
+$fieldSet-bg-colour: rgba(245, 245, 245, 1);
 $header-height: 42px;
 $footer-height: 62px;
 $image-shadow-colour: rgba(12, 12, 12, 0.4);
@@ -72,6 +72,9 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */
@@ -145,16 +148,20 @@ h6 {
 /* General global stye settings */
 
 fieldset.fieldSet {
+  margin-top: 0.2em;
   border: 1px solid $border-colour-light;
-  background-color: $fieldSet-bg-colour;
+  border-bottom: 2px solid $border-colour-dark;
+  background-color: rgba(0, 135, 255, 1);
   flex-grow: 1;
-  // width: MIN(100%, 600px);
 }
 fieldset legend {
+  position: relative;
+  top: 2px;
   text-transform: uppercase;
-  font-size: 1.4em;
+  font-size: 1.6em;
   font-family: 'Bebas Neue', cursive;
   letter-spacing: 0.3em;
+  color: $main-bg-colour;
 }
 fieldset button {
   width: 100%;
