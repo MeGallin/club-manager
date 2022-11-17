@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 header {
+  display: flex;
+  justify-content: space-between;
   border: 1px solid $border-colour;
   text-transform: uppercase;
   a {
@@ -11,11 +13,14 @@ header {
   }
 
   nav {
+    display: flex;
+    align-items: center;
+    align-content: center;
     height: clamp(1rem, $header-height, $header-height);
     background-color: $main-bg-colour;
 
     span {
-      border: 1px solid $border-colour;
+      padding: 0 1em;
       width: 100%;
       text-align: center;
     }
@@ -26,20 +31,20 @@ header {
     }
   }
   .nav-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     span {
       a.active {
         color: $main-bg-colour;
         background-color: $main-font-colour;
         display: flex;
         justify-content: center;
+        padding: 0 0.6em;
       }
       &:hover {
-        background: $border-colour-light;
+        background: $border-colour-dark;
+        transition: background-color 0.8s;
       }
     }
+
     .logged-in-user-wrapper {
       display: flex;
       justify-content: center;

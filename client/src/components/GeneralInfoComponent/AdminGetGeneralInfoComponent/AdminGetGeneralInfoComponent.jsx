@@ -14,6 +14,7 @@ import SearchComponent from '../../SearchComponent/SearchComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreateGeneralInfoComponent from '../AdminCreateGeneralInfoComponent/AdminCreateGeneralInfoComponent';
 import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
+import LogoComponent from '../../LogoComponent/LogoComponent';
 
 const AdminGetGeneralInfoComponent = () => {
   const dispatch = useDispatch();
@@ -98,7 +99,6 @@ const AdminGetGeneralInfoComponent = () => {
         <SpinnerComponent />
       ) : success && searchedPosts ? (
         <div className="wrapper">
-          <h3>Anorthosis Famagusta Academy - Larnaca Division</h3>
           {searchedPosts?.map((post) => (
             <div key={post._id} className="inner-content-wrapper">
               <div>
@@ -109,12 +109,13 @@ const AdminGetGeneralInfoComponent = () => {
                       keyword={keyword}
                     />
                   </legend>
+                  <LogoComponent />
                   <SearchHighlightComponent
                     value={post.post}
                     keyword={keyword}
                   />
-                  <p className="small-text">BY: {post.name}</p>
 
+                  <p className="small-text">BY: {post.name}</p>
                   {userAdmin?.isAdmin ? (
                     <div className="button-wrapper">
                       <ModalComponent
@@ -128,6 +129,7 @@ const AdminGetGeneralInfoComponent = () => {
                           </>
                         }
                       />
+
                       <AdminDeleteGeneralInfoComponent
                         postId={post._id}
                         postTitle={post.heading}
@@ -144,7 +146,6 @@ const AdminGetGeneralInfoComponent = () => {
           ))}
         </div>
       ) : null}
-      <h3>This will only be visible to registered members/users</h3>
     </div>
   );
 };
