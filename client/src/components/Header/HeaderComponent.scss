@@ -2,21 +2,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 header {
+  display: flex;
+  justify-content: space-between;
   border: 1px solid $border-colour;
   text-transform: uppercase;
   a {
     color: $main-font-colour;
-    padding: 0.1em 0;
+    // padding: 0.1em 0;
     border-radius: 4px;
+    font-weight: bold;
   }
 
   nav {
+    display: flex;
+    align-items: center;
+    align-content: center;
     height: clamp(1rem, $header-height, $header-height);
     background-color: $main-bg-colour;
 
     span {
-      border: 1px solid $border-colour;
-      width: 100%;
+      margin: 0 0.2em;
+      width: auto;
       text-align: center;
     }
 
@@ -26,30 +32,28 @@ header {
     }
   }
   .nav-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     span {
       a.active {
         color: $main-bg-colour;
-        background-color: $main-font-colour;
-        display: flex;
-        justify-content: center;
+        background-color: $secondary-bg-colour;
+        padding: 2px 2em;
       }
       &:hover {
-        background: $border-colour-light;
+        border-radius: 4px;
+        background: $border-colour-dark;
+        padding: 2px 1em;
+        transition: background-color, padding 0.4s;
       }
     }
+
     .logged-in-user-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 1em;
-      font-size: 0.5em;
-      :first-child {
-        position: relative;
-        top: -2px;
-      }
+      font-size: 0.65em;
+      padding-top: 0.2em;
+
       .logged-in-user {
         font-family: 'Bebas Neue', cursive;
         color: $secondary-bg-colour;

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './HeaderComponent.scss';
 
 import LogoutComponent from '../LogoutComponent/LogoutComponent';
+import LogoComponent from '../LogoComponent/LogoComponent';
 
 const HeaderComponent = () => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -14,16 +15,14 @@ const HeaderComponent = () => {
   return (
     <>
       <header>
-        <nav className="nav-wrapper">
-          <span>
-            <NavLink
-              className={(navData) => (navData.isActive ? 'active' : '')}
-              to="/home"
-            >
-              Home
-            </NavLink>
-          </span>
+        <NavLink
+          className={(navData) => (navData.isActive ? 'active' : '')}
+          to="/home"
+        >
+          <LogoComponent />
+        </NavLink>
 
+        <nav className="nav-wrapper">
           {userInfo ? (
             <>
               {userAdmin?.isAdmin ? (
@@ -36,7 +35,6 @@ const HeaderComponent = () => {
                       to="/admin-profile"
                     >
                       <div className="logged-in-user-wrapper">
-                        <div>Admin Profile:</div>
                         <div className="logged-in-user">
                           {userAdmin?.username}
                         </div>
@@ -57,7 +55,6 @@ const HeaderComponent = () => {
                       to="/user-admin"
                     >
                       <div className="logged-in-user-wrapper">
-                        <div>USER:</div>
                         <div className="logged-in-user">
                           {userAdmin?.username}
                         </div>

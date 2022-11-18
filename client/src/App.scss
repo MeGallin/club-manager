@@ -17,11 +17,12 @@ $grid__bp-md: 1280;
   background-color: $main-font-colour;
   color: $main-bg-colour;
   padding: 0.2em;
+  border-radius: 4px;
 }
 
 @media (min-width: 845px) {
   .content-wrapper {
     margin: 0 auto;
-    max-width: 76%;
+    max-width: 100%;
   }
 }

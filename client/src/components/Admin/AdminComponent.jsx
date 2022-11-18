@@ -68,7 +68,7 @@ const AdminComponent = () => {
                         Manage Users
                       </NavLink>
                     }
-                    variant="info"
+                    variant="warning"
                     disabled={false}
                   />
                   <ButtonComponent
@@ -83,7 +83,7 @@ const AdminComponent = () => {
                         Manage Players
                       </NavLink>
                     }
-                    variant="info"
+                    variant="warning"
                     disabled={false}
                   />
                   <ButtonComponent
@@ -98,7 +98,7 @@ const AdminComponent = () => {
                         Manage General Information
                       </NavLink>
                     }
-                    variant="info"
+                    variant="warning"
                     disabled={false}
                   />
                 </div>
@@ -109,6 +109,7 @@ const AdminComponent = () => {
           <div className="wrapper">
             <div className="inner-content-wrapper">
               <fieldset className="fieldSet">
+                <legend>Edit your details</legend>
                 <ButtonComponent
                   type="button"
                   text={

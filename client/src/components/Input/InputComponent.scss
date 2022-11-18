@@ -30,7 +30,7 @@
   input[type='tel']:focus,
   input[type='number']:focus {
     background-color: rgba(255, 255, 255, 1);
-    color: $main-font-colour;
+    color: $warning;
   }
   .validation-error {
     color: $danger;
@@ -94,9 +94,6 @@
     border-left: $secondary-bg-colour 4px solid;
   }
 
-  margin-bottom: 0.4rem;
-  margin-top: 0.4rem;
-
   .input-icon-wrapper {
     display: flex;
     justify-content: space-between;
@@ -105,7 +102,7 @@
       font-size: 1.4em;
       cursor: pointer;
       padding-top: 6px;
-      color: $main-font-colour;
+      color: $main-bg-colour;
     }
   }
   label[for='input-field'] {

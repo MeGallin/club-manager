@@ -16,6 +16,7 @@ import SearchComponent from '../../SearchComponent/SearchComponent';
 import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreatePlayer from '../AdminCreatePlayer/AdminCreatePlayer';
+import LogoComponent from '../../LogoComponent/LogoComponent';
 
 const AdminGetPlayers = () => {
   const [statusChecked, setStatusChecked] = useState(false);
@@ -120,7 +121,7 @@ const AdminGetPlayers = () => {
                           keyword={keyword}
                         />
                       </legend>
-
+                      <LogoComponent />
                       <p>
                         Name on shirt: {player.nameOnShirt} - Shirt number:{' '}
                         {player.shirtNumber}

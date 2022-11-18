@@ -11,10 +11,8 @@ const LogoutComponent = () => {
     navigate('/login');
   };
   return (
-    <div>
-      <div onClick={handleLogout}>
-        <span className="link-effect">LOG OUT</span>
-      </div>
+    <div className="link-effect" onClick={handleLogout}>
+      LOG OUT
     </div>
   );
 };
