@@ -42,7 +42,7 @@ const ForgotPWComponent = () => {
         <SpinnerComponent />
       ) : (
         <fieldset className="fieldSet">
-          <legend>Login Form</legend>
+          <legend>Forgot Password Form</legend>
           <div>
             <form onSubmit={handleForgotPWSubmit}>
               <InputComponent
@@ -62,8 +62,8 @@ const ForgotPWComponent = () => {
 
               <ButtonComponent
                 type="submit"
-                text="submit"
-                variant="primary"
+                text="send email address"
+                variant="dark"
                 disabled={!emailRegEx.test(email)}
               />
             </form>

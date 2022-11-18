@@ -35,7 +35,6 @@ const HeaderComponent = () => {
                       to="/admin-profile"
                     >
                       <div className="logged-in-user-wrapper">
-                        <div>Admin Profile:</div>
                         <div className="logged-in-user">
                           {userAdmin?.username}
                         </div>
@@ -56,7 +55,6 @@ const HeaderComponent = () => {
                       to="/user-admin"
                     >
                       <div className="logged-in-user-wrapper">
-                        <div>USER:</div>
                         <div className="logged-in-user">
                           {userAdmin?.username}
                         </div>
