@@ -13,6 +13,7 @@ app.use('/api/', require('./routes/AdminProfileRoutes'));
 app.use('/api/', require('./routes/confirmEmailRoute'));
 app.use('/api/', require('./routes/PlayerRoutes'));
 app.use('/api/', require('./routes/GeneralInfoRoutes'));
+app.use('/api/', require('./routes/PublicNoticeRoutes'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/auth/private', require('./routes/auth'));
 

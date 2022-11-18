@@ -4,7 +4,6 @@ const ErrorResponse = require('../utils/errorResponse');
 // @description: Create a new POST
 // @route: POST /api/admin/general-info-create/
 // @access: ADMIN && PRIVATE
-
 exports.adminCreateGeneralIfo = async (req, res, next) => {
   const user = req.user._id;
   const { name, heading, post } = req.body;
