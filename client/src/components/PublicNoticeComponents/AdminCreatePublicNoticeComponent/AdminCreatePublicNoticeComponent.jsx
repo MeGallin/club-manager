@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import './AdminCreateGeneralInfoComponent.scss';
+import './AdminCreatePublicNoticeComponent.scss';
 
 import InputComponent from '../../../components/Input/InputComponent';
 import ButtonComponent from '../../../components/Button/ButtonComponent';
@@ -11,9 +11,9 @@ import SuccessComponent from '../../Success/SuccessComponent';
 import { nameRegEx } from '../../../utils/regEx';
 import TextAreaComponent from '../../TextArea/TextAreaComponent';
 
-import { adminCreateGeneralInfoAction } from '../../../store/actions/adminGeneralInfoActions';
+import { adminCreatePublicNoticeAction } from '../../../store/actions/adminPublicNoticeActions';
 
-const AdminCreateGeneralInfoComponent = () => {
+const AdminCreatePublicNoticeComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,14 +37,14 @@ const AdminCreateGeneralInfoComponent = () => {
     }));
   };
 
-  const handleCreateGeneralInfoSubmit = (e) => {
+  const handleCreatePublicNoticeSubmit = (e) => {
     e.preventDefault();
 
     if (!userInfo && !userAdmin?.isAdmin) {
       navigate('/login');
     } else {
       //Dispatch your CREATE action
-      dispatch(adminCreateGeneralInfoAction(formData));
+      dispatch(adminCreatePublicNoticeAction(formData));
       setFormData({
         name: '',
         heading: '',
@@ -53,10 +53,10 @@ const AdminCreateGeneralInfoComponent = () => {
     }
   };
 
-  const adminCreateGeneralInfo = useSelector(
-    (state) => state.adminCreateGeneralInfo,
+  const adminCreatePublicNotice = useSelector(
+    (state) => state.adminCreatePublicNotice,
   );
-  const { error, success } = adminCreateGeneralInfo;
+  const { error, success } = adminCreatePublicNotice;
 
   return (
     <>
@@ -66,9 +66,9 @@ const AdminCreateGeneralInfoComponent = () => {
       ) : null}
 
       <fieldset className="fieldSet">
-        <legend>Create General Info Post</legend>
+        <legend>Create Public Notice Post</legend>
         <div>
-          <form onSubmit={handleCreateGeneralInfoSubmit}>
+          <form onSubmit={handleCreatePublicNoticeSubmit}>
             <InputComponent
               label="Name"
               value={name}
@@ -128,4 +128,4 @@ const AdminCreateGeneralInfoComponent = () => {
   );
 };
 
-export default AdminCreateGeneralInfoComponent;
+export default AdminCreatePublicNoticeComponent;

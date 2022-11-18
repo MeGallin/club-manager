@@ -1,7 +1,7 @@
 @import '../../index.scss';
 .modal-wrapper {
-  background-color: $main-bg-colour;
-  color: $main-font-colour;
+  background-color: $border-colour-light;
+  color: $main-bg-colour;
   position: fixed;
   z-index: 100;
   top: 50%;
