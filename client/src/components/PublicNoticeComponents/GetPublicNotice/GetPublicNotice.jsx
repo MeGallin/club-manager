@@ -42,6 +42,7 @@ const GetPublicNotice = () => {
       {success ? (
         <SuccessComponent message="Retrieved all notices successfully" />
       ) : null}
+      <h1>Anorthosis Football Academy</h1>
       <fieldset className="fieldSet">
         <SearchComponent
           placeholder="SEARCH A Title"

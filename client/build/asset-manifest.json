@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.90dea489.css",
-    "main.js": "/static/js/main.378caae5.js",
+    "main.css": "/static/css/main.e3150aa8.css",
+    "main.js": "/static/js/main.7d8d4ac1.js",
     "static/media/club-manager-logo.png": "/static/media/club-manager-logo.1f49db4d241fe31fcb20.png",
     "index.html": "/index.html",
-    "main.90dea489.css.map": "/static/css/main.90dea489.css.map",
-    "main.378caae5.js.map": "/static/js/main.378caae5.js.map"
+    "main.e3150aa8.css.map": "/static/css/main.e3150aa8.css.map",
+    "main.7d8d4ac1.js.map": "/static/js/main.7d8d4ac1.js.map"
   },
   "entrypoints": [
-    "static/css/main.90dea489.css",
-    "static/js/main.378caae5.js"
+    "static/css/main.e3150aa8.css",
+    "static/js/main.7d8d4ac1.js"
   ]
 }
