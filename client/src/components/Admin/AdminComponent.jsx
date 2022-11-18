@@ -68,7 +68,7 @@ const AdminComponent = () => {
                         Manage Users
                       </NavLink>
                     }
-                    variant="info"
+                    variant="warning"
                     disabled={false}
                   />
                   <ButtonComponent
@@ -83,7 +83,7 @@ const AdminComponent = () => {
                         Manage Players
                       </NavLink>
                     }
-                    variant="info"
+                    variant="warning"
                     disabled={false}
                   />
                   <ButtonComponent
@@ -98,7 +98,7 @@ const AdminComponent = () => {
                         Manage General Information
                       </NavLink>
                     }
-                    variant="info"
+                    variant="warning"
                     disabled={false}
                   />
                 </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './LoginComponent.scss';
+import 'animate.css';
 
 import { userLoginAction } from '../../store/actions/userActions';
 
@@ -9,6 +10,7 @@ import ButtonComponent from '../../components/Button/ButtonComponent';
 import SpinnerComponent from '../Spinner/SpinnerComponent';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../Success/SuccessComponent';
+import { NavLink } from 'react-router-dom';
 
 const LoginComponent = () => {
   const dispatch = useDispatch();
@@ -16,7 +18,10 @@ const LoginComponent = () => {
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, success } = userLogin;
+  const { loading, error, success, userInfo } = userLogin;
+
+  const userAdminDetails = useSelector((state) => state.userAdminDetails);
+  const { userAdmin } = userAdminDetails;
 
   const [formData, setFormData] = useState({
     email: '',
@@ -42,12 +47,50 @@ const LoginComponent = () => {
     });
   };
 
+  const navigateMessage = (
+    <p className="animate__animated animate__bounceInLeft small-text">
+      NAVIGATE to YOUR PROFILE by clicking here.
+    </p>
+  );
+
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
       {success ? (
         <SuccessComponent message="You have successfully logged in!" />
       ) : null}
+
+      {userInfo && !userAdmin?.isAdmin && success ? (
+        <ButtonComponent
+          type="button"
+          text={
+            <NavLink
+              className={(navData) => (navData.isActive ? 'active' : '')}
+              to="/user-admin"
+            >
+              {userInfo?.username}, {navigateMessage}
+            </NavLink>
+          }
+          variant="info"
+          disabled={false}
+        />
+      ) : null}
+      {userAdmin?.isAdmin && success ? (
+        <ButtonComponent
+          type="button"
+          text={
+            <NavLink
+              className={(navData) => (navData.isActive ? 'active' : '')}
+              to="/admin-profile"
+            >
+              {userInfo?.username}, {navigateMessage}
+            </NavLink>
+          }
+          variant="info"
+          disabled={false}
+        />
+      ) : null}
+
       {loading ? (
         <SpinnerComponent />
       ) : (
@@ -87,7 +130,7 @@ const LoginComponent = () => {
               <ButtonComponent
                 type="submit"
                 text="login"
-                variant="primary"
+                variant="dark"
                 disabled={!emailRegEx.test(email) || password.length <= 5}
               />
             </form>
