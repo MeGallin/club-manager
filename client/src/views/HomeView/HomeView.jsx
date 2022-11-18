@@ -1,7 +1,8 @@
 import './HomeView.scss';
+import GetPublicNotice from '../../components/PublicNoticeComponents/GetPublicNotice/GetPublicNotice';
 
 const HomeView = () => {
-  return <div className="home-view">HomeView-public information area</div>;
+  return <GetPublicNotice />;
 };
 
 export default HomeView;
