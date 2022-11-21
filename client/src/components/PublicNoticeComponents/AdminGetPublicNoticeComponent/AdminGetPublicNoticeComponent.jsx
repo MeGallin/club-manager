@@ -10,8 +10,9 @@ import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighl
 import ModalComponent from '../../ModalComponent/ModalComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreatePublicNoticeComponent from '../AdminCreatePublicNoticeComponent/AdminCreatePublicNoticeComponent';
-
+import AdminEditPublicNoticeComponent from '../AdminPublicNoticeEditComponent/AdminEditPublicNoticeComponent';
 import moment from 'moment';
+import AdminDeletePublicNoticeComponent from '../AdminDeletePublicNoticeComponent/AdminDeletePublicNoticeComponent';
 
 const AdminGetPublicNoticeComponent = () => {
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
@@ -102,6 +103,25 @@ const AdminGetPublicNoticeComponent = () => {
                   keyword={keyword}
                 />
                 <p className="small-text">BY: {notice.name}</p>
+
+                <div className="button-wrapper">
+                  <ModalComponent
+                    className="create-btn"
+                    openButtonTitle="Edit Post"
+                    closeButtonTitle="Close modal"
+                    variant="warning"
+                    props={
+                      <>
+                        <AdminEditPublicNoticeComponent postId={notice._id} />
+                      </>
+                    }
+                  />
+                  <AdminDeletePublicNoticeComponent
+                    noticeId={notice._id}
+                    noticeTitle={notice.heading}
+                  />
+                </div>
+
                 <div className="dates-wrapper">
                   <p> Created: {moment(notice.createdAt).fromNow()}</p>
                   <p> Updated: {moment(notice.updatedAt).fromNow()}</p>

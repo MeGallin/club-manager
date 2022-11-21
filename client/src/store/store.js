@@ -38,6 +38,8 @@ import {
 import {
   getPublicNoticeReducer,
   adminCreatePublicNoticeReducer,
+  adminEditPublicNoticeReducer,
+  adminDeletePublicNoticeReducer,
 } from './reducers/adminPublicNoticeReducers';
 
 //Initialise state to hold user info if logged in.
@@ -71,6 +73,8 @@ const reducer = combineReducers({
   adminDeleteGeneralInfo: adminDeleteGeneralInfoReducer,
   getPublicNotice: getPublicNoticeReducer,
   adminCreatePublicNotice: adminCreatePublicNoticeReducer,
+  adminEditPublicNotice: adminEditPublicNoticeReducer,
+  adminDeletePublicNotice: adminDeletePublicNoticeReducer,
 });
 
 const initialState = {
