@@ -52,15 +52,14 @@ const AdminGetPublicNoticeComponent = () => {
             }
           />
         ) : null}
-        <fieldset className="fieldSet">
-          <SearchComponent
-            placeholder="SEARCH A Title"
-            value={keyword}
-            onChange={handleSearch}
-            quantity={searchedNotices?.length}
-            total={notices?.length}
-          />
-        </fieldset>
+
+        <SearchComponent
+          placeholder="SEARCH A Title"
+          value={keyword}
+          onChange={handleSearch}
+          quantity={searchedNotices?.length}
+          total={notices?.length}
+        />
 
         {userAdmin?.isAdmin ? (
           <ButtonComponent

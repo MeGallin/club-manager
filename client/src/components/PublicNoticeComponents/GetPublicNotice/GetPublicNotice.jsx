@@ -43,15 +43,14 @@ const GetPublicNotice = () => {
         <SuccessComponent message="Retrieved all notices successfully" />
       ) : null}
       <h1>Anorthosis Football Academy</h1>
-      <fieldset className="fieldSet">
-        <SearchComponent
-          placeholder="SEARCH A Title"
-          value={keyword}
-          onChange={handleSearch}
-          quantity={searchedNotices?.length}
-          total={notices?.length}
-        />
-      </fieldset>
+
+      <SearchComponent
+        placeholder="SEARCH A TITLE"
+        value={keyword}
+        onChange={handleSearch}
+        quantity={searchedNotices?.length}
+        total={notices?.length}
+      />
       {loading ? (
         <SpinnerComponent />
       ) : success && searchedNotices ? (

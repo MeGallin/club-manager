@@ -9,4 +9,8 @@
   p {
     font-size: 0.8em;
   }
+  input::placeholder {
+    text-transform: uppercase;
+    text-align: center;
+  }
 }

@@ -40,9 +40,10 @@ header {
       }
       &:hover {
         border-radius: 4px;
-        background: $border-colour-dark;
-        padding: 2px 1em;
-        transition: background-color, padding 0.4s;
+        background: $border-colour-light;
+        opacity: 0.7;
+        padding: 1px;
+        transition: color, 0.4s;
       }
     }
 

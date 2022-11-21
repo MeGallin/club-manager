@@ -16,6 +16,7 @@ $border-colour: rgba(200, 200, 200, 0.5);
 $border-colour-dark: hsla(0, 1%, 33%, 0.2);
 $border-colour-light: hsla(0, 0%, 78%, 0.2);
 $fieldSet-bg-colour: rgba(245, 245, 245, 1);
+$fieldSet-bg-colour-film: rgba(0, 135, 255, 1);
 $header-height: 48px;
 $footer-height: 62px;
 $image-shadow-colour: rgba(12, 12, 12, 0.4);
@@ -151,7 +152,7 @@ fieldset.fieldSet {
   margin-top: 0.2em;
   border: 1px solid $border-colour-light;
   border-bottom: 2px solid $border-colour-dark;
-  background-color: rgba(0, 135, 255, 1);
+  background-color: $fieldSet-bg-colour-film;
   border-radius: 4px;
 }
 fieldset legend {
