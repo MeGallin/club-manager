@@ -44,7 +44,6 @@ const AdminCreateGeneralInfoComponent = () => {
       navigate('/login');
     } else {
       //Dispatch your CREATE action
-      console.log(formData);
       dispatch(adminCreateGeneralInfoAction(formData));
       setFormData({
         name: '',

@@ -8,15 +8,15 @@ import SuccessComponent from '../../Success/SuccessComponent';
 
 import { nameRegEx } from '../../../utils/regEx';
 import TextAreaComponent from '../../TextArea/TextAreaComponent';
-import { adminEditGeneralInfoAction } from '../../../store/actions/adminGeneralInfoActions';
+import { adminEditPublicNoticeAction } from '../../../store/actions/adminPublicNoticeActions';
 
-function AdminEditGeneralInfoComponent({ postId }) {
+function AdminEditPublicNoticeComponent({ postId }) {
   const dispatch = useDispatch();
 
-  const adminGetGeneralInfo = useSelector((state) => state.adminGetGeneralInfo);
-  const { posts } = adminGetGeneralInfo;
+  const getPublicNotice = useSelector((state) => state.getPublicNotice);
+  const { notices } = getPublicNotice;
 
-  const filteredPost = posts?.filter((post) => {
+  const filteredNotice = notices?.filter((post) => {
     if (post._id === postId) {
       return post;
     }
@@ -25,9 +25,9 @@ function AdminEditGeneralInfoComponent({ postId }) {
 
   const [formData, setFormData] = useState({
     id: postId,
-    name: filteredPost[0].name,
-    heading: filteredPost[0].heading,
-    post: filteredPost[0].post,
+    name: filteredNotice[0].name,
+    heading: filteredNotice[0].heading,
+    post: filteredNotice[0].post,
   });
 
   const { name, heading, post } = formData;
@@ -39,11 +39,11 @@ function AdminEditGeneralInfoComponent({ postId }) {
     }));
   };
 
-  const handleEditGeneralInfoSubmit = (e) => {
+  const handleEditPublicNoticeSubmit = (e) => {
     e.preventDefault();
     // If this component is part of a view then make checks if admin and if user
     //Dispatch your CREATE action
-    dispatch(adminEditGeneralInfoAction(formData));
+    dispatch(adminEditPublicNoticeAction(formData));
     setFormData({
       name: '',
       heading: '',
@@ -51,21 +51,21 @@ function AdminEditGeneralInfoComponent({ postId }) {
     });
   };
 
-  const adminEditGeneralInfo = useSelector(
-    (state) => state.adminEditGeneralInfo,
+  const adminEditPublicNotice = useSelector(
+    (state) => state.adminEditPublicNotice,
   );
-  const { success, error } = adminEditGeneralInfo;
+  const { success, error } = adminEditPublicNotice;
 
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
       {success ? (
-        <SuccessComponent message={'Your profile was successfully created'} />
+        <SuccessComponent message={'Notice was successfully updated.'} />
       ) : null}
       <fieldset className="fieldSet">
-        <legend>Edit General Info Post</legend>
+        <legend>Edit Public Notice</legend>
         <div>
-          <form onSubmit={handleEditGeneralInfoSubmit}>
+          <form onSubmit={handleEditPublicNoticeSubmit}>
             <InputComponent
               label="Name"
               value={name}
@@ -125,4 +125,4 @@ function AdminEditGeneralInfoComponent({ postId }) {
   );
 }
 
-export default AdminEditGeneralInfoComponent;
+export default AdminEditPublicNoticeComponent;

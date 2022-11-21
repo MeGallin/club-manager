@@ -35,7 +35,12 @@ import {
   adminDeleteGeneralInfoReducer,
 } from './reducers/adminGeneralInfoReducers';
 
-import { getPublicNoticeReducer } from './reducers/adminPublicNoticeReducers';
+import {
+  getPublicNoticeReducer,
+  adminCreatePublicNoticeReducer,
+  adminEditPublicNoticeReducer,
+  adminDeletePublicNoticeReducer,
+} from './reducers/adminPublicNoticeReducers';
 
 //Initialise state to hold user info if logged in.
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -67,6 +72,9 @@ const reducer = combineReducers({
   adminEditGeneralInfo: adminEditGeneralInfoReducer,
   adminDeleteGeneralInfo: adminDeleteGeneralInfoReducer,
   getPublicNotice: getPublicNoticeReducer,
+  adminCreatePublicNotice: adminCreatePublicNoticeReducer,
+  adminEditPublicNotice: adminEditPublicNoticeReducer,
+  adminDeletePublicNotice: adminDeletePublicNoticeReducer,
 });
 
 const initialState = {

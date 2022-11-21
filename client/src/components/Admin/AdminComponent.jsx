@@ -101,6 +101,21 @@ const AdminComponent = () => {
                     variant="warning"
                     disabled={false}
                   />
+                  <ButtonComponent
+                    type="button"
+                    text={
+                      <NavLink
+                        className={(navData) =>
+                          navData.isActive ? 'active' : ''
+                        }
+                        to="/admin-public-notice"
+                      >
+                        Manage Public Notices
+                      </NavLink>
+                    }
+                    variant="warning"
+                    disabled={false}
+                  />
                 </div>
               </fieldset>
             ) : null}
