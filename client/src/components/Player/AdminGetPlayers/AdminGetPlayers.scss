@@ -1,9 +1,7 @@
 @import '../../../index.scss';
 .admin-get-player__top-wrapper {
-  padding: 0.2em;
-  margin-bottom: 1em;
-  border: 2px solid $border-colour-light;
-  background-color: $fieldSet-bg-colour-film;
+  padding: 0 0.2em;
+  background-color: darkblue;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

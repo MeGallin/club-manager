@@ -14,7 +14,6 @@ import SearchComponent from '../../SearchComponent/SearchComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreateGeneralInfoComponent from '../AdminCreateGeneralInfoComponent/AdminCreateGeneralInfoComponent';
 import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
-import LogoComponent from '../../LogoComponent/LogoComponent';
 
 const AdminGetGeneralInfoComponent = () => {
   const dispatch = useDispatch();
@@ -56,6 +55,7 @@ const AdminGetGeneralInfoComponent = () => {
   return (
     <div>
       {error ? <ErrorComponent error={error} /> : null}
+      <h2>General Notices</h2>
       <div className="admin-get-player__top-wrapper">
         {userAdmin?.isAdmin ? (
           <ModalComponent
@@ -109,7 +109,7 @@ const AdminGetGeneralInfoComponent = () => {
                       keyword={keyword}
                     />
                   </legend>
-                  <LogoComponent />
+
                   <SearchHighlightComponent
                     value={post.post}
                     keyword={keyword}

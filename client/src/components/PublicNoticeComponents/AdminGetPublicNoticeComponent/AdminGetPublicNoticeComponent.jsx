@@ -38,6 +38,7 @@ const AdminGetPublicNoticeComponent = () => {
 
   return (
     <>
+      <h2>Public Notices</h2>
       <div className="admin-get-player__top-wrapper">
         {userAdmin?.isAdmin ? (
           <ModalComponent
@@ -78,8 +79,6 @@ const AdminGetPublicNoticeComponent = () => {
         ) : null}
       </div>
 
-      <h1>Public Notices</h1>
-
       {loading ? (
         <SpinnerComponent />
       ) : success && searchedNotices ? (
@@ -94,8 +93,6 @@ const AdminGetPublicNoticeComponent = () => {
                     keyword={keyword}
                   />
                 </legend>
-
-                <h1>{notice.heading}</h1>
 
                 <SearchHighlightComponent
                   value={notice.post}

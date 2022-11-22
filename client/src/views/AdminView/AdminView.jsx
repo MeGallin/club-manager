@@ -83,6 +83,7 @@ const AdminView = () => {
         <SpinnerComponent />
       ) : (
         <>
+          <h2>Manage Users</h2>
           <div className="admin-get-player__top-wrapper">
             <SearchComponent
               placeholder="search username"
