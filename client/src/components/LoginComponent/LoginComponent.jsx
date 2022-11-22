@@ -97,6 +97,7 @@ const LoginComponent = () => {
         <fieldset className="fieldSet">
           <legend>Login Form</legend>
           <div>
+            <p>Welcome back, please login below</p>
             <form onSubmit={handleLoginSubmit}>
               <InputComponent
                 label="EMAIL"
@@ -129,7 +130,11 @@ const LoginComponent = () => {
 
               <ButtonComponent
                 type="submit"
-                text="login"
+                text={
+                  !emailRegEx.test(email) || password.length <= 5
+                    ? 'Disabled'
+                    : 'login'
+                }
                 variant="dark"
                 disabled={!emailRegEx.test(email) || password.length <= 5}
               />
