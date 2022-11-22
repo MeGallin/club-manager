@@ -16,10 +16,12 @@ $border-colour: rgba(200, 200, 200, 0.5);
 $border-colour-dark: hsla(0, 1%, 33%, 0.2);
 $border-colour-light: hsla(0, 0%, 78%, 0.2);
 $fieldSet-bg-colour: rgba(245, 245, 245, 1);
+$fieldSet-bg-colour-film: rgba(0, 135, 255, 1);
 $header-height: 48px;
 $footer-height: 62px;
 $image-shadow-colour: rgba(12, 12, 12, 0.4);
 $notice-message-size: 1.2em;
+$dark-blue: darkblue;
 
 /* Box sizing rules */
 *,
@@ -151,7 +153,7 @@ fieldset.fieldSet {
   margin-top: 0.2em;
   border: 1px solid $border-colour-light;
   border-bottom: 2px solid $border-colour-dark;
-  background-color: rgba(0, 135, 255, 1);
+  background-color: $dark-blue;
   border-radius: 4px;
 }
 fieldset legend {
@@ -163,8 +165,12 @@ fieldset legend {
   letter-spacing: 0.3em;
   color: $main-bg-colour;
 }
+fieldset form {
+  border: 1px solid $border-colour-dark;
+}
 fieldset button {
-  width: 100%;
+  margin-top: 1em;
+  width: auto;
 }
 
 textarea {

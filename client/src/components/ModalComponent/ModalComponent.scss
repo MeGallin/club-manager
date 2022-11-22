@@ -1,7 +1,7 @@
 @import '../../index.scss';
 .modal-wrapper {
-  background-color: $main-bg-colour;
-  color: $main-font-colour;
+  background-color: $dark-blue;
+  color: $main-bg-colour;
   position: fixed;
   z-index: 100;
   top: 50%;
@@ -49,7 +49,7 @@
   cursor: pointer;
   text-transform: uppercase;
   text-align: center;
-  width: 100%;
+  width: auto;
 }
 .modal-btn:hover {
   opacity: 1;

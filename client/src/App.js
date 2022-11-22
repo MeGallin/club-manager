@@ -14,6 +14,7 @@ import AdminView from './views/AdminView/AdminView';
 import AdminProfileView from './views/AdminView/AdminProfileView';
 import AdminPlayersView from './views/AdminView/AdminPlayersView';
 import AdminGeneralInformationView from './views/AdminView/AdminGeneralInformationView';
+import AdminPublicNoticeView from './views/AdminView/AdminPublicNoticeView.jsx';
 
 const App = () => {
   return (
@@ -34,6 +35,11 @@ const App = () => {
             <Route
               path="/admin-general-information"
               element={<AdminGeneralInformationView />}
+              exact
+            />
+            <Route
+              path="/admin-public-notice"
+              element={<AdminPublicNoticeView />}
               exact
             />
             <Route path="/admin" element={<AdminView />} exact />

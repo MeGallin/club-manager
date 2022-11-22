@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import './AdminCreatePublicNoticeComponent.scss';
 
 import InputComponent from '../../../components/Input/InputComponent';
 import ButtonComponent from '../../../components/Button/ButtonComponent';
@@ -8,26 +10,22 @@ import SuccessComponent from '../../Success/SuccessComponent';
 
 import { nameRegEx } from '../../../utils/regEx';
 import TextAreaComponent from '../../TextArea/TextAreaComponent';
-import { adminEditGeneralInfoAction } from '../../../store/actions/adminGeneralInfoActions';
 
-function AdminEditGeneralInfoComponent({ postId }) {
+import { adminCreatePublicNoticeAction } from '../../../store/actions/adminPublicNoticeActions';
+
+const AdminCreatePublicNoticeComponent = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const adminGetGeneralInfo = useSelector((state) => state.adminGetGeneralInfo);
-  const { posts } = adminGetGeneralInfo;
-
-  const filteredPost = posts?.filter((post) => {
-    if (post._id === postId) {
-      return post;
-    }
-    return false;
-  });
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const userAdminDetails = useSelector((state) => state.userAdminDetails);
+  const { userAdmin } = userAdminDetails;
 
   const [formData, setFormData] = useState({
-    id: postId,
-    name: filteredPost[0].name,
-    heading: filteredPost[0].heading,
-    post: filteredPost[0].post,
+    name: '',
+    heading: '',
+    post: '',
   });
 
   const { name, heading, post } = formData;
@@ -39,22 +37,26 @@ function AdminEditGeneralInfoComponent({ postId }) {
     }));
   };
 
-  const handleEditGeneralInfoSubmit = (e) => {
+  const handleCreatePublicNoticeSubmit = (e) => {
     e.preventDefault();
-    // If this component is part of a view then make checks if admin and if user
-    //Dispatch your CREATE action
-    dispatch(adminEditGeneralInfoAction(formData));
-    setFormData({
-      name: '',
-      heading: '',
-      post: '',
-    });
+
+    if (!userInfo && !userAdmin?.isAdmin) {
+      navigate('/login');
+    } else {
+      //Dispatch your CREATE action
+      dispatch(adminCreatePublicNoticeAction(formData));
+      setFormData({
+        name: '',
+        heading: '',
+        post: '',
+      });
+    }
   };
 
-  const adminEditGeneralInfo = useSelector(
-    (state) => state.adminEditGeneralInfo,
+  const adminCreatePublicNotice = useSelector(
+    (state) => state.adminCreatePublicNotice,
   );
-  const { success, error } = adminEditGeneralInfo;
+  const { error, success } = adminCreatePublicNotice;
 
   return (
     <>
@@ -62,10 +64,11 @@ function AdminEditGeneralInfoComponent({ postId }) {
       {success ? (
         <SuccessComponent message={'Your profile was successfully created'} />
       ) : null}
+
       <fieldset className="fieldSet">
-        <legend>Edit General Info Post</legend>
+        <legend>Create Public Notice Post</legend>
         <div>
-          <form onSubmit={handleEditGeneralInfoSubmit}>
+          <form onSubmit={handleCreatePublicNoticeSubmit}>
             <InputComponent
               label="Name"
               value={name}
@@ -123,6 +126,6 @@ function AdminEditGeneralInfoComponent({ postId }) {
       </fieldset>
     </>
   );
-}
+};
 
-export default AdminEditGeneralInfoComponent;
+export default AdminCreatePublicNoticeComponent;
