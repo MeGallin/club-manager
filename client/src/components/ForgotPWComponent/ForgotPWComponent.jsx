@@ -44,6 +44,10 @@ const ForgotPWComponent = () => {
         <fieldset className="fieldSet">
           <legend>Forgot Password Form</legend>
           <div>
+            <p>
+              Simply send us your email address and we will send you an email
+              with a reset link.
+            </p>
             <form onSubmit={handleForgotPWSubmit}>
               <InputComponent
                 label="EMAIL"
@@ -62,7 +66,9 @@ const ForgotPWComponent = () => {
 
               <ButtonComponent
                 type="submit"
-                text="send email address"
+                text={
+                  !emailRegEx.test(email) ? 'Disabled' : 'send email address'
+                }
                 variant="dark"
                 disabled={!emailRegEx.test(email)}
               />

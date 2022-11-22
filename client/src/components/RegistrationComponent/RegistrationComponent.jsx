@@ -55,6 +55,7 @@ const RegistrationComponent = () => {
         <fieldset className="fieldSet">
           <legend>Registration Form</legend>
           <div>
+            <p>Register by sending the form below.</p>
             <form onSubmit={handleRegistrationSubmit}>
               <InputComponent
                 label="User Name"
@@ -103,7 +104,13 @@ const RegistrationComponent = () => {
 
               <ButtonComponent
                 type="submit"
-                text="Register"
+                text={
+                  !emailRegEx.test(email) ||
+                  !usernameRegEx.test(username) ||
+                  password.length <= 5
+                    ? 'Disabled'
+                    : 'Register'
+                }
                 variant="dark"
                 disabled={
                   !emailRegEx.test(email) ||
