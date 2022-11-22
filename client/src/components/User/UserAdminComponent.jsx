@@ -74,6 +74,7 @@ const UserAdminComponent = () => {
                     onClick={() => setShowUserAdminInputs(!showUserAdminInputs)}
                   />
                 </fieldset>
+
                 {success && userAdmin?.isConfirmed ? (
                   showUserAdminInputs ? (
                     <div>

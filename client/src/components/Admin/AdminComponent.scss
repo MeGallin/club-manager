@@ -2,7 +2,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
-  gap: 0.2rem;
+
   .inner-content-wrapper {
   }
 
@@ -25,11 +25,14 @@
 
 .admin-nav-buttons-wrapper {
   display: flex;
-  gap: 0.4em;
+  gap: 0.2em;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 390px) {
   .wrapper {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .admin-nav-buttons-wrapper {
+    flex-wrap: wrap;
   }
 }

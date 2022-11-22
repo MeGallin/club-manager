@@ -63,6 +63,7 @@ const AdminGetPlayers = () => {
         <SpinnerComponent />
       ) : (
         <>
+          <h2>Manage Players</h2>
           {success && searchedPlayers ? (
             <>
               <div className="admin-get-player__top-wrapper">
@@ -77,6 +78,7 @@ const AdminGetPlayers = () => {
                     </>
                   }
                 />
+
                 <SearchComponent
                   placeholder={statusChecked ? 'SEARCH STATUS' : 'SEARCH NAME'}
                   value={keyword}
