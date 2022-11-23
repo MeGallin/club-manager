@@ -63,23 +63,23 @@ const GetPublicNotice = () => {
                     />
                   </legend>
                   <LogoComponent />
-                  <h1>{notice?.heading}</h1>
+                  <h3>{notice?.heading}</h3>
+                  <p className="small-text">Post by: {notice.name}</p>
 
                   <SearchHighlightComponent
-                    value={notice?.post.slice(0, 12) + '...'}
+                    value={notice?.post.slice(0, 40) + '...'}
                     keyword={keyword}
                   />
 
                   <ModalComponent
                     className="create-btn"
-                    openButtonTitle="Read More"
-                    closeButtonTitle="Close modal"
-                    variant="warning"
+                    openButtonTitle="Continue reading?"
+                    closeButtonTitle="Close"
+                    variant="info"
                     props={
                       <>
-                        <LogoComponent />
-                        <h1>{notice.heading}</h1>
-                        <p className="small-text">BY: {notice.name}</p>
+                        <h3>{notice.heading}</h3>
+                        <p className="small-text">Post by: {notice.name}</p>
                         <SearchHighlightComponent
                           value={notice.post}
                           keyword={keyword}
@@ -93,7 +93,6 @@ const GetPublicNotice = () => {
                     }
                   />
 
-                  <p className="small-text">BY: {notice.name}</p>
                   <div className="dates-wrapper">
                     <p> Created: {moment(notice.createdAt).fromNow()}</p>
                     <p> Updated: {moment(notice.updatedAt).fromNow()}</p>
