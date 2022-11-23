@@ -65,7 +65,7 @@ const AdminComponent = () => {
                         }
                         to="/admin"
                       >
-                        Manage Users
+                        Users
                       </NavLink>
                     }
                     variant="warning"
@@ -80,7 +80,7 @@ const AdminComponent = () => {
                         }
                         to="/admin-players"
                       >
-                        Manage Players
+                        Players
                       </NavLink>
                     }
                     variant="warning"
@@ -95,7 +95,7 @@ const AdminComponent = () => {
                         }
                         to="/admin-general-information"
                       >
-                        Manage General Information
+                        General Information
                       </NavLink>
                     }
                     variant="warning"
@@ -110,7 +110,7 @@ const AdminComponent = () => {
                         }
                         to="/admin-public-notice"
                       >
-                        Manage Public Notices
+                        Public Notices
                       </NavLink>
                     }
                     variant="warning"

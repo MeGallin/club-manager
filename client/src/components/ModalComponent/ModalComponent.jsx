@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import LogoComponent from '../LogoComponent/LogoComponent';
 import './ModalComponent.scss';
+import { FaRegWindowClose } from 'react-icons/fa';
 
 const ModalComponent = ({
   openButtonTitle,
@@ -16,17 +18,21 @@ const ModalComponent = ({
       {showModal ? (
         <div>
           <div
-            title="Close modal"
+            title="Close"
             className={showModal ? 'modal-overlay' : null}
             onClick={() => setShowModal(false)}
           />
           <div className="modal-wrapper">
-            <button
-              onClick={() => setShowModal(false)}
-              className="confirmation"
-            >
-              {closeButtonTitle}
-            </button>
+            <div className="modal-inner-wrapper">
+              <LogoComponent />
+
+              <span
+                onClick={() => setShowModal(false)}
+                className="confirmation"
+              >
+                <FaRegWindowClose className="ra-thumbs-down" />
+              </span>
+            </div>
             {props}
           </div>
         </div>

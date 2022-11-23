@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import './AdminView.scss';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 import {
   adminUsersDetailsAction,
@@ -13,15 +15,12 @@ import {
 } from '../../store/actions/adminActions';
 
 import ButtonComponent from '../../components/Button/ButtonComponent';
-
-import './AdminView.scss';
 import ErrorComponent from '../../components/ErrorComponent/ErrorComponent';
 import SpinnerComponent from '../../components/Spinner/SpinnerComponent';
-import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
-
-import moment from 'moment';
 import SearchComponent from '../../components/SearchComponent/SearchComponent';
 import SearchHighlightComponent from '../../components/SearchHighlightComponent/SearchHighlightComponent';
+
+import moment from 'moment';
 
 const AdminView = () => {
   const dispatch = useDispatch();
@@ -107,7 +106,7 @@ const AdminView = () => {
             />
           </div>
 
-          <div className="admin-wrapper">
+          <div className="wrapper">
             {searchedUsers?.map((user) => (
               <div key={user._id}>
                 <fieldset className="fieldSet">
@@ -149,34 +148,43 @@ const AdminView = () => {
                         <div className="toggle-wrapper">
                           {user?.isCoach ? (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Remove Coach ?"
-                                variant="danger"
-                                onClick={() => handleIsCoach(user?._id, false)}
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Coach</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Remove Coach ?"
+                                  variant="danger"
+                                  onClick={() =>
+                                    handleIsCoach(user?._id, false)
+                                  }
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsDown className="ra-thumbs-down" />
                             </>
                           ) : (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Confirm is Coach ?"
-                                variant="dark"
-                                onClick={() => handleIsCoach(user?._id, true)}
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Coach</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Confirm?"
+                                  variant="info"
+                                  onClick={() => handleIsCoach(user?._id, true)}
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
                               <FaThumbsUp className="ra-thumbs-up" />
                             </>
                           )}
@@ -200,34 +208,46 @@ const AdminView = () => {
                         <div className="toggle-wrapper">
                           {user?.isPlayer ? (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Remove Player ?"
-                                variant="danger"
-                                onClick={() => handleIsPlayer(user?._id, false)}
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Player</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Remove Player ?"
+                                  variant="danger"
+                                  onClick={() =>
+                                    handleIsPlayer(user?._id, false)
+                                  }
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsDown className="ra-thumbs-down" />
                             </>
                           ) : (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Confirm is Player ?"
-                                variant="dark"
-                                onClick={() => handleIsPlayer(user?._id, true)}
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Player</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Confirm?"
+                                  variant="info"
+                                  onClick={() =>
+                                    handleIsPlayer(user?._id, true)
+                                  }
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsUp className="ra-thumbs-up" />
                             </>
                           )}
@@ -251,34 +271,46 @@ const AdminView = () => {
                         <div className="toggle-wrapper">
                           {user?.isParent ? (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Remove Parent ?"
-                                variant="danger"
-                                onClick={() => handleIsParent(user?._id, false)}
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Parent</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Remove Parent ?"
+                                  variant="danger"
+                                  onClick={() =>
+                                    handleIsParent(user?._id, false)
+                                  }
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsDown className="ra-thumbs-down" />
                             </>
                           ) : (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Confirm is Parent ?"
-                                variant="dark"
-                                onClick={() => handleIsParent(user?._id, true)}
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Parent</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Confirm?"
+                                  variant="info"
+                                  onClick={() =>
+                                    handleIsParent(user?._id, true)
+                                  }
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsUp className="ra-thumbs-up" />
                             </>
                           )}
@@ -302,34 +334,44 @@ const AdminView = () => {
                         <div className="toggle-wrapper">
                           {user?.isAdmin ? (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Remove Admin ?"
-                                variant="danger"
-                                onClick={() => handleIsAdmin(user?._id, false)}
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Admin</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Remove?"
+                                  variant="danger"
+                                  onClick={() =>
+                                    handleIsAdmin(user?._id, false)
+                                  }
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsDown className="ra-thumbs-down" />
                             </>
                           ) : (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Make Admin ?"
-                                variant="dark"
-                                onClick={() => handleIsAdmin(user?._id, true)}
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Admin</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Make?"
+                                  variant="info"
+                                  onClick={() => handleIsAdmin(user?._id, true)}
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsUp className="ra-thumbs-up" />
                             </>
                           )}
@@ -353,38 +395,46 @@ const AdminView = () => {
                         <div className="toggle-wrapper">
                           {user?.isSuspended ? (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Unsuspend ?"
-                                variant="dark"
-                                onClick={() =>
-                                  handleIsSuspended(user?._id, false)
-                                }
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Un-Suspend</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Unsuspend?"
+                                  variant="info"
+                                  onClick={() =>
+                                    handleIsSuspended(user?._id, false)
+                                  }
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsUp className="ra-thumbs-up" />
                             </>
                           ) : (
                             <>
-                              <ButtonComponent
-                                type="button"
-                                text="Suspend ?"
-                                variant="danger"
-                                onClick={() =>
-                                  handleIsSuspended(user?._id, true)
-                                }
-                                disabled={
-                                  user?.username === userInfo?.username ||
-                                  user.email === 'admin@mail.com'
-                                    ? true
-                                    : false
-                                }
-                              />
+                              <div>
+                                <h4>Suspend</h4>
+                                <ButtonComponent
+                                  type="button"
+                                  text="Suspend?"
+                                  variant="danger"
+                                  onClick={() =>
+                                    handleIsSuspended(user?._id, true)
+                                  }
+                                  disabled={
+                                    user?.username === userInfo?.username ||
+                                    user.email === 'admin@mail.com'
+                                      ? true
+                                      : false
+                                  }
+                                />
+                              </div>
+
                               <FaThumbsDown className="ra-thumbs-down" />
                             </>
                           )}
@@ -393,15 +443,9 @@ const AdminView = () => {
                     </>
                   )}
 
-                  <div className="admin-dates-wrapper">
-                    <p>
-                      CREATED:
-                      {moment(user.createdAt).format('Do MMM YYYY, h:mm:ss')}
-                    </p>
-                    <p>
-                      UPDATED:{' '}
-                      {moment(user.updatedAt).format('Do MMM YYYY, h:mm:ss')}
-                    </p>
+                  <div className="dates-wrapper">
+                    <p> Created: {moment(user.createdAt).fromNow()}</p>
+                    <p>Updated: {moment(user.updatedAt).fromNow()}</p>
                   </div>
                 </fieldset>
               </div>
