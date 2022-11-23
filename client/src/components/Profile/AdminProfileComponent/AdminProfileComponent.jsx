@@ -53,7 +53,7 @@ const AdminProfileComponent = () => {
           <div className="inner-content-wrapper">
             {adminProfile?.length === 0 ? null : (
               <fieldset className="fieldSet">
-                <legend>Edit your profile details</legend>
+                <legend>Edit your profile</legend>
                 <ButtonComponent
                   type="button"
                   text={
