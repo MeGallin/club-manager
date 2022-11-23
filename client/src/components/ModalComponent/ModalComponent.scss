@@ -9,9 +9,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: MIN(96%, 600px);
+  padding: 0.4em;
   height: inherit;
   overflow-y: auto;
-  padding: 0.6rem;
   animation-name: expand-modal;
   animation-duration: 0.8s;
 
@@ -32,6 +32,12 @@
     }
   }
 }
+
+.modal-title {
+  display: flex;
+  border-radius: 4px;
+}
+
 @keyframes expand-modal {
   from {
     position: fixed;
