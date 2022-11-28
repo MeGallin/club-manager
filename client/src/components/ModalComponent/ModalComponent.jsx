@@ -42,7 +42,7 @@ const ModalComponent = ({
         onClick={handleShowModal}
         className={`${variant} modal-btn`}
       >
-        {openButtonTitle}
+        <span className="modal-title">{openButtonTitle}</span>
       </button>
     </>
   );

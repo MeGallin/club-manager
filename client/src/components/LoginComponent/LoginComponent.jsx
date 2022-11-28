@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import './LoginComponent.scss';
 import 'animate.css';
 
-import { userLoginAction } from '../../store/actions/userActions';
+import {
+  userLoginAction,
+  googleUserLoginAction,
+} from '../../store/actions/userActions';
 
 import InputComponent from '../../components/Input/InputComponent';
 import ButtonComponent from '../../components/Button/ButtonComponent';
@@ -11,6 +14,8 @@ import SpinnerComponent from '../Spinner/SpinnerComponent';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../Success/SuccessComponent';
 import { NavLink } from 'react-router-dom';
+
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 const LoginComponent = () => {
   const dispatch = useDispatch();
@@ -53,11 +58,48 @@ const LoginComponent = () => {
     </p>
   );
 
+  const googleSuccess = async (googleRes) => {
+    //Dispatch action that save google info from googleRes.
+    dispatch(googleUserLoginAction(googleRes));
+  };
+  const googleFailure = (error) => {
+    console.log('Error, with google login', error);
+  };
+
+  const googleUserLogin = useSelector((state) => state.googleUserLogin);
+  const {
+    loading: googleLoading,
+    success: googleSuccessState,
+    error: googleError,
+    userInfo: googleUserIfo,
+  } = googleUserLogin;
+
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
       {success ? (
         <SuccessComponent message="You have successfully logged in!" />
+      ) : null}
+
+      {googleError ? <ErrorComponent error={error} /> : null}
+      {googleSuccessState ? (
+        <SuccessComponent message="You have successfully logged in through GOOGLE" />
+      ) : null}
+
+      {googleUserIfo && !userAdmin?.isAdmin && googleSuccessState ? (
+        <ButtonComponent
+          type="button"
+          text={
+            <NavLink
+              className={(navData) => (navData.isActive ? 'active' : '')}
+              to="/user-admin"
+            >
+              {googleUserIfo?.username}, {navigateMessage}
+            </NavLink>
+          }
+          variant="info"
+          disabled={false}
+        />
       ) : null}
 
       {userInfo && !userAdmin?.isAdmin && success ? (
@@ -75,6 +117,7 @@ const LoginComponent = () => {
           disabled={false}
         />
       ) : null}
+
       {userAdmin?.isAdmin && success ? (
         <ButtonComponent
           type="button"
@@ -128,16 +171,29 @@ const LoginComponent = () => {
                 onChange={handleOnChange}
               />
 
-              <ButtonComponent
-                type="submit"
-                text={
-                  !emailRegEx.test(email) || password.length <= 5
-                    ? 'Disabled'
-                    : 'login'
-                }
-                variant="dark"
-                disabled={!emailRegEx.test(email) || password.length <= 5}
-              />
+              <div className="login-button-wrapper">
+                <ButtonComponent
+                  type="submit"
+                  text={
+                    !emailRegEx.test(email) || password.length <= 5
+                      ? 'Disabled'
+                      : 'login'
+                  }
+                  variant="dark"
+                  disabled={!emailRegEx.test(email) || password.length <= 5}
+                />
+
+                {googleLoading ? (
+                  <SpinnerComponent />
+                ) : (
+                  <GoogleOAuthProvider clientId="508473669508-okvrq23k3it6qna41r8fp2e6ffruqmcf.apps.googleusercontent.com">
+                    <GoogleLogin
+                      onSuccess={googleSuccess}
+                      onError={googleFailure}
+                    />
+                  </GoogleOAuthProvider>
+                )}
+              </div>
             </form>
           </div>
         </fieldset>

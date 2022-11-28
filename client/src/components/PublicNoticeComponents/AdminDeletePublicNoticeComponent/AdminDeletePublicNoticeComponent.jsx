@@ -10,13 +10,13 @@ const AdminDeletePublicNoticeComponent = ({ noticeId, noticeTitle }) => {
   const dispatch = useDispatch();
 
   const handlePublicNoticeDelete = () => {
-    //Action Delete player
     dispatch(adminDeletePublicNoticeAction(noticeId));
   };
 
   const adminDeletePublicNotice = useSelector(
     (state) => state.adminDeletePublicNotice,
   );
+
   const { loading, error } = adminDeletePublicNotice;
 
   return (
@@ -29,7 +29,7 @@ const AdminDeletePublicNoticeComponent = ({ noticeId, noticeTitle }) => {
         <>
           <ModalComponent
             className="create-btn"
-            openButtonTitle="Delete Profile"
+            openButtonTitle="Delete Notice"
             closeButtonTitle="No thanks"
             variant="danger"
             props={
@@ -40,7 +40,7 @@ const AdminDeletePublicNoticeComponent = ({ noticeId, noticeTitle }) => {
                 </div>
                 <ButtonComponent
                   type="submit"
-                  text="Yes Delete Profile"
+                  text="Yes Delete"
                   variant="danger"
                   disabled={false}
                   onClick={handlePublicNoticeDelete}

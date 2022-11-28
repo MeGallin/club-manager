@@ -1,1 +1,10 @@
 @import '../../../index.scss';
+
+.search-model-wrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+#read-more-modal {
+  font-size: 28px;
+}

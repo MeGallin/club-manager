@@ -42,8 +42,6 @@ const ContactFormComponent = () => {
   const contactForm = useSelector((state) => state.contactForm);
   const { loading, error, success } = contactForm;
 
-  console.log(loading, error, success);
-
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}

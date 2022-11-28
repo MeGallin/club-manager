@@ -1,4 +1,8 @@
 import {
+  GOOGLE_USER_LOGIN_FAILURE,
+  GOOGLE_USER_LOGIN_REQUEST,
+  GOOGLE_USER_LOGIN_SUCCESS,
+  GOOGLE_USER_LOGOUT,
   USER_ADMIN_DETAILS_FAILURE,
   USER_ADMIN_DETAILS_REQUEST,
   USER_ADMIN_DETAILS_SUCCESS,
@@ -48,6 +52,22 @@ export const userLoginReducer = (state = {}, action) => {
     case USER_LOGIN_FAILURE:
       return { loading: false, error: action.payload };
     case USER_LOGOUT:
+      return {};
+    default:
+      return { ...state };
+  }
+};
+
+// GOOGLE USER LOGIN REDUCER
+export const googleUserLoginReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GOOGLE_USER_LOGIN_REQUEST:
+      return { loading: true };
+    case GOOGLE_USER_LOGIN_SUCCESS:
+      return { loading: false, success: true, userInfo: action.payload };
+    case GOOGLE_USER_LOGIN_FAILURE:
+      return { loading: false, error: action.payload };
+    case GOOGLE_USER_LOGOUT:
       return {};
     default:
       return { ...state };

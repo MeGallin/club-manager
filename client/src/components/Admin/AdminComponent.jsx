@@ -149,9 +149,18 @@ const AdminComponent = () => {
                           className="user-profile-image"
                           alt={userAdmin?.name}
                         />
-
                         <p>USER NAME : {userAdmin?.username}</p>
                         <p>EMAIL : {userAdmin?.email}</p>
+                        <p>
+                          Registered Via Google:{' '}
+                          {userAdmin?.registeredWithGoogle === false ||
+                          userAdmin?.registeredWithGoogle === undefined ? (
+                            <FaThumbsDown className="ra-thumbs-down" />
+                          ) : (
+                            <FaThumbsUp className="ra-thumbs-up" />
+                          )}
+                        </p>
+
                         <p>
                           ADMIN :{' '}
                           {userAdmin?.isAdmin === false ? (

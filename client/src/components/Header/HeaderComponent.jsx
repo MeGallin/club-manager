@@ -9,6 +9,9 @@ const HeaderComponent = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const googleUserLogin = useSelector((state) => state.googleUserLogin);
+  const { userInfo: googleUserInfo } = googleUserLogin;
+
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { userAdmin } = userAdminDetails;
 
@@ -23,7 +26,7 @@ const HeaderComponent = () => {
         </NavLink>
 
         <nav className="nav-wrapper">
-          {userInfo ? (
+          {userInfo || googleUserInfo ? (
             <>
               {userAdmin?.isAdmin ? (
                 <>

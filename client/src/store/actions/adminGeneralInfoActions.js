@@ -20,21 +20,43 @@ export const adminGetGeneralInfoAction = () => async (dispatch, getState) => {
     dispatch({
       type: ADMIN_GET_GENERAL_INFO_REQUEST,
     });
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
 
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_END_POINT}api/admin/general-info`,
-      config,
-    );
-    dispatch({ type: ADMIN_GET_GENERAL_INFO_SUCCESS, payload: data });
+    if (getState().userLogin.userInfo) {
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_END_POINT}api/admin/general-info`,
+        config,
+      );
+      dispatch({ type: ADMIN_GET_GENERAL_INFO_SUCCESS, payload: data });
+    }
+
+    if (getState().googleUserLogin.userInfo) {
+      const {
+        googleUserLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_END_POINT}api/admin/general-info`,
+        config,
+      );
+      dispatch({ type: ADMIN_GET_GENERAL_INFO_SUCCESS, payload: data });
+    }
   } catch (error) {
     dispatch({
       type: ADMIN_GET_GENERAL_INFO_FAILURE,
@@ -88,6 +110,7 @@ export const adminEditGeneralInfoAction =
       dispatch({
         type: ADMIN_EDIT_GENERAL_INFO_REQUEST,
       });
+
       const {
         userLogin: { userInfo },
       } = getState();
