@@ -50,6 +50,40 @@ const generateToken = (id, email) => {
   });
 };
 
+//Google Login
+exports.googleLogin = async (req, res, next) => {
+  token = req.body.headers.Authorization.split(' ')[1];
+
+  try {
+    if (token?.sub) {
+      const googleToken = jwt.decode(token);
+      //check if email exist
+      const existingUser = await User.findOne({ email: googleToken?.email });
+      if (existingUser === null) {
+        // Create user
+        const user = await User.create({
+          username: googleToken?.name,
+          email: googleToken?.email,
+          password: googleToken?.email + process.env.JWT_SECRET,
+          isConfirmed: true,
+          registeredWithGoogle: true,
+        });
+
+        await user.save();
+        sendToken(user, 200, res);
+      } else {
+        //Login
+        const user = await User.findOne({ email: googleToken?.email });
+        sendToken(user, 200, res);
+      }
+    } else {
+      return next(new ErrorResponse('Your login was un-successful', 500));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 //LOGIN
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -166,6 +200,7 @@ exports.getUserAdminDetails = async (req, res, next) => {
       isParent,
       isConfirmed,
       isSuspended,
+      registeredWithGoogle,
       createdAt,
       updatedAt,
     } = await User.findById(req.user.id);
@@ -180,6 +215,7 @@ exports.getUserAdminDetails = async (req, res, next) => {
       isParent,
       isConfirmed,
       isSuspended,
+      registeredWithGoogle,
       createdAt,
       updatedAt,
     });

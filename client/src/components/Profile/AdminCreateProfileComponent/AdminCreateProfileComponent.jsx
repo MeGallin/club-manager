@@ -24,6 +24,8 @@ const AdminCreateProfileComponent = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const googleUserLogin = useSelector((state) => state.googleUserLogin);
+  const { userInfo: googleUserInfo } = googleUserLogin;
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { userAdmin } = userAdminDetails;
 
@@ -46,7 +48,7 @@ const AdminCreateProfileComponent = () => {
   const handleCreateAdminProfileSubmit = (e) => {
     e.preventDefault();
 
-    if (!userInfo && !userAdmin?.isAdmin) {
+    if (!userInfo || (!googleUserInfo && !userAdmin?.isAdmin)) {
       navigate('/login');
     } else {
       //Dispatch your CREATE action

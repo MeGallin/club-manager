@@ -8,6 +8,7 @@ const LogoutComponent = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(userLogoutAction());
+
     navigate('/login');
   };
   return (

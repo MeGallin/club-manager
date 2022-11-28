@@ -29,6 +29,8 @@ const AdminEditPlayer = ({ playerId }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const googleUserLogin = useSelector((state) => state.googleUserLogin);
+  const { userInfo: googleUserInfo } = googleUserLogin;
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { userAdmin } = userAdminDetails;
   const adminGetPlayers = useSelector((state) => state.adminGetPlayers);
@@ -82,7 +84,7 @@ const AdminEditPlayer = ({ playerId }) => {
   const handleAdminPEditPlayer = (e) => {
     e.preventDefault();
 
-    if (!userInfo && !userAdmin?.isAdmin) {
+    if (!userInfo || (!googleUserInfo && !userAdmin?.isAdmin)) {
       navigate('/login');
     } else {
       //Dispatch your CREATE action
