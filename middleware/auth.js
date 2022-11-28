@@ -12,13 +12,13 @@ exports.protect = async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findById(decoded.id).select('-password');
+
       req.user = user;
       if (!user) {
         return next(new ErrorResponse('No user found with this ID', 404));
       }
       next();
     } catch (error) {
-      console.log(error);
       res.status(401);
       new ErrorResponse('Token has failed', 401);
     }

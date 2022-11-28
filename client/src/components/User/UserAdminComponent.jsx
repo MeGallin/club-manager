@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import './UserAdminComponent.scss';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
-import { userAdminDetailsAction } from '../../store/actions/userActions';
 
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import UserAdminEditComponent from './UserAdminEditComponent';
@@ -13,25 +12,11 @@ import moment from 'moment';
 import SpinnerComponent from '../Spinner/SpinnerComponent';
 
 const UserAdminComponent = () => {
-  const dispatch = useDispatch();
-
   const [tokenExpiration] = useState(
     'You are about to be logged out. Your token has expired.',
   );
   const [showUserAdminInputs, setShowUserAdminInputs] = useState(true);
   const [hideUserInfo, setHideUserInfo] = useState(true);
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
-  useEffect(() => {
-    let ignore = false;
-    //Dispatch your get action
-    if (userInfo) {
-      if (!ignore) dispatch(userAdminDetailsAction());
-    }
-    return () => (ignore = true);
-  }, [userInfo, dispatch]);
-
   const userAdminDetails = useSelector((state) => state.userAdminDetails);
   const { loading, success, error, userAdmin } = userAdminDetails;
 
@@ -88,6 +73,16 @@ const UserAdminComponent = () => {
                         <p>USER NAME : {userAdmin?.username}</p>
                         <p>EMAIL : {userAdmin?.email}</p>
                         <p>
+                          Registered Via Google:
+                          {userAdmin?.registeredWithGoogle === false ||
+                          userAdmin?.registeredWithGoogle === undefined ? (
+                            <FaThumbsDown className="ra-thumbs-down" />
+                          ) : (
+                            <FaThumbsUp className="ra-thumbs-up" />
+                          )}
+                        </p>
+
+                        <p>
                           ADMIN :{' '}
                           {userAdmin?.isAdmin === false ? (
                             <FaThumbsDown className="ra-thumbs-down" />
@@ -135,7 +130,6 @@ const UserAdminComponent = () => {
                             <FaThumbsUp className="ra-thumbs-up" />
                           )}
                         </p>
-
                         <div className="dates-wrapper">
                           <p>
                             CREATED {moment(userAdmin?.createdAt).fromNow()}

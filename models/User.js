@@ -54,6 +54,11 @@ const UserSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    registeredWithGoogle: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     profileImage: {
       type: String,
     },

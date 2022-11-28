@@ -8,6 +8,7 @@ import {
   userResetPasswordReducer,
   userAdminDetailsReducer,
   userUpdateAdminDetailsReducer,
+  googleUserLoginReducer,
 } from './reducers/userReducers';
 import {
   adminUsersDetailsReducer,
@@ -56,6 +57,7 @@ const reducer = combineReducers({
   userResetPassword: userResetPasswordReducer,
   userAdminDetails: userAdminDetailsReducer,
   userUpdateAdminDetails: userUpdateAdminDetailsReducer,
+  googleUserLogin: googleUserLoginReducer,
   adminUsersDetails: adminUsersDetailsReducer,
   adminIsAdmin: adminIsAdminReducer,
   adminIsSuspended: adminIsSuspendedReducer,

@@ -16,7 +16,6 @@ app.use('/api/', require('./routes/GeneralInfoRoutes'));
 app.use('/api/', require('./routes/PublicNoticeRoutes'));
 app.use('/api/', require('./routes/ContactFormRoutes'));
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/auth/private', require('./routes/auth'));
 
 // Error Handlers NB should be last piece of middleware
 app.use(errorHandler);

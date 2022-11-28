@@ -30,6 +30,7 @@ const AdminView = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
+    console.log('fired');
     let ignore = false;
 
     if (!userInfo) {
@@ -122,6 +123,21 @@ const AdminView = () => {
                     <p>
                       <a href={`mailto:${user.email}`}>{user.email}</a>
                     </p>
+                  </div>
+
+                  <div
+                    className={`toggle-wrapper ${
+                      user?.registeredWithGoogle === false
+                        ? 'is-not-google'
+                        : 'is-google'
+                    }`}
+                  >
+                    REGISTERED WITH GOOGLE:{' '}
+                    {user?.registeredWithGoogle === false ? (
+                      <FaThumbsDown className="ra-thumbs-down" />
+                    ) : (
+                      <FaThumbsUp className="ra-thumbs-up" />
+                    )}
                   </div>
 
                   <div className="toggle-wrapper">
@@ -336,6 +352,7 @@ const AdminView = () => {
                             <>
                               <div>
                                 <h4>Admin</h4>
+
                                 <ButtonComponent
                                   type="button"
                                   text="Remove?"
@@ -358,20 +375,28 @@ const AdminView = () => {
                             <>
                               <div>
                                 <h4>Admin</h4>
-                                <ButtonComponent
-                                  type="button"
-                                  text="Make?"
-                                  variant="info"
-                                  onClick={() => handleIsAdmin(user?._id, true)}
-                                  disabled={
-                                    user?.username === userInfo?.username ||
-                                    user.email === 'admin@mail.com'
-                                      ? true
-                                      : false
-                                  }
-                                />
+                                {user?.registeredWithGoogle ? (
+                                  <p className="admin-warning">
+                                    Please note: Google registered user can not
+                                    be made admin.
+                                  </p>
+                                ) : (
+                                  <ButtonComponent
+                                    type="button"
+                                    text="Make?"
+                                    variant="info"
+                                    onClick={() =>
+                                      handleIsAdmin(user?._id, true)
+                                    }
+                                    disabled={
+                                      user?.username === userInfo?.username ||
+                                      user.email === 'admin@mail.com'
+                                        ? true
+                                        : false
+                                    }
+                                  />
+                                )}
                               </div>
-
                               <FaThumbsUp className="ra-thumbs-up" />
                             </>
                           )}
