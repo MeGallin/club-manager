@@ -69,7 +69,7 @@ const ForgotPWComponent = () => {
                 text={
                   !emailRegEx.test(email) ? 'Disabled' : 'send email address'
                 }
-                variant="dark"
+                variant="info"
                 disabled={!emailRegEx.test(email)}
               />
             </form>
