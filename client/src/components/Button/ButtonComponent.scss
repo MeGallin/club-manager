@@ -11,51 +11,56 @@ $btn-light: #fbfbfb;
 $btn-dark: #332d2d;
 
 button {
-  border: none;
-  border-radius: 2px;
   padding: 6px 9px;
   font-size: 16px;
   text-transform: uppercase;
   cursor: pointer;
-  color: white;
-  background-color: white;
+  color: $main-font-colour;
   box-shadow: 0 0 4px #999;
-  outline: none;
-  opacity: 0.8;
   margin-top: 0.2em;
   margin-bottom: 0.2em;
   text-align: center;
   width: max-content;
+  color: white;
+  border: none;
+  outline: 0.1rem solid white;
+  outline-offset: -0.3rem;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+    transition: opacity 0.8s;
+  }
 }
 
 button.primary {
-  background-color: $btn-primary;
+  background: $btn-primary;
 }
 button.secondary {
-  background-color: $btn-secondary;
+  background: $btn-secondary;
 }
 button.success {
-  background-color: $btn-success;
+  background: $btn-success;
 }
 button.danger {
-  background-color: $btn-danger;
+  background: $btn-danger;
 }
 button.warning {
-  background-color: $btn-warning;
+  background: $btn-warning;
 }
 button.info {
-  background-color: $btn-info;
+  background: $btn-info;
 }
 button.light {
-  background-color: $btn-light;
+  background: $btn-light;
 }
 button.dark {
-  background-color: $btn-dark;
+  background: $btn-dark;
 }
 
 /* Ripple effect */
 .ripple {
   background-position: center;
+
   transition: background 0.8s;
 }
 .ripple:hover {
