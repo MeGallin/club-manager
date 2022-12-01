@@ -78,6 +78,21 @@ const AdminComponent = () => {
                         className={(navData) =>
                           navData.isActive ? 'active' : ''
                         }
+                        to="/admin-private-messages"
+                      >
+                        Private MESSAGES
+                      </NavLink>
+                    }
+                    variant="warning"
+                    disabled={false}
+                  />
+                  <ButtonComponent
+                    type="button"
+                    text={
+                      <NavLink
+                        className={(navData) =>
+                          navData.isActive ? 'active' : ''
+                        }
                         to="/admin-players"
                       >
                         Players
