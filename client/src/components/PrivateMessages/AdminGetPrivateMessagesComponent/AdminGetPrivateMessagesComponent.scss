@@ -1,0 +1,24 @@
+@import '../../../index.scss';
+
+.message-wrapper {
+  border: 1px solid $main-bg-colour;
+  padding: 0.4rem;
+}
+
+.reply-wrapper {
+  padding: 0.4rem;
+  padding-left: 1rem;
+}
+
+.reply-wrapper + div {
+  padding-left: 2rem;
+}
+
+.reply-wrapper + div + div {
+  padding-left: 3rem;
+}
+
+.reply-wrapper p + p {
+  padding: 0.4rem;
+  border-left: 4px solid $rating-colour;
+}

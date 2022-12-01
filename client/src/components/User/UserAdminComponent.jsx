@@ -10,6 +10,7 @@ import AdminGetGeneralInfoComponent from '../GeneralInfoComponent/AdminGetGenera
 
 import moment from 'moment';
 import SpinnerComponent from '../Spinner/SpinnerComponent';
+import UserGetPrivateMessagesComponent from '../PrivateMessages/UserGetPrivateMessagesComponent/UserGetPrivateMessagesComponent';
 
 const UserAdminComponent = () => {
   const [tokenExpiration] = useState(
@@ -151,6 +152,7 @@ const UserAdminComponent = () => {
           </div>
           <div>
             <AdminGetGeneralInfoComponent />
+            <UserGetPrivateMessagesComponent />
           </div>
         </div>
       )}

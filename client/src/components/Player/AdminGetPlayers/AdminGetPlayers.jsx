@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import moment from 'moment';
-
 import './AdminGetPlayers.scss';
+
+import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import AdminEditPlayer from '../AdminEditPlayer/AdminEditPlayer';
 import SpinnerComponent from '../../Spinner/SpinnerComponent';
 import AdminDeletePlayer from '../AdminDeletePlayer/AdminDeletePlayer';
-
-import { adminGetPlayersAction } from '../../../store/actions/playerActions';
 import ModalComponent from '../../ModalComponent/ModalComponent';
 import SearchComponent from '../../SearchComponent/SearchComponent';
 import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 import ButtonComponent from '../../Button/ButtonComponent';
 import AdminCreatePlayer from '../AdminCreatePlayer/AdminCreatePlayer';
 import LogoComponent from '../../LogoComponent/LogoComponent';
+import moment from 'moment';
 
 const AdminGetPlayers = () => {
   const [statusChecked, setStatusChecked] = useState(false);
