@@ -1,4 +1,7 @@
 import {
+  ADMIN_CREATE_PRIVATE_MESSAGES_FAILURE,
+  ADMIN_CREATE_PRIVATE_MESSAGES_REQUEST,
+  ADMIN_CREATE_PRIVATE_MESSAGES_SUCCESS,
   ADMIN_GET_PRIVATE_MESSAGES_FAILURE,
   ADMIN_GET_PRIVATE_MESSAGES_REQUEST,
   ADMIN_GET_PRIVATE_MESSAGES_SUCCESS,
@@ -19,6 +22,24 @@ export const adminGetPrivateMessagesReducer = (state = {}, action) => {
         ...action.payload,
       };
     case ADMIN_GET_PRIVATE_MESSAGES_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// POST: ADMIN CREATE private message
+export const adminCreatePrivateMessageReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_CREATE_PRIVATE_MESSAGES_REQUEST:
+      return { loading: true };
+    case ADMIN_CREATE_PRIVATE_MESSAGES_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        ...action.payload,
+      };
+    case ADMIN_CREATE_PRIVATE_MESSAGES_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return { ...state };

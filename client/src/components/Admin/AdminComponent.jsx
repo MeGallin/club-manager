@@ -166,6 +166,7 @@ const AdminComponent = () => {
                         />
                         <p>USER NAME : {userAdmin?.username}</p>
                         <p>EMAIL : {userAdmin?.email}</p>
+                        HERE
                         <p>
                           Registered Via Google:{' '}
                           {userAdmin?.registeredWithGoogle === false ||
@@ -175,7 +176,6 @@ const AdminComponent = () => {
                             <FaThumbsUp className="ra-thumbs-up" />
                           )}
                         </p>
-
                         <p>
                           ADMIN :{' '}
                           {userAdmin?.isAdmin === false ? (

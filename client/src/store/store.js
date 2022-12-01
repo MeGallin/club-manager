@@ -47,6 +47,7 @@ import { contactFormReducer } from './reducers/contactFormReducer';
 
 import {
   adminGetPrivateMessagesReducer,
+  adminCreatePrivateMessageReducer,
   userGetPrivateMessagesReducer,
 } from './reducers/adminPrivateMessageReducers';
 
@@ -86,6 +87,7 @@ const reducer = combineReducers({
   adminEditPublicNotice: adminEditPublicNoticeReducer,
   adminDeletePublicNotice: adminDeletePublicNoticeReducer,
   adminGetPrivateMessages: adminGetPrivateMessagesReducer,
+  adminCreatePrivateMessage: adminCreatePrivateMessageReducer,
   contactForm: contactFormReducer,
 });
 

@@ -19,8 +19,10 @@ import ErrorComponent from '../../components/ErrorComponent/ErrorComponent';
 import SpinnerComponent from '../../components/Spinner/SpinnerComponent';
 import SearchComponent from '../../components/SearchComponent/SearchComponent';
 import SearchHighlightComponent from '../../components/SearchHighlightComponent/SearchHighlightComponent';
+import ModalComponent from '../../components/ModalComponent/ModalComponent';
 
 import moment from 'moment';
+import AdminCreatePrivateMessageComponent from '../../components/PrivateMessages/AdminCreatePrivateMessageComponent/AdminCreatePrivateMessageComponent';
 
 const AdminView = () => {
   const dispatch = useDispatch();
@@ -117,6 +119,18 @@ const AdminView = () => {
                       keyword={keyword}
                     />
                   </legend>
+
+                  <ModalComponent
+                    className="create-btn"
+                    openButtonTitle="Send Private Message"
+                    closeButtonTitle="Close"
+                    variant="success"
+                    props={
+                      <>
+                        <AdminCreatePrivateMessageComponent userId={user._id} />
+                      </>
+                    }
+                  />
 
                   <div className="toggle-wrapper">
                     <div>EMAIL</div>
