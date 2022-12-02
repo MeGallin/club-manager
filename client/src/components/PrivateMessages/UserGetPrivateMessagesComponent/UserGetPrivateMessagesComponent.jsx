@@ -10,6 +10,8 @@ import ButtonComponent from '../../Button/ButtonComponent';
 import SearchComponent from '../../SearchComponent/SearchComponent';
 import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 import moment from 'moment';
+import UserCreatePMReplyComponent from '../UserCreatePMReplyComponent/UserCreatePMReplyComponent';
+import ModalComponent from '../../ModalComponent/ModalComponent';
 
 const UserGetPrivateMessagesComponent = () => {
   const dispatch = useDispatch();
@@ -117,6 +119,20 @@ const UserGetPrivateMessagesComponent = () => {
                           <p>{reply?.from}</p>
                         </div>
                       ))}
+                      <ModalComponent
+                        className="create-btn"
+                        openButtonTitle="Reply"
+                        closeButtonTitle="Close"
+                        variant="success"
+                        props={
+                          <>
+                            <UserCreatePMReplyComponent
+                              messageId={message?._id}
+                              userId={userAdmin?._id}
+                            />
+                          </>
+                        }
+                      />
                     </fieldset>
                   </div>
                 ))}

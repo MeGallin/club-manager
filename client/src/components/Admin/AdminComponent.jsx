@@ -10,9 +10,8 @@ import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import UserAdminEditComponent from '../User/UserAdminEditComponent';
 import ButtonComponent from '../Button/ButtonComponent';
 import AdminProfileComponent from '../Profile/AdminProfileComponent/AdminProfileComponent';
-
-import moment from 'moment';
 import SpinnerComponent from '../Spinner/SpinnerComponent';
+import moment from 'moment';
 
 const AdminComponent = () => {
   const dispatch = useDispatch();
@@ -166,7 +165,6 @@ const AdminComponent = () => {
                         />
                         <p>USER NAME : {userAdmin?.username}</p>
                         <p>EMAIL : {userAdmin?.email}</p>
-                        HERE
                         <p>
                           Registered Via Google:{' '}
                           {userAdmin?.registeredWithGoogle === false ||

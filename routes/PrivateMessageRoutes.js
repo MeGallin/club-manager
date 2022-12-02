@@ -37,7 +37,7 @@ router
   .get(protect, userPrivateMessagesGet);
 
 router
-  .route('/user/private-message-reply-create/user/:id')
+  .route('/user/private-message-reply-create/:id')
   .post(protect, userPrivateMessageReplyPost);
 
 module.exports = router;

@@ -6,6 +6,9 @@ import {
   ADMIN_GET_PRIVATE_MESSAGES_FAILURE,
   ADMIN_GET_PRIVATE_MESSAGES_REQUEST,
   ADMIN_GET_PRIVATE_MESSAGES_SUCCESS,
+  USER_CREATE_REPLY_PRIVATE_MESSAGES_FAILURE,
+  USER_CREATE_REPLY_PRIVATE_MESSAGES_REQUEST,
+  USER_CREATE_REPLY_PRIVATE_MESSAGES_SUCCESS,
   USER_GET_PRIVATE_MESSAGES_FAILURE,
   USER_GET_PRIVATE_MESSAGES_REQUEST,
   USER_GET_PRIVATE_MESSAGES_SUCCESS,
@@ -129,6 +132,71 @@ export const userGetPrivateMessagesAction =
     } catch (error) {
       dispatch({
         type: USER_GET_PRIVATE_MESSAGES_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//POST: USER create private REPLY
+export const userCreateReplyPrivateMessageAction =
+  (formData, userId) => async (dispatch, getState) => {
+    console.log(formData, userId);
+    try {
+      dispatch({
+        type: USER_CREATE_REPLY_PRIVATE_MESSAGES_REQUEST,
+      });
+      if (getState().userLogin.userInfo) {
+        const {
+          userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        };
+        const { data } = await axios.post(
+          `${process.env.REACT_APP_END_POINT}api/user/private-message-reply-create/${userId}`,
+          formData,
+          config,
+        );
+        dispatch({
+          type: USER_CREATE_REPLY_PRIVATE_MESSAGES_SUCCESS,
+          payload: data,
+        });
+        dispatch(userGetPrivateMessagesAction(userId));
+      }
+
+      if (getState().googleUserLogin.userInfo) {
+        const {
+          googleUserLogin: { userInfo },
+        } = getState();
+
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        };
+
+        const { data } = await axios.post(
+          `${process.env.REACT_APP_END_POINT}api/user/private-message-reply-create/${userId}`,
+          formData,
+          config,
+        );
+        dispatch({
+          type: USER_CREATE_REPLY_PRIVATE_MESSAGES_SUCCESS,
+          payload: data,
+        });
+        dispatch(userGetPrivateMessagesAction(userId));
+      }
+    } catch (error) {
+      dispatch({
+        type: USER_CREATE_REPLY_PRIVATE_MESSAGES_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

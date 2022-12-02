@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 const privateMessageReplySchema = mongoose.Schema(
   {
-    to: {
-      type: String,
-      required: [true, 'Please provide a name.'],
-    },
     title: {
       type: String,
       required: [true, 'Please provide a title.'],

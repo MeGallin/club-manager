@@ -146,7 +146,6 @@ exports.userPrivateMessageReplyPost = async (req, res, next) => {
       return next(new ErrorResponse('No messages could be found', 500));
     } else {
       const reply = {
-        to: req.body.to,
         title: req.body.title,
         message: req.body.message,
         from: user.username,
