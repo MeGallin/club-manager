@@ -6,6 +6,9 @@ import {
   ADMIN_GET_PRIVATE_MESSAGES_FAILURE,
   ADMIN_GET_PRIVATE_MESSAGES_REQUEST,
   ADMIN_GET_PRIVATE_MESSAGES_SUCCESS,
+  ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_FAILURE,
+  ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_REQUEST,
+  ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_SUCCESS,
   USER_CREATE_REPLY_PRIVATE_MESSAGES_FAILURE,
   USER_CREATE_REPLY_PRIVATE_MESSAGES_REQUEST,
   USER_CREATE_REPLY_PRIVATE_MESSAGES_SUCCESS,
@@ -84,6 +87,46 @@ export const adminCreatePrivateMessageAction =
       });
     }
   };
+
+//PATCH: ADMIN IS COMPLETE Toggle
+export const adminIsCompletePrivateMessageAction =
+  (isComplete, userId, messageId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.patch(
+        `${process.env.REACT_APP_END_POINT}api/admin/private-message-is-complete/${userId}`,
+        { isComplete, messageId },
+        config,
+      );
+      dispatch({
+        type: ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_SUCCESS,
+        payload: data,
+      });
+      dispatch(adminGetPrivateMessagesAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//USERS USERS USERS
 
 //GET: USER get PRIVATE MESSAGES
 export const userGetPrivateMessagesAction =

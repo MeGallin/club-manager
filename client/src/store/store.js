@@ -50,6 +50,7 @@ import {
   adminCreatePrivateMessageReducer,
   userGetPrivateMessagesReducer,
   userCreateReplyPrivateMessagesReducer,
+  adminIsCompletePrivateMessageReducer,
 } from './reducers/adminPrivateMessageReducers';
 
 //Initialise state to hold user info if logged in.
@@ -90,6 +91,7 @@ const reducer = combineReducers({
   adminDeletePublicNotice: adminDeletePublicNoticeReducer,
   adminGetPrivateMessages: adminGetPrivateMessagesReducer,
   adminCreatePrivateMessage: adminCreatePrivateMessageReducer,
+  adminIsCompletePrivateMessage: adminIsCompletePrivateMessageReducer,
   contactForm: contactFormReducer,
 });
 

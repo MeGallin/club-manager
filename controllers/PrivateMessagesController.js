@@ -19,6 +19,7 @@ exports.adminPrivateMessageCreate = async (req, res, next) => {
         title,
         message,
         from,
+        isComplete: false,
         privateMessageReply: [],
       });
       res.status(200).json({ success: true });
@@ -93,6 +94,32 @@ exports.adminPrivateMessagesGet = async (req, res, next) => {
   }
 };
 
+// @description: Handle isComplete
+// @route: GET /api/admin/private-messages-isComplete/id
+// @access: PRIVATE && ADMIN
+exports.adminPrivateMessageIsComplete = async (req, res, next) => {
+  const user = await User.findOne({ _id: req.params.id });
+  const message = await PrivateMessage.findOne({ _id: req.body.messageId });
+  try {
+    if (!user && !message) {
+      return next(new ErrorResponse('No message could be found', 401));
+    } else {
+      await PrivateMessage.findByIdAndUpdate(
+        req.body.messageId,
+        { isComplete: req.body.isComplete },
+        {
+          new: true,
+        },
+      );
+      res.status(200).json({ success: true });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// USER USER USER
+
 // @description: Get a Message
 // @route: GET /api/user/private-message-get/:id
 // @access: PRIVATE
@@ -114,7 +141,9 @@ exports.userPrivateMessageGet = async (req, res, next) => {
 // @access: PRIVATE
 exports.userPrivateMessagesGet = async (req, res, next) => {
   const user = await User.findOne({ _id: req.params.id });
-  const messages = await PrivateMessage.find({ user });
+  const messages = await PrivateMessage.find({ user }).sort({
+    createdAt: -1,
+  });
   try {
     if (!user && !messages) {
       return next(new ErrorResponse('No messages could be foundXXXX', 500));
