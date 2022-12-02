@@ -111,7 +111,7 @@ const RegistrationComponent = () => {
                     ? 'Disabled'
                     : 'Register'
                 }
-                variant="dark"
+                variant="info"
                 disabled={
                   !emailRegEx.test(email) ||
                   !usernameRegEx.test(username) ||

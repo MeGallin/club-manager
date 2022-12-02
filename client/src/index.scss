@@ -166,7 +166,7 @@ fieldset legend {
   position: relative;
   top: 2px;
   text-transform: uppercase;
-  font-size: 1.6em;
+  font-size: 1.4em;
   font-family: 'Bebas Neue', cursive;
   letter-spacing: 0.3em;
   color: $main-bg-colour;
@@ -212,6 +212,15 @@ textarea:focus {
 .small-text {
   font-size: 0.76em;
   font-weight: bold;
+}
+.small-text.warning {
+  color: $rating-colour;
+  text-transform: uppercase;
+}
+.small-text.danger {
+  color: $danger;
+  font-size: 1rem;
+  text-transform: uppercase;
 }
 
 hr.style-one {

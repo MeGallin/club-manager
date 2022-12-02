@@ -179,7 +179,7 @@ const LoginComponent = () => {
                       ? 'Disabled'
                       : 'login'
                   }
-                  variant="dark"
+                  variant="info"
                   disabled={!emailRegEx.test(email) || password.length <= 5}
                 />
 

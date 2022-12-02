@@ -3,15 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './AdminCreateGeneralInfoComponent.scss';
 
+import { adminCreateGeneralInfoAction } from '../../../store/actions/adminGeneralInfoActions';
+
 import InputComponent from '../../../components/Input/InputComponent';
 import ButtonComponent from '../../../components/Button/ButtonComponent';
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import SuccessComponent from '../../Success/SuccessComponent';
-
-import { nameRegEx } from '../../../utils/regEx';
 import TextAreaComponent from '../../TextArea/TextAreaComponent';
-
-import { adminCreateGeneralInfoAction } from '../../../store/actions/adminGeneralInfoActions';
+import { nameRegEx } from '../../../utils/regEx';
 
 const AdminCreateGeneralInfoComponent = () => {
   const dispatch = useDispatch();
@@ -41,7 +40,6 @@ const AdminCreateGeneralInfoComponent = () => {
 
   const handleCreateGeneralInfoSubmit = (e) => {
     e.preventDefault();
-
     if (!userInfo || (!googleUserInfo && !userAdmin?.isAdmin)) {
       navigate('/login');
     } else {

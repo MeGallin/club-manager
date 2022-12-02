@@ -10,9 +10,8 @@ import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import UserAdminEditComponent from '../User/UserAdminEditComponent';
 import ButtonComponent from '../Button/ButtonComponent';
 import AdminProfileComponent from '../Profile/AdminProfileComponent/AdminProfileComponent';
-
-import moment from 'moment';
 import SpinnerComponent from '../Spinner/SpinnerComponent';
+import moment from 'moment';
 
 const AdminComponent = () => {
   const dispatch = useDispatch();
@@ -66,6 +65,21 @@ const AdminComponent = () => {
                         to="/admin"
                       >
                         Users
+                      </NavLink>
+                    }
+                    variant="warning"
+                    disabled={false}
+                  />
+                  <ButtonComponent
+                    type="button"
+                    text={
+                      <NavLink
+                        className={(navData) =>
+                          navData.isActive ? 'active' : ''
+                        }
+                        to="/admin-private-messages"
+                      >
+                        Private MESSAGES
                       </NavLink>
                     }
                     variant="warning"
@@ -160,7 +174,6 @@ const AdminComponent = () => {
                             <FaThumbsUp className="ra-thumbs-up" />
                           )}
                         </p>
-
                         <p>
                           ADMIN :{' '}
                           {userAdmin?.isAdmin === false ? (

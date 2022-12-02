@@ -7,7 +7,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
     case 'primary':
       return (
         <button
-          className={`ripple ${variant}`}
+          className={`${variant}`}
           id={id}
           type={type}
           text={text}
@@ -20,7 +20,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
     case 'secondary':
       return (
         <button
-          className={`ripple ${variant}`}
+          className={`${variant}`}
           id={id}
           type={type}
           text={text}
@@ -33,7 +33,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
     case 'success':
       return (
         <button
-          className={`ripple ${variant}`}
+          className={`${variant}`}
           id={id}
           type={type}
           text={text}
@@ -46,7 +46,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
     case 'danger':
       return (
         <button
-          className={`ripple ${variant}`}
+          className={`${variant}`}
           id={id}
           type={type}
           text={text}
@@ -59,7 +59,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
     case 'warning':
       return (
         <button
-          className={`ripple ${variant}`}
+          className={`${variant}`}
           id={id}
           type={type}
           text={text}
@@ -72,7 +72,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
     case 'info':
       return (
         <button
-          className={`ripple ${variant}`}
+          className={`${variant}`}
           id={id}
           type={type}
           text={text}
@@ -85,7 +85,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
     case 'light':
       return (
         <button
-          className={`ripple ${variant}`}
+          className={`${variant}`}
           id={id}
           type={type}
           text={text}
@@ -98,7 +98,7 @@ const ButtonComponent = ({ id, type, text, onClick, variant, disabled }) => {
     case 'dark':
       return (
         <button
-          className={`ripple ${variant}`}
+          className={`${variant}`}
           id={id}
           type={type}
           text={text}

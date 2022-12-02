@@ -45,6 +45,14 @@ import {
 
 import { contactFormReducer } from './reducers/contactFormReducer';
 
+import {
+  adminGetPrivateMessagesReducer,
+  adminCreatePrivateMessageReducer,
+  userGetPrivateMessagesReducer,
+  userCreateReplyPrivateMessagesReducer,
+  adminIsCompletePrivateMessageReducer,
+} from './reducers/adminPrivateMessageReducers';
+
 //Initialise state to hold user info if logged in.
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
@@ -57,6 +65,8 @@ const reducer = combineReducers({
   userResetPassword: userResetPasswordReducer,
   userAdminDetails: userAdminDetailsReducer,
   userUpdateAdminDetails: userUpdateAdminDetailsReducer,
+  userGetPrivateMessages: userGetPrivateMessagesReducer,
+  userCreateReplyPrivateMessages: userCreateReplyPrivateMessagesReducer,
   googleUserLogin: googleUserLoginReducer,
   adminUsersDetails: adminUsersDetailsReducer,
   adminIsAdmin: adminIsAdminReducer,
@@ -79,6 +89,9 @@ const reducer = combineReducers({
   adminCreatePublicNotice: adminCreatePublicNoticeReducer,
   adminEditPublicNotice: adminEditPublicNoticeReducer,
   adminDeletePublicNotice: adminDeletePublicNoticeReducer,
+  adminGetPrivateMessages: adminGetPrivateMessagesReducer,
+  adminCreatePrivateMessage: adminCreatePrivateMessageReducer,
+  adminIsCompletePrivateMessage: adminIsCompletePrivateMessageReducer,
   contactForm: contactFormReducer,
 });
 
