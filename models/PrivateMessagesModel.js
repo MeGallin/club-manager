@@ -41,6 +41,10 @@ const privateMessageSchema = mongoose.Schema(
       type: String,
       required: [true, "From field can't be left empty."],
     },
+    isComplete: {
+      type: Boolean,
+      default: false,
+    },
     privateMessageReply: [privateMessageReplySchema],
   },
   { timestamps: true },

@@ -5,6 +5,9 @@ import {
   ADMIN_GET_PRIVATE_MESSAGES_FAILURE,
   ADMIN_GET_PRIVATE_MESSAGES_REQUEST,
   ADMIN_GET_PRIVATE_MESSAGES_SUCCESS,
+  ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_FAILURE,
+  ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_REQUEST,
+  ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_SUCCESS,
   USER_CREATE_REPLY_PRIVATE_MESSAGES_FAILURE,
   USER_CREATE_REPLY_PRIVATE_MESSAGES_REQUEST,
   USER_CREATE_REPLY_PRIVATE_MESSAGES_SUCCESS,
@@ -43,6 +46,24 @@ export const adminCreatePrivateMessageReducer = (state = {}, action) => {
         ...action.payload,
       };
     case ADMIN_CREATE_PRIVATE_MESSAGES_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// PATCH: ADMIN Is Complete toggle
+export const adminIsCompletePrivateMessageReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_REQUEST:
+      return { loading: true };
+    case ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        ...action.payload,
+      };
+    case ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return { ...state };

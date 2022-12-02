@@ -9,6 +9,7 @@ const {
   userPrivateMessageGet,
   userPrivateMessagesGet,
   userPrivateMessageReplyPost,
+  adminPrivateMessageIsComplete,
 } = require('../controllers/PrivateMessagesController');
 
 router
@@ -22,6 +23,10 @@ router
 router
   .route('/admin/private-message-edit/:id')
   .patch(protect, admin, adminPrivateMessageEdit);
+
+router
+  .route('/admin/private-message-is-complete/:id')
+  .patch(protect, admin, adminPrivateMessageIsComplete);
 
 router
   .route('/admin/private-messages-get')

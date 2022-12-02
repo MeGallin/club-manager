@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './AdminGetPrivateMessagesComponent.scss';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
-import { adminGetPrivateMessagesAction } from '../../../store/actions/adminPrivateMessagesActions';
+import {
+  adminGetPrivateMessagesAction,
+  adminIsCompletePrivateMessageAction,
+} from '../../../store/actions/adminPrivateMessagesActions';
 
 import ErrorComponent from '../../ErrorComponent/ErrorComponent';
 import SpinnerComponent from '../../Spinner/SpinnerComponent';
@@ -46,18 +50,32 @@ const AdminGetPrivateMessagesComponent = () => {
     return message.to.toLowerCase().includes(keyword.toLowerCase());
   });
   //Search Message by to [name]
+  console.log(searchedMessages);
+  const handleIsComplete = (val, userId, messageId) => {
+    dispatch(adminIsCompletePrivateMessageAction(val, userId, messageId));
+  };
+
+  const adminIsCompletePrivateMessage = useSelector(
+    (state) => state.adminIsCompletePrivateMessage,
+  );
+  const {
+    loading: isCompleteLoading,
+    error: isCompleteError,
+    success: isCompleteSuccess,
+  } = adminIsCompletePrivateMessage;
 
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
+      {isCompleteError ? <ErrorComponent error={isCompleteError} /> : null}
 
-      {loading ? (
+      {loading || isCompleteLoading ? (
         <SpinnerComponent />
       ) : (
         <>
-          <h2>Manage PM</h2>
-          {success && searchedMessages ? (
+          {success || (isCompleteSuccess && searchedMessages) ? (
             <>
+              <h2>Manage Private Messages</h2>
               <div className="admin-get-player__top-wrapper">
                 <SearchComponent
                   placeholder="SEARCH NAME"
@@ -83,6 +101,7 @@ const AdminGetPrivateMessagesComponent = () => {
                   disabled={false}
                 />
               </div>
+
               <div className="wrapper">
                 {searchedMessages?.map((message) => (
                   <div key={message?._id} className="inner-content-wrapper">
@@ -94,29 +113,61 @@ const AdminGetPrivateMessagesComponent = () => {
                         />
                       </legend>
                       <div className="message-wrapper">
-                        <h3>
-                          {message?.title}{' '}
-                          <sup>
-                            [posted {moment(message?.createdAt).fromNow()}]
-                          </sup>
-                        </h3>
+                        {message.isComplete ? (
+                          <div
+                            onClick={() =>
+                              handleIsComplete(
+                                false,
+                                message?.user,
+                                message?._id,
+                              )
+                            }
+                          >
+                            <div className="is-complete-wrapper">
+                              <p className="small-text danger">
+                                Un-Mark as Complete
+                              </p>
+                              <FaThumbsDown className="ra-thumbs-down" />
+                            </div>
+                          </div>
+                        ) : (
+                          <div
+                            onClick={() =>
+                              handleIsComplete(
+                                true,
+                                message?.user,
+                                message?._id,
+                              )
+                            }
+                          >
+                            <div className="is-complete-wrapper">
+                              <p className="small-text warning">
+                                Mark as Complete
+                              </p>
+                              <FaThumbsUp className="ra-thumbs-up" />
+                            </div>
+                          </div>
+                        )}
+
+                        <h3>{message?.title} </h3>
                         <p>{message?.message}</p>
                         <p>{message?.from}</p>
+                        <sup>
+                          [posted {moment(message?.createdAt).fromNow()}]
+                        </sup>
                       </div>
 
                       {message?.privateMessageReply.map((reply) => (
                         <div key={reply?._id} className="reply-wrapper">
-                          <h4>
-                            Reply{' '}
-                            <sup>
-                              [posted {moment(reply?.createdAt).fromNow()}]
-                            </sup>
-                          </h4>
+                          <h4>Reply </h4>
 
                           <h3>{reply?.title} </h3>
                           <p>{reply?.to}</p>
                           <p>{reply?.message}</p>
                           <p>{reply?.from}</p>
+                          <sup>
+                            [posted {moment(reply?.createdAt).fromNow()}]
+                          </sup>
                         </div>
                       ))}
                     </fieldset>

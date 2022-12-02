@@ -57,9 +57,9 @@ const UserGetPrivateMessagesComponent = () => {
         <SpinnerComponent />
       ) : (
         <>
-          <h2>Manage PM</h2>
           {success && searchedMessages ? (
             <>
+              <h2>Manage PM</h2>
               <div className="admin-get-player__top-wrapper">
                 <SearchComponent
                   placeholder="SEARCH TITLE"
@@ -91,32 +91,36 @@ const UserGetPrivateMessagesComponent = () => {
                     <fieldset className="fieldSet">
                       <legend>TO: {message.to}</legend>
                       <div className="message-wrapper">
+                        {message?.isComplete ? (
+                          <p className="small-text danger">
+                            Admin has marked this as complete.
+                          </p>
+                        ) : null}
                         <h3>
                           <SearchHighlightComponent
                             value={`TITLE: ${message?.title}`}
                             keyword={keyword}
-                          />{' '}
-                          <sup>
-                            [posted {moment(message?.createdAt).fromNow()}]
-                          </sup>
+                          />
                         </h3>
+
                         <p>{message?.message}</p>
                         <p>{message?.from}</p>
+                        <sup>
+                          [posted {moment(message?.createdAt).fromNow()}]
+                        </sup>
                       </div>
 
                       {message?.privateMessageReply.map((reply) => (
                         <div key={reply?._id} className="reply-wrapper">
-                          <h4>
-                            Reply{' '}
-                            <sup>
-                              [posted {moment(reply?.createdAt).fromNow()}]
-                            </sup>
-                          </h4>
+                          <h4>Reply </h4>
 
                           <h3>{reply?.title} </h3>
                           <p>{reply?.to}</p>
                           <p>{reply?.message}</p>
                           <p>{reply?.from}</p>
+                          <sup>
+                            [posted {moment(reply?.createdAt).fromNow()}]
+                          </sup>
                         </div>
                       ))}
                       <ModalComponent
