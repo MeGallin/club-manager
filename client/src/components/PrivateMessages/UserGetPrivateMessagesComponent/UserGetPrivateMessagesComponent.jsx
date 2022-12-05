@@ -123,20 +123,22 @@ const UserGetPrivateMessagesComponent = () => {
                           </sup>
                         </div>
                       ))}
-                      <ModalComponent
-                        className="create-btn"
-                        openButtonTitle="Reply"
-                        closeButtonTitle="Close"
-                        variant="success"
-                        props={
-                          <>
-                            <UserCreatePMReplyComponent
-                              messageId={message?._id}
-                              userId={userAdmin?._id}
-                            />
-                          </>
-                        }
-                      />
+                      {message?.isComplete ? null : (
+                        <ModalComponent
+                          className="create-btn"
+                          openButtonTitle="Reply"
+                          closeButtonTitle="Close"
+                          variant="success"
+                          props={
+                            <>
+                              <UserCreatePMReplyComponent
+                                messageId={message?._id}
+                                userId={userAdmin?._id}
+                              />
+                            </>
+                          }
+                        />
+                      )}
                     </fieldset>
                   </div>
                 ))}

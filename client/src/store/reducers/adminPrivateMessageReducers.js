@@ -2,6 +2,12 @@ import {
   ADMIN_CREATE_PRIVATE_MESSAGES_FAILURE,
   ADMIN_CREATE_PRIVATE_MESSAGES_REQUEST,
   ADMIN_CREATE_PRIVATE_MESSAGES_SUCCESS,
+  ADMIN_DELETE_PRIVATE_MESSAGES_FAILURE,
+  ADMIN_DELETE_PRIVATE_MESSAGES_REQUEST,
+  ADMIN_DELETE_PRIVATE_MESSAGES_SUCCESS,
+  ADMIN_EDIT_PRIVATE_MESSAGES_FAILURE,
+  ADMIN_EDIT_PRIVATE_MESSAGES_REQUEST,
+  ADMIN_EDIT_PRIVATE_MESSAGES_SUCCESS,
   ADMIN_GET_PRIVATE_MESSAGES_FAILURE,
   ADMIN_GET_PRIVATE_MESSAGES_REQUEST,
   ADMIN_GET_PRIVATE_MESSAGES_SUCCESS,
@@ -46,6 +52,42 @@ export const adminCreatePrivateMessageReducer = (state = {}, action) => {
         ...action.payload,
       };
     case ADMIN_CREATE_PRIVATE_MESSAGES_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// DELETE: ADMIN DELETE private message
+export const adminDeletePrivateMessageReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_DELETE_PRIVATE_MESSAGES_REQUEST:
+      return { loading: true };
+    case ADMIN_DELETE_PRIVATE_MESSAGES_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        ...action.payload,
+      };
+    case ADMIN_DELETE_PRIVATE_MESSAGES_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// PATCH: ADMIN EDIT private message
+export const adminEditPrivateMessageReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_EDIT_PRIVATE_MESSAGES_REQUEST:
+      return { loading: true };
+    case ADMIN_EDIT_PRIVATE_MESSAGES_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        ...action.payload,
+      };
+    case ADMIN_EDIT_PRIVATE_MESSAGES_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return { ...state };

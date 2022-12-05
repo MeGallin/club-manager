@@ -15,6 +15,9 @@ import ButtonComponent from '../../Button/ButtonComponent';
 import SearchComponent from '../../SearchComponent/SearchComponent';
 import SearchHighlightComponent from '../../SearchHighlightComponent/SearchHighlightComponent';
 import moment from 'moment';
+import ModalComponent from '../../ModalComponent/ModalComponent';
+import AdminDeletePrivateMessageComponent from '../AdminDeletePrivateMessageComponent/AdminDeletePrivateMessageComponent';
+import AdminEditPrivateMessageComponent from '../AdminEditPrivateMessageComponent/AdminEditPrivateMessageComponent';
 
 const AdminGetPrivateMessagesComponent = () => {
   const dispatch = useDispatch();
@@ -49,8 +52,7 @@ const AdminGetPrivateMessagesComponent = () => {
   const searchedMessages = messages?.filter((message) => {
     return message.to.toLowerCase().includes(keyword.toLowerCase());
   });
-  //Search Message by to [name]
-  console.log(searchedMessages);
+  //Search Message by [name]
   const handleIsComplete = (val, userId, messageId) => {
     dispatch(adminIsCompletePrivateMessageAction(val, userId, messageId));
   };
@@ -157,9 +159,26 @@ const AdminGetPrivateMessagesComponent = () => {
                         </sup>
                       </div>
 
+                      <ModalComponent
+                        className="create-btn"
+                        openButtonTitle="EDIT"
+                        closeButtonTitle="Close"
+                        variant="warning"
+                        props={
+                          <>
+                            <AdminEditPrivateMessageComponent
+                              messageId={message?._id}
+                            />
+                          </>
+                        }
+                      />
+                      <AdminDeletePrivateMessageComponent
+                        messageId={message?._id}
+                      />
+
                       {message?.privateMessageReply.map((reply) => (
                         <div key={reply?._id} className="reply-wrapper">
-                          <h4>Reply </h4>
+                          <h4>Reply:</h4>
 
                           <h3>{reply?.title} </h3>
                           <p>{reply?.to}</p>
