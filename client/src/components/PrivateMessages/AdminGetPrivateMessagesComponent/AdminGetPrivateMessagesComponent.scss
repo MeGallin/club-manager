@@ -19,7 +19,9 @@
 .reply-wrapper {
   padding: 0.4rem;
   padding-left: 1rem;
-  background-color: $border-colour;
+  h4 {
+    text-decoration: underline;
+  }
 }
 
 .reply-wrapper + div {
@@ -29,10 +31,11 @@
 
 .reply-wrapper + div + div {
   padding-left: 3rem;
-  background-color: $border-colour-dark;
+  background-color: $border-colour-light;
 }
 
 .reply-wrapper p + p {
   padding: 0.4rem;
   border-left: 4px solid $rating-colour;
+  background-color: $border-colour-light;
 }

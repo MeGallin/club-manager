@@ -3,6 +3,9 @@ import {
   ADMIN_CREATE_PRIVATE_MESSAGES_FAILURE,
   ADMIN_CREATE_PRIVATE_MESSAGES_REQUEST,
   ADMIN_CREATE_PRIVATE_MESSAGES_SUCCESS,
+  ADMIN_DELETE_PRIVATE_MESSAGES_FAILURE,
+  ADMIN_DELETE_PRIVATE_MESSAGES_REQUEST,
+  ADMIN_DELETE_PRIVATE_MESSAGES_SUCCESS,
   ADMIN_GET_PRIVATE_MESSAGES_FAILURE,
   ADMIN_GET_PRIVATE_MESSAGES_REQUEST,
   ADMIN_GET_PRIVATE_MESSAGES_SUCCESS,
@@ -80,6 +83,78 @@ export const adminCreatePrivateMessageAction =
     } catch (error) {
       dispatch({
         type: ADMIN_CREATE_PRIVATE_MESSAGES_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//DELETE: ADMIN delete private message
+export const adminDeletePrivateMessageAction =
+  (messageId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_DELETE_PRIVATE_MESSAGES_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_END_POINT}api/admin/private-message-delete/${messageId}`,
+        config,
+      );
+      dispatch({ type: ADMIN_DELETE_PRIVATE_MESSAGES_SUCCESS, payload: data });
+      dispatch(adminGetPrivateMessagesAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_DELETE_PRIVATE_MESSAGES_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+//PATCH: ADMIN EDIT message
+export const adminEditPrivateMessageAction =
+  (formData, messageId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.patch(
+        `${process.env.REACT_APP_END_POINT}api/admin/private-message-edit/${messageId}`,
+        formData,
+        config,
+      );
+      dispatch({
+        type: ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_SUCCESS,
+        payload: data,
+      });
+      dispatch(adminGetPrivateMessagesAction());
+    } catch (error) {
+      dispatch({
+        type: ADMIN_IS_COMPLETE_PRIVATE_MESSAGES_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

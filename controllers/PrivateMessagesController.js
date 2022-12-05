@@ -73,7 +73,6 @@ exports.adminPrivateMessageEdit = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  res.status(200).json({ success: true });
 };
 
 // @description: Get all Messages
