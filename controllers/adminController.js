@@ -7,11 +7,8 @@ const ErrorResponse = require('../utils/errorResponse');
 exports.getAllUsers = async (req, res, next) => {
   const users = await User.find({});
   try {
-    if (users) {
-      res.status(200).json({ success: true, users });
-    } else {
-      return next(new ErrorResponse('No user could be found', 500));
-    }
+    if (!users) return next(new ErrorResponse('No user could be found', 500));
+    res.status(200).json({ success: true, users });
   } catch (error) {
     next(error);
   }
@@ -24,15 +21,13 @@ exports.toggleIsAdmin = async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
   try {
-    if (user) {
-      user.isAdmin = req.body.isAdmin;
-      await user.save();
-      res
-        .status(200)
-        .json({ success: true, message: 'Admin changed successfully' });
-    } else {
+    if (!user)
       return next(new ErrorResponse('Could not make your request', 400));
-    }
+    user.isAdmin = req.body.isAdmin;
+    await user.save();
+    res
+      .status(200)
+      .json({ success: true, message: 'Admin changed successfully' });
   } catch (error) {
     next(error);
   }
@@ -45,15 +40,13 @@ exports.toggleIsSuspended = async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
   try {
-    if (user) {
-      user.isSuspended = req.body.isSuspended;
-      await user.save();
-      res
-        .status(200)
-        .json({ success: true, message: 'Suspension changed successfully' });
-    } else {
+    if (!user)
       return next(new ErrorResponse('Could not make your request', 400));
-    }
+    user.isSuspended = req.body.isSuspended;
+    await user.save();
+    res
+      .status(200)
+      .json({ success: true, message: 'Suspension changed successfully' });
   } catch (error) {
     next(error);
   }
@@ -66,15 +59,13 @@ exports.toggleIsCoach = async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
   try {
-    if (user) {
-      user.isCoach = req.body.isCoach;
-      await user.save();
-      res
-        .status(200)
-        .json({ success: true, message: 'Coach changed successfully' });
-    } else {
+    if (!user)
       return next(new ErrorResponse('Could not make your request', 400));
-    }
+    user.isCoach = req.body.isCoach;
+    await user.save();
+    res
+      .status(200)
+      .json({ success: true, message: 'Coach changed successfully' });
   } catch (error) {
     next(error);
   }
@@ -87,15 +78,13 @@ exports.toggleIsParent = async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
   try {
-    if (user) {
-      user.isParent = req.body.isParent;
-      await user.save();
-      res
-        .status(200)
-        .json({ success: true, message: 'Parent changed successfully' });
-    } else {
+    if (!user)
       return next(new ErrorResponse('Could not make your request', 400));
-    }
+    user.isParent = req.body.isParent;
+    await user.save();
+    res
+      .status(200)
+      .json({ success: true, message: 'Parent changed successfully' });
   } catch (error) {
     next(error);
   }
@@ -108,15 +97,13 @@ exports.toggleIsPlayer = async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
   try {
-    if (user) {
-      user.isPlayer = req.body.isPlayer;
-      await user.save();
-      res
-        .status(200)
-        .json({ success: true, message: 'PLayer changed successfully' });
-    } else {
+    if (!user)
       return next(new ErrorResponse('Could not make your request', 400));
-    }
+    user.isPlayer = req.body.isPlayer;
+    await user.save();
+    res
+      .status(200)
+      .json({ success: true, message: 'PLayer changed successfully' });
   } catch (error) {
     next(error);
   }

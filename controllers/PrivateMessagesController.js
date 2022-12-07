@@ -10,20 +10,18 @@ exports.adminPrivateMessageCreate = async (req, res, next) => {
   const { title, message, from } = req.body;
   // Add email option here
   try {
-    if (!title && !message && !from) {
+    if (!title && !message && !from)
       return next(new ErrorResponse('Provide all fields please', 401));
-    } else {
-      await PrivateMessage.create({
-        user,
-        to: user.username,
-        title,
-        message,
-        from,
-        isComplete: false,
-        privateMessageReply: [],
-      });
-      res.status(200).json({ success: true });
-    }
+    await PrivateMessage.create({
+      user,
+      to: user.username,
+      title,
+      message,
+      from,
+      isComplete: false,
+      privateMessageReply: [],
+    });
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }
@@ -35,12 +33,9 @@ exports.adminPrivateMessageCreate = async (req, res, next) => {
 exports.adminPrivateMessageDelete = async (req, res, next) => {
   const message = await PrivateMessage.findOne({ _id: req.params.id });
   try {
-    if (!message) {
-      return next(new ErrorResponse('Message not found', 401));
-    } else {
-      await message.remove();
-      res.status(200).json({ success: true });
-    }
+    if (!message) return next(new ErrorResponse('Message not found', 401));
+    await message.remove();
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }
@@ -52,24 +47,22 @@ exports.adminPrivateMessageDelete = async (req, res, next) => {
 exports.adminPrivateMessageEdit = async (req, res, next) => {
   const message = await PrivateMessage.findOne({ _id: req.params.id });
   try {
-    if (!message) {
-      return next(new ErrorResponse('Message not found', 401));
-    } else {
-      const info = {
-        title: req.body.title,
-        message: req.body.message,
-        from: req.body.from,
-      };
+    if (!message) return next(new ErrorResponse('Message not found', 401));
 
-      const updatedMessage = await PrivateMessage.findByIdAndUpdate(
-        req.params.id,
-        info,
-        {
-          new: true,
-        },
-      );
-      res.status(200).json({ success: true, updatedMessage });
-    }
+    const info = {
+      title: req.body.title,
+      message: req.body.message,
+      from: req.body.from,
+    };
+
+    const updatedMessage = await PrivateMessage.findByIdAndUpdate(
+      req.params.id,
+      info,
+      {
+        new: true,
+      },
+    );
+    res.status(200).json({ success: true, updatedMessage });
   } catch (error) {
     next(error);
   }
@@ -83,11 +76,9 @@ exports.adminPrivateMessagesGet = async (req, res, next) => {
     createdAt: -1,
   });
   try {
-    if (!messages) {
+    if (!messages)
       return next(new ErrorResponse('No messages could be found', 401));
-    } else {
-      res.status(200).json({ success: true, messages });
-    }
+    res.status(200).json({ success: true, messages });
   } catch (error) {
     next(error);
   }
@@ -100,18 +91,17 @@ exports.adminPrivateMessageIsComplete = async (req, res, next) => {
   const user = await User.findOne({ _id: req.params.id });
   const message = await PrivateMessage.findOne({ _id: req.body.messageId });
   try {
-    if (!user && !message) {
+    if (!user && !message)
       return next(new ErrorResponse('No message could be found', 401));
-    } else {
-      await PrivateMessage.findByIdAndUpdate(
-        req.body.messageId,
-        { isComplete: req.body.isComplete },
-        {
-          new: true,
-        },
-      );
-      res.status(200).json({ success: true });
-    }
+
+    await PrivateMessage.findByIdAndUpdate(
+      req.body.messageId,
+      { isComplete: req.body.isComplete },
+      {
+        new: true,
+      },
+    );
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }
@@ -125,11 +115,10 @@ exports.adminPrivateMessageIsComplete = async (req, res, next) => {
 exports.userPrivateMessageGet = async (req, res, next) => {
   const message = await PrivateMessage.findOne({ _id: req.params.id });
   try {
-    if (!message) {
+    if (!message)
       return next(new ErrorResponse('No message could be found', 500));
-    } else {
-      res.status(200).json({ success: true, message });
-    }
+
+    res.status(200).json({ success: true, message });
   } catch (error) {
     next(error);
   }
@@ -144,11 +133,9 @@ exports.userPrivateMessagesGet = async (req, res, next) => {
     createdAt: -1,
   });
   try {
-    if (!user && !messages) {
-      return next(new ErrorResponse('No messages could be foundXXXX', 500));
-    } else {
-      res.status(200).json({ success: true, messages });
-    }
+    if (!user && !messages)
+      return next(new ErrorResponse('No messages could be found', 500));
+    res.status(200).json({ success: true, messages });
   } catch (error) {
     next(error);
   }
@@ -170,20 +157,16 @@ exports.userPrivateMessageReplyPost = async (req, res, next) => {
   });
 
   try {
-    if (!user && !foundMessage) {
+    if (!user && !foundMessage)
       return next(new ErrorResponse('No messages could be found', 500));
-    } else {
-      const reply = {
-        title: req.body.title,
-        message: req.body.message,
-        from: user.username,
-      };
-
-      foundMessage[0].privateMessageReply.push(reply);
-
-      await foundMessage[0].save();
-      res.status(201).json({ success: true });
-    }
+    const reply = {
+      title: req.body.title,
+      message: req.body.message,
+      from: user.username,
+    };
+    foundMessage[0].privateMessageReply.push(reply);
+    await foundMessage[0].save();
+    res.status(201).json({ success: true });
   } catch (error) {
     next(error);
   }
