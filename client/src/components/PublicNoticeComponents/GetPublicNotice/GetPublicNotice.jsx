@@ -15,8 +15,13 @@ import moment from 'moment';
 
 const GetPublicNotice = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getPublicNoticeAction());
+    let ignore = false;
+    if (!ignore) {
+      dispatch(getPublicNoticeAction());
+    }
+    return () => (ignore = true);
   }, [dispatch]);
 
   const getPublicNotice = useSelector((state) => state.getPublicNotice);

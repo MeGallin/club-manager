@@ -19,20 +19,26 @@
 .reply-wrapper {
   padding: 0.4rem;
   padding-left: 1rem;
-  background-color: $border-colour;
+  h4 {
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
 }
 
 .reply-wrapper + div {
   padding-left: 2rem;
-  background-color: $border-colour-light;
 }
 
 .reply-wrapper + div + div {
   padding-left: 3rem;
-  background-color: $border-colour-dark;
 }
 
 .reply-wrapper p + p {
   padding: 0.4rem;
   border-left: 4px solid $rating-colour;
+  background-color: $border-colour-light;
 }

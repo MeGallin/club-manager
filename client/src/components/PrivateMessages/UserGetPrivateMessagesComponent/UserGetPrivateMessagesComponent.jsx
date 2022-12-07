@@ -49,6 +49,21 @@ const UserGetPrivateMessagesComponent = () => {
   });
   //Search Message by to [name]
 
+  const [toggleReply, setToggleReply] = useState(false);
+  const [showReply, setShowReply] = useState('');
+
+  const handleToggleReply = (replyId) => {
+    messages.flatMap((message) => {
+      setToggleReply(true);
+      return message.privateMessageReply.flatMap((mess) => {
+        if (replyId === mess._id) {
+          return setShowReply(mess);
+        }
+        return false;
+      });
+    });
+  };
+
   return (
     <>
       {error ? <ErrorComponent error={error} /> : null}
@@ -59,7 +74,7 @@ const UserGetPrivateMessagesComponent = () => {
         <>
           {success && searchedMessages ? (
             <>
-              <h2>Manage PM</h2>
+              <h2>Manage Private Messages</h2>
               <div className="admin-get-player__top-wrapper">
                 <SearchComponent
                   placeholder="SEARCH TITLE"
@@ -111,32 +126,41 @@ const UserGetPrivateMessagesComponent = () => {
                       </div>
 
                       {message?.privateMessageReply.map((reply) => (
-                        <div key={reply?._id} className="reply-wrapper">
-                          <h4>Reply </h4>
+                        <>
+                          <div key={reply?._id} className="reply-wrapper">
+                            <h4 onClick={() => handleToggleReply(reply?._id)}>
+                              View Reply: {reply?.title}{' '}
+                            </h4>
 
-                          <h3>{reply?.title} </h3>
-                          <p>{reply?.to}</p>
-                          <p>{reply?.message}</p>
-                          <p>{reply?.from}</p>
-                          <sup>
-                            [posted {moment(reply?.createdAt).fromNow()}]
-                          </sup>
-                        </div>
+                            {toggleReply && showReply._id === reply?._id ? (
+                              <>
+                                <p>{reply?.to}</p>
+                                <p>{reply?.message}</p>
+                                <p>{reply?.from}</p>
+                                <sup>
+                                  [posted {moment(reply?.createdAt).fromNow()}]
+                                </sup>
+                              </>
+                            ) : null}
+                          </div>
+                        </>
                       ))}
-                      <ModalComponent
-                        className="create-btn"
-                        openButtonTitle="Reply"
-                        closeButtonTitle="Close"
-                        variant="success"
-                        props={
-                          <>
-                            <UserCreatePMReplyComponent
-                              messageId={message?._id}
-                              userId={userAdmin?._id}
-                            />
-                          </>
-                        }
-                      />
+                      {message?.isComplete ? null : (
+                        <ModalComponent
+                          className="create-btn"
+                          openButtonTitle="Reply"
+                          closeButtonTitle="Close"
+                          variant="success"
+                          props={
+                            <>
+                              <UserCreatePMReplyComponent
+                                messageId={message?._id}
+                                userId={userAdmin?._id}
+                              />
+                            </>
+                          }
+                        />
+                      )}
                     </fieldset>
                   </div>
                 ))}

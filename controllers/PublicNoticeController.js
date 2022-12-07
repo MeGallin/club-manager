@@ -9,17 +9,15 @@ exports.adminCreatePublicNotice = async function (req, res, next) {
   const { name, heading, post } = req.body;
   console.log(name, heading, post);
   try {
-    if (!name && !heading && !post) {
+    if (!name && !heading && !post)
       return next(new ErrorResponse('Provide all fields please', 401));
-    } else {
-      await PublicNotice.create({
-        user,
-        name,
-        heading,
-        post,
-      });
-      res.status(200).json({ success: true });
-    }
+    await PublicNotice.create({
+      user,
+      name,
+      heading,
+      post,
+    });
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }
@@ -33,11 +31,9 @@ exports.getPublicNotices = async (req, res, next) => {
     createdAt: -1,
   });
   try {
-    if (!notices) {
+    if (!notices)
       return next(new ErrorResponse('No notices could be found', 401));
-    } else {
-      res.status(200).json({ success: true, notices });
-    }
+    res.status(200).json({ success: true, notices });
   } catch (error) {
     next(error);
   }
@@ -49,11 +45,8 @@ exports.getPublicNotices = async (req, res, next) => {
 exports.getPublicNotice = async (req, res, next) => {
   const notice = await PublicNotice.findById(req.params.id);
   try {
-    if (!notice) {
-      return next(new ErrorResponse('Post not found', 401));
-    } else {
-      res.status(200).json({ success: true, notice });
-    }
+    if (!notice) return next(new ErrorResponse('Post not found', 401));
+    res.status(200).json({ success: true, notice });
   } catch (error) {
     next(error);
   }
@@ -66,23 +59,20 @@ exports.adminEditPublicNotice = async (req, res, next) => {
   const notice = await PublicNotice.findById(req.params.id);
   const { name, heading, post } = req.body;
   try {
-    if (!notice) {
-      return next(new ErrorResponse('Notice not found', 401));
-    } else {
-      const publicInfo = {
-        name,
-        heading,
-        post,
-      };
-      const updateNotice = await PublicNotice.findByIdAndUpdate(
-        req.params.id,
-        publicInfo,
-        {
-          new: true,
-        },
-      );
-      res.status(200).json({ success: true, updateNotice });
-    }
+    if (!notice) return next(new ErrorResponse('Notice not found', 401));
+    const publicInfo = {
+      name,
+      heading,
+      post,
+    };
+    const updateNotice = await PublicNotice.findByIdAndUpdate(
+      req.params.id,
+      publicInfo,
+      {
+        new: true,
+      },
+    );
+    res.status(200).json({ success: true, updateNotice });
   } catch (error) {
     next(error);
   }
@@ -94,12 +84,9 @@ exports.adminEditPublicNotice = async (req, res, next) => {
 exports.deletePublicNotice = async (req, res, next) => {
   const notice = await PublicNotice.findById(req.params.id);
   try {
-    if (!notice) {
-      return next(new ErrorResponse('Notice not found', 401));
-    } else {
-      await notice.remove();
-      res.status(200).json({ success: true });
-    }
+    if (!notice) return next(new ErrorResponse('Notice not found', 401));
+    await notice.remove();
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }
