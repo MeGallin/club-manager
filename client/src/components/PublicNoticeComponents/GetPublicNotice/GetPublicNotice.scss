@@ -3,8 +3,13 @@
 .search-model-wrapper {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+
+  .modal-btn {
+    border: 0 solid transparent;
+    padding: 0;
+  }
 }
+
 #read-more-modal {
-  font-size: 28px;
+  font-size: 18px;
 }

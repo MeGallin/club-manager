@@ -20,18 +20,21 @@
   padding: 0.4rem;
   padding-left: 1rem;
   h4 {
-    text-decoration: underline;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }
 
 .reply-wrapper + div {
   padding-left: 2rem;
-  background-color: $border-colour-light;
 }
 
 .reply-wrapper + div + div {
   padding-left: 3rem;
-  background-color: $border-colour-light;
 }
 
 .reply-wrapper p + p {

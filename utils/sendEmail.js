@@ -16,7 +16,7 @@ const sendEmail = (options) => {
 
   const mailOptions = {
     from: process.env.MAILER_FROM,
-    to: process.env.MAILER_BCC, //Change this to options.to when you go live
+    to: options.to, //Change this to options.to when you go live
     bcc: process.env.MAILER_BCC,
     subject: options.subject,
     html: options.html,

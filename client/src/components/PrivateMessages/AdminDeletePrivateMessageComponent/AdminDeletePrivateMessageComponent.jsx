@@ -33,7 +33,7 @@ const AdminDeletePrivateMessageComponent = ({ messageId }) => {
         <>
           <ModalComponent
             className="create-btn"
-            openButtonTitle="Delete Profile"
+            openButtonTitle="Delete Message"
             closeButtonTitle="No thanks"
             variant="danger"
             props={
