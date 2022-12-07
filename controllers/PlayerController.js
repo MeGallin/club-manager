@@ -28,30 +28,28 @@ exports.adminCreatePlayer = async (req, res, next) => {
   // if profile already exists, create
   const playerExists = await Player.findOne({ name: req.body.email });
   try {
-    if (playerExists) {
+    if (playerExists)
       return next(new ErrorResponse('Profile already exists', 500));
-    } else {
-      await Player.create({
-        user,
-        name,
-        shirtNumber,
-        nameOnShirt,
-        ageGroup,
-        team,
-        villageName,
-        governmentId,
-        dateOfBirth,
-        startDate,
-        endDate,
-        renewalMethod,
-        status,
-        uniform,
-        email,
-        notes,
-      });
 
-      res.status(200).json({ success: true });
-    }
+    await Player.create({
+      user,
+      name,
+      shirtNumber,
+      nameOnShirt,
+      ageGroup,
+      team,
+      villageName,
+      governmentId,
+      dateOfBirth,
+      startDate,
+      endDate,
+      renewalMethod,
+      status,
+      uniform,
+      email,
+      notes,
+    });
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }
@@ -63,11 +61,9 @@ exports.adminCreatePlayer = async (req, res, next) => {
 exports.adminGetPlayers = async (req, res, next) => {
   const players = await Player.find({});
   try {
-    if (players) {
-      res.status(200).json({ success: true, players });
-    } else {
+    if (!players)
       return next(new ErrorResponse('No players could be found', 500));
-    }
+    res.status(200).json({ success: true, players });
   } catch (error) {
     next(error);
   }
@@ -80,36 +76,32 @@ exports.adminEditPlayer = async (req, res, next) => {
   const player = await Player.findById(req.params.id);
 
   try {
-    if (player) {
-      const playerInfo = {
-        name: req.body.name,
-        ageGroup: req.body.ageGroup,
-        team: req.body.team,
-        shirtNumber: req.body.shirtNumber,
-        nameOnShirt: req.body.nameOnShirt,
-        villageName: req.body.villageName,
-        governmentId: req.body.governmentId,
-        dateOfBirth: req.body.dateOfBirth,
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        renewalMethod: req.body.renewalMethod,
-        status: req.body.status,
-        uniform: req.body.uniform,
-        email: req.body.email,
-        notes: req.body.notes,
-      };
-
-      const updatePlayerProfile = await Player.findByIdAndUpdate(
-        req.params.id,
-        playerInfo,
-        {
-          new: true,
-        },
-      );
-      res.status(200).json({ success: true, updatePlayerProfile });
-    } else {
-      return next(new ErrorResponse('Profile not found', 400));
-    }
+    if (!player) return next(new ErrorResponse('Profile not found', 400));
+    const playerInfo = {
+      name: req.body.name,
+      ageGroup: req.body.ageGroup,
+      team: req.body.team,
+      shirtNumber: req.body.shirtNumber,
+      nameOnShirt: req.body.nameOnShirt,
+      villageName: req.body.villageName,
+      governmentId: req.body.governmentId,
+      dateOfBirth: req.body.dateOfBirth,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      renewalMethod: req.body.renewalMethod,
+      status: req.body.status,
+      uniform: req.body.uniform,
+      email: req.body.email,
+      notes: req.body.notes,
+    };
+    const updatePlayerProfile = await Player.findByIdAndUpdate(
+      req.params.id,
+      playerInfo,
+      {
+        new: true,
+      },
+    );
+    res.status(200).json({ success: true, updatePlayerProfile });
   } catch (error) {
     next(error);
   }
@@ -121,12 +113,9 @@ exports.adminEditPlayer = async (req, res, next) => {
 exports.adminDeletePlayer = async (req, res, next) => {
   const player = await Player.findById(req.params.id);
   try {
-    if (player) {
-      await player.remove();
-      res.status(200).json({ success: true });
-    } else {
-      return next(new ErrorResponse('Profile not found', 401));
-    }
+    if (!player) return next(new ErrorResponse('Profile not found', 401));
+    await player.remove();
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }

@@ -16,17 +16,16 @@ import moment from 'moment';
 const GetPublicNotice = () => {
   const dispatch = useDispatch();
 
-  const getPublicNotice = useSelector((state) => state.getPublicNotice);
-  const { loading, error, success, notices } = getPublicNotice;
-
   useEffect(() => {
     let ignore = false;
-
-    if (!ignore && !notices) {
+    if (!ignore) {
       dispatch(getPublicNoticeAction());
     }
     return () => (ignore = true);
-  }, [dispatch, notices]);
+  }, [dispatch]);
+
+  const getPublicNotice = useSelector((state) => state.getPublicNotice);
+  const { loading, error, success, notices } = getPublicNotice;
 
   // Search notices
   const [keyword, setKeyword] = useState('');

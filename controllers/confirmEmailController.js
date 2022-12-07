@@ -16,17 +16,12 @@ exports.confirmEmail = async (req, res) => {
 
   const user = await User.findById(decodedToken);
 
-  if (user) {
-    user.isConfirmed = true;
-    await user.save();
-    if (process.env.NODE_ENV === 'production') {
-      return res.redirect('https://clubmanager.livenotice.co.uk');
-    } else {
-      return res
-        .status(200)
-        .send({ message: 'Your Account has been Verified.' });
-    }
+  if (!user) return next(new ErrorResponse('No user found', 404));
+  user.isConfirmed = true;
+  await user.save();
+  if (process.env.NODE_ENV === 'production') {
+    return res.redirect('https://clubmanager.livenotice.co.uk');
   } else {
-    return next(new ErrorResponse('No user found', 404));
+    return res.status(200).send({ message: 'Your Account has been Verified.' });
   }
 };

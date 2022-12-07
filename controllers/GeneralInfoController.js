@@ -9,17 +9,16 @@ exports.adminCreateGeneralIfo = async (req, res, next) => {
   const { name, heading, post } = req.body;
 
   try {
-    if (!name && !heading && !post) {
+    if (!name && !heading && !post)
       return next(new ErrorResponse('Provide all fields please', 401));
-    } else {
-      await GeneralInfo.create({
-        user,
-        name,
-        heading,
-        post,
-      });
-      res.status(200).json({ success: true });
-    }
+
+    await GeneralInfo.create({
+      user,
+      name,
+      heading,
+      post,
+    });
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }
@@ -33,11 +32,9 @@ exports.adminGetGeneralInfo = async (req, res, next) => {
     createdAt: -1,
   });
   try {
-    if (!posts) {
-      return next(new ErrorResponse('No posts could be found', 401));
-    } else {
-      res.status(200).json({ success: true, posts });
-    }
+    if (!posts) return next(new ErrorResponse('No posts could be found', 401));
+
+    res.status(200).json({ success: true, posts });
   } catch (error) {
     next(error);
   }
@@ -50,24 +47,21 @@ exports.adminEditGeneralInfo = async (req, res, next) => {
   const post = await GeneralInfo.findById(req.params.id);
 
   try {
-    if (post) {
-      const postInfo = {
-        name: req.body.name,
-        heading: req.body.heading,
-        post: req.body.post,
-      };
+    if (!post) return next(new ErrorResponse('Post not found', 401));
+    const postInfo = {
+      name: req.body.name,
+      heading: req.body.heading,
+      post: req.body.post,
+    };
 
-      const updatePost = await GeneralInfo.findByIdAndUpdate(
-        req.params.id,
-        postInfo,
-        {
-          new: true,
-        },
-      );
-      res.status(200).json({ success: true, updatePost });
-    } else {
-      return next(new ErrorResponse('Post not found', 401));
-    }
+    const updatePost = await GeneralInfo.findByIdAndUpdate(
+      req.params.id,
+      postInfo,
+      {
+        new: true,
+      },
+    );
+    res.status(200).json({ success: true, updatePost });
   } catch (error) {
     next(error);
   }
@@ -79,12 +73,9 @@ exports.adminEditGeneralInfo = async (req, res, next) => {
 exports.adminDeleteGeneralInfo = async (req, res, next) => {
   const post = await GeneralInfo.findById(req.params.id);
   try {
-    if (post) {
-      await post.remove();
-      res.status(200).json({ success: true });
-    } else {
-      return next(new ErrorResponse('Profile not found', 401));
-    }
+    if (!post) return next(new ErrorResponse('Profile not found', 401));
+    await post.remove();
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }

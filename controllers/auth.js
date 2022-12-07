@@ -118,9 +118,7 @@ exports.forgotPassword = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
 
-    if (!user) {
-      return next(new ErrorResponse('Email could not be set', 404));
-    }
+    if (!user) return next(new ErrorResponse('Email could not be set', 404));
 
     try {
       const resetToken = user.getResetPasswordToken();
@@ -162,9 +160,7 @@ exports.resetPassword = async (req, res, next) => {
       resetPasswordExpire: { $gt: Date.now() },
     });
 
-    if (!user) {
-      return next(new ErrorResponse('Invalid Reset Token', 400));
-    }
+    if (!user) return next(new ErrorResponse('Invalid Reset Token', 400));
 
     user.password = req.body.password;
     user.resetPasswordToken = undefined;
@@ -231,23 +227,20 @@ exports.userUpdateAdminDetails = async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
   try {
-    if (user) {
-      user.username = req.body.username || user.username;
-      user.email = req.body.email || user.email;
+    if (!user) return new ErrorResponse('User not found', 400);
+    user.username = req.body.username || user.username;
+    user.email = req.body.email || user.email;
 
-      if (req.body.password) {
-        user.password = req.body.password || user.password;
-      }
-
-      const updatedUser = await user.save();
-
-      res.json({
-        success: true,
-        updatedUser,
-      });
-    } else {
-      return new ErrorResponse('User not found', 400);
+    if (req.body.password) {
+      user.password = req.body.password || user.password;
     }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      success: true,
+      updatedUser,
+    });
   } catch (error) {
     next(error);
   }
