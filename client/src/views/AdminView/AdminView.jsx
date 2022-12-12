@@ -32,9 +32,7 @@ const AdminView = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    console.log('fired');
     let ignore = false;
-
     if (!userInfo) {
       navigate('/login');
     } else {

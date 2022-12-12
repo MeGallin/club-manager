@@ -1,34 +1,45 @@
 import { lazy, Suspense } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.scss';
-
-import HomeView from './views/HomeView/HomeView';
-import FooterComponent from './components/Footer/FooterComponent';
-import { ErrorView } from './views/ErrorView/ErrorView';
-import ContactView from './views/ContactView/ContactView';
-
-import LoginView from './views/LoginView/LoginView';
-import PWResetView from './views/PWRestView/PWResetView';
-import UserAdminView from './views/UserAdminView/UserAdminView';
-import AdminView from './views/AdminView/AdminView';
-import AdminProfileView from './views/AdminView/AdminProfileView';
-import AdminPlayersView from './views/AdminView/AdminPlayersView';
-import AdminGeneralInformationView from './views/AdminView/AdminGeneralInformationView';
-import AdminPublicNoticeView from './views/AdminView/AdminPublicNoticeView.jsx';
-import AdminPrivateMessagesView from './views/AdminView/AdminPrivateMessagesView.jsx';
+import SpinnerComponent from './components/Spinner/SpinnerComponent';
 
 const HeaderComponent = lazy(() =>
   import('./components/Header/HeaderComponent'),
 );
+const HomeView = lazy(() => import('./views/HomeView/HomeView'));
+const FooterComponent = lazy(() =>
+  import('./components/Footer/FooterComponent'),
+);
 const AboutView = lazy(() => import('./views/AboutView/AboutView'));
+const ContactView = lazy(() => import('./views/ContactView/ContactView'));
+const LoginView = lazy(() => import('./views/LoginView/LoginView'));
+const PWResetView = lazy(() => import('./views/PWRestView/PWResetView'));
+const UserAdminView = lazy(() => import('./views/UserAdminView/UserAdminView'));
+const AdminView = lazy(() => import('./views/AdminView/AdminView'));
+const ErrorView = lazy(() => import('./views/ErrorView/ErrorView'));
+const AdminProfileView = lazy(() =>
+  import('./views/AdminView/AdminProfileView'),
+);
+const AdminPlayersView = lazy(() =>
+  import('./views/AdminView/AdminPlayersView'),
+);
+const AdminGeneralInformationView = lazy(() =>
+  import('./views/AdminView/AdminGeneralInformationView'),
+);
+const AdminPublicNoticeView = lazy(() =>
+  import('./views/AdminView/AdminPublicNoticeView'),
+);
+const AdminPrivateMessagesView = lazy(() =>
+  import('./views/AdminView/AdminPrivateMessagesView'),
+);
 
 const App = () => {
   return (
     <Router>
       <div className="container--fluid">
         <HeaderComponent />
-        <div className="content-wrapper">
-          <Suspense fallback={<>Loading...</>}>
+        <Suspense fallback={<SpinnerComponent />}>
+          <div className="content-wrapper">
             <Routes>
               <Route path="/" element={<HomeView />} />
               <Route path="/home" element={<HomeView />} exact />
@@ -65,8 +76,8 @@ const App = () => {
               <Route path="/admin" element={<AdminView />} exact />
               <Route path="*" element={<ErrorView />} exact />
             </Routes>
-          </Suspense>
-        </div>
+          </div>
+        </Suspense>
         <FooterComponent />
       </div>
     </Router>

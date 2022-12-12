@@ -1,7 +1,16 @@
 @import '../../index.scss';
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+.admin-get-player__top-wrapper {
+  padding: 0 0.2em;
+  background-color: $dark-blue;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-wrapper {
+  display: flex;
+  gap: 0.4em;
 }
 
 .user-profile-image {
@@ -17,13 +26,4 @@
 .admin-nav-buttons-wrapper {
   display: flex;
   gap: 0.2em;
-}
-
-@media (max-width: 390px) {
-  .wrapper {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .admin-nav-buttons-wrapper {
-    flex-wrap: wrap;
-  }
 }
